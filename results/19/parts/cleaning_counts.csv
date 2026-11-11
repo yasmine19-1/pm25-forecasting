@@ -1,0 +1,23 @@
+section,variable,group,metric,value,note
+cleaning,0_start,,rows_removed,0,raw file combined_gee_pm25.csv
+cleaning,0_start,,rows_after,41718,
+cleaning,1_missing_pm25,,rows_removed,0,pm25 is missing
+cleaning,1_missing_pm25,,rows_after,41718,
+cleaning,2_pm25_nonpositive,,rows_removed,727,pm25 <= 0
+cleaning,2_pm25_nonpositive,,rows_after,40991,
+cleaning,3_pm25_too_high,,rows_removed,8,pm25 >= 500
+cleaning,3_pm25_too_high,,rows_after,40983,
+cleaning,4_exact_duplicates,,rows_removed,0,"identical in all columns, keep first"
+cleaning,4_exact_duplicates,,rows_after,40983,
+cleaning,5_key_duplicates,,rows_removed,0,date+lat+lon+station_id; rule=first
+cleaning,5_key_duplicates,,rows_after,40983,
+cleaning,6_same_sensor_same_day,,rows_removed,4,station_id+date; rule=drop_all
+cleaning,6_same_sensor_same_day,,rows_after,40979,
+cleaning,7_unparseable_date,,rows_removed,0,date could not be parsed
+cleaning,7_unparseable_date,,rows_after,40979,
+split,development,,rows,31282,2016-11-25 to 2024-12-31
+split,development,,stations,70,
+split,final_test,,rows,8149,2025-01-01 to 2025-12-31
+split,final_test,,stations,57,
+split,after_test_period,,rows,1548,2026-01-01 to 2026-04-06
+split,after_test_period,,stations,46,

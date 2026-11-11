@@ -90,7 +90,10 @@ def parse_dates(s):
 
 def save_rows(rows, filename):
     config.ensure_dirs()
-    out = pd.DataFrame(rows, columns=["section", "metric", "value"])
+    out = pd.DataFrame(rows, columns=["section", "variable", "value"])
+    out.insert(2, "group", "")
+    out.insert(3, "metric", "value")
+    out["note"] = ""
     path = config.PARTS / filename
     out.to_csv(path, index=False, encoding="utf-8")
     return path

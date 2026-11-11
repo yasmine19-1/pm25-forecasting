@@ -1,0 +1,16 @@
+raw_name,clean_name
+date,date
+datetime_utc,datetime_utc
+id,gee_id
+latitude,lat
+longitude,lon
+temperature_celsius,temperature_celsius
+pressure_mb,pressure_mb
+wind_u,wind_u
+wind_v,wind_v
+NO2,no2
+CO,co
+O3,o3
+AOD,aod
+pm25,pm25
+sensor_name,station_id

@@ -11,11 +11,13 @@ FINAL_TEST = ROOT / "data" / "final_test"
 PARTS = ROOT / "results" / GROUP_ID / "parts"
 
 # Which CSV in data/raw to use. None = auto (works only if there is exactly one CSV).
-RAW_FILE = None
+RAW_FILE = "combined_gee_pm25.csv"
+
 
 # If a script picks the wrong raw column, write the real name here,
 # e.g. {"pm25": "PM2.5 (ug/m3)"}. Leave None to auto-detect.
-COLUMN_OVERRIDES = {"date": None, "station_id": None, "lat": None, "lon": None, "pm25": None}
+COLUMN_OVERRIDES = {"date": "date", "station_id": "sensor_name",
+                    "lat": "latitude", "lon": "longitude", "pm25": "pm25"}
 
 # Date parsing. Leave None unless dates parse badly (e.g. "%d/%m/%Y").
 DATE_FORMAT = None
@@ -29,6 +31,21 @@ PM25_MAX = 500  # remove PM2.5 >= 500
 #   "mean"     average the numeric columns, keep the first value of the others
 #   "drop_all" remove the whole group
 KEY_DUP_RULE = "first"
+
+
+# Final test period: proposed after the audit; the team confirms.
+# Development data = rows BEFORE TEST_START. Rows AFTER TEST_END are locked away too
+# (training on them would use data later than the test period).
+TEST_START = "2025-01-01"
+TEST_END = "2025-12-31"
+
+# Same sensor_name + same date but different GEE id/coordinates (audit: 2 groups):
+#   "drop_all" removes every row of the group (no arbitrary pick)   "first" keeps the first row
+SENSOR_DAY_DUP_RULE = "drop_all"
+
+# Never model inputs (brief 5.4: station ID defines groups only; coordinates excluded)
+TARGET = "pm25"
+NON_FEATURE_COLS = ["date", "datetime_utc", "station_id", "gee_id", "lat", "lon"]
 
 
 def ensure_dirs():
