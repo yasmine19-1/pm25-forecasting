@@ -2,7 +2,7 @@
 
 ## Dataset
 - File: data/raw/combined_gee_pm25.csv (teacher-provided merge). All three raw CSVs are untouched.
-- Source: https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin20162026
+- Source: https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026
 - License: the dataset description states that the raw data come from OpenAQ (CC BY 4.0), Copernicus open-access and NASA open data, and asks users to check the individual source licenses before commercial use.
 - Units (per the dataset description): pm25 ug/m3; temperature degC; pressure hPa; wind m/s; NO2, CO, O3 mol/m2; AOD dimensionless.
 - 41,718 rows, 15 columns; 2016-11-25 to 2026-04-06; 94 sensor names, 98 GEE ids; lat 36.13 to 43.53, lon -5.66 to 9.14; PM2.5 in ug/m3.
