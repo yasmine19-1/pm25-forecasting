@@ -38,8 +38,9 @@ add("basics", "column_names", ", ".join(df.columns))
 for k, v in found.items():
     add("basics", f"detected_{k}", v)
 add("manual", "source", "https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin20162026")
-add("manual", "license", "FILL IN from the Kaggle page (License box)")
-add("manual", "pm25_units", "ug/m3 (per project brief)")
+add("manual", "license", "Dataset description: raw data from OpenAQ (CC BY 4.0), Copernicus open-access and NASA open data; check individual source licenses before commercial use")
+add("manual", "units", "pm25 ug/m3; temperature_celsius degC; pressure_mb hPa; wind_u and wind_v m/s; NO2, CO, O3 mol/m2 (Sentinel-5P); AOD dimensionless (MODIS) - per the Kaggle dataset description")
+add("manual", "description_vs_combined_file", "Kaggle description lists 125 PM2.5 sensors and 100 GEE ids; the combined file has 94 sensor names and 98 GEE ids")
 
 # 2. Timestamps ---------------------------------------------------------
 head("2. Timestamps")

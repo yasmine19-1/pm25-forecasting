@@ -3,7 +3,8 @@
 ## Dataset
 - File: data/raw/combined_gee_pm25.csv (teacher-provided merge). All three raw CSVs are untouched.
 - Source: https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin20162026
-- License: TO FILL (Kaggle License box)
+- License: the dataset description states that the raw data come from OpenAQ (CC BY 4.0), Copernicus open-access and NASA open data, and asks users to check the individual source licenses before commercial use.
+- Units (per the dataset description): pm25 ug/m3; temperature degC; pressure hPa; wind m/s; NO2, CO, O3 mol/m2; AOD dimensionless.
 - 41,718 rows, 15 columns; 2016-11-25 to 2026-04-06; 94 sensor names, 98 GEE ids; lat 36.13 to 43.53, lon -5.66 to 9.14; PM2.5 in ug/m3.
 
 ## Decisions
@@ -22,3 +23,5 @@
 - NO2, CO, O3 are missing for all of 2016 and 2017 and most of 2018, then complete from 2019.
 - Sparse early years: 111 rows in 2016, 252 in 2018.
 - 15 sensors have fewer than 100 valid days; 13 of the 57 test-year stations never appear in development data. Retained stations are decided Thursday.
+- The Kaggle description lists 125 PM2.5 sensors and 100 GEE ids; the combined file has 94 sensor names and 98 GEE ids.
+- The description attributes NO2, CO and O3 gaps (about 12%) to cloud cover, but in the combined file the missingness is entirely before 2019, so it looks structural.
