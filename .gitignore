@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+.DS_Store
+.ipynb_checkpoints/
+# datasets stay out of git (size + Kaggle licence); everyone rebuilds them with the scripts
+data/
