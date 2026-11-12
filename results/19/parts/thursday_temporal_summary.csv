@@ -1,0 +1,145 @@
+section,variable,group,metric,value,note
+temporal_gate,aod,lag_1d,n_pairs,20496.0,Past values within continuous daily runs only
+temporal_gate,aod,lag_1d,median_station_spearman,0.07764422058812678,Descriptive; not significance or predictive skill
+temporal_gate,aod,lag_1d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,aod,lag_1d,stations_positive,46.0,No inferential threshold or station exclusion
+temporal_gate,aod,lag_2d,n_pairs,14017.0,Past values within continuous daily runs only
+temporal_gate,aod,lag_2d,median_station_spearman,0.0019612683489439032,Descriptive; not significance or predictive skill
+temporal_gate,aod,lag_2d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,aod,lag_2d,stations_positive,35.0,No inferential threshold or station exclusion
+temporal_gate,aod,lag_3d,n_pairs,10188.0,Past values within continuous daily runs only
+temporal_gate,aod,lag_3d,median_station_spearman,0.023813816758496732,Descriptive; not significance or predictive skill
+temporal_gate,aod,lag_3d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,aod,lag_3d,stations_positive,37.0,No inferential threshold or station exclusion
+temporal_gate,aod,lag_7d,n_pairs,3400.0,Past values within continuous daily runs only
+temporal_gate,aod,lag_7d,median_station_spearman,-0.04364059725401298,Descriptive; not significance or predictive skill
+temporal_gate,aod,lag_7d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,aod,lag_7d,stations_positive,26.0,No inferential threshold or station exclusion
+temporal_gate,co,lag_1d,n_pairs,18839.0,Past values within continuous daily runs only
+temporal_gate,co,lag_1d,median_station_spearman,0.004742039471829402,Descriptive; not significance or predictive skill
+temporal_gate,co,lag_1d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,co,lag_1d,stations_positive,35.0,No inferential threshold or station exclusion
+temporal_gate,co,lag_2d,n_pairs,12878.0,Past values within continuous daily runs only
+temporal_gate,co,lag_2d,median_station_spearman,0.013877422733748791,Descriptive; not significance or predictive skill
+temporal_gate,co,lag_2d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,co,lag_2d,stations_positive,37.0,No inferential threshold or station exclusion
+temporal_gate,co,lag_3d,n_pairs,9347.0,Past values within continuous daily runs only
+temporal_gate,co,lag_3d,median_station_spearman,0.03293255979666644,Descriptive; not significance or predictive skill
+temporal_gate,co,lag_3d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,co,lag_3d,stations_positive,41.0,No inferential threshold or station exclusion
+temporal_gate,co,lag_7d,n_pairs,3120.0,Past values within continuous daily runs only
+temporal_gate,co,lag_7d,median_station_spearman,0.02714271646020229,Descriptive; not significance or predictive skill
+temporal_gate,co,lag_7d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,co,lag_7d,stations_positive,35.0,No inferential threshold or station exclusion
+temporal_gate,no2,lag_1d,n_pairs,18839.0,Past values within continuous daily runs only
+temporal_gate,no2,lag_1d,median_station_spearman,0.254409738790138,Descriptive; not significance or predictive skill
+temporal_gate,no2,lag_1d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,no2,lag_1d,stations_positive,63.0,No inferential threshold or station exclusion
+temporal_gate,no2,lag_2d,n_pairs,12878.0,Past values within continuous daily runs only
+temporal_gate,no2,lag_2d,median_station_spearman,0.15315962586687165,Descriptive; not significance or predictive skill
+temporal_gate,no2,lag_2d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,no2,lag_2d,stations_positive,58.0,No inferential threshold or station exclusion
+temporal_gate,no2,lag_3d,n_pairs,9347.0,Past values within continuous daily runs only
+temporal_gate,no2,lag_3d,median_station_spearman,0.11785531938708055,Descriptive; not significance or predictive skill
+temporal_gate,no2,lag_3d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,no2,lag_3d,stations_positive,53.0,No inferential threshold or station exclusion
+temporal_gate,no2,lag_7d,n_pairs,3120.0,Past values within continuous daily runs only
+temporal_gate,no2,lag_7d,median_station_spearman,0.0319699610325194,Descriptive; not significance or predictive skill
+temporal_gate,no2,lag_7d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,no2,lag_7d,stations_positive,38.0,No inferential threshold or station exclusion
+temporal_gate,o3,lag_1d,n_pairs,18829.0,Past values within continuous daily runs only
+temporal_gate,o3,lag_1d,median_station_spearman,-0.15931152603261456,Descriptive; not significance or predictive skill
+temporal_gate,o3,lag_1d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,o3,lag_1d,stations_positive,6.0,No inferential threshold or station exclusion
+temporal_gate,o3,lag_2d,n_pairs,12878.0,Past values within continuous daily runs only
+temporal_gate,o3,lag_2d,median_station_spearman,-0.11943117996966196,Descriptive; not significance or predictive skill
+temporal_gate,o3,lag_2d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,o3,lag_2d,stations_positive,11.0,No inferential threshold or station exclusion
+temporal_gate,o3,lag_3d,n_pairs,9347.0,Past values within continuous daily runs only
+temporal_gate,o3,lag_3d,median_station_spearman,-0.10312406572413985,Descriptive; not significance or predictive skill
+temporal_gate,o3,lag_3d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,o3,lag_3d,stations_positive,22.0,No inferential threshold or station exclusion
+temporal_gate,o3,lag_7d,n_pairs,3120.0,Past values within continuous daily runs only
+temporal_gate,o3,lag_7d,median_station_spearman,-0.08633985187951124,Descriptive; not significance or predictive skill
+temporal_gate,o3,lag_7d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,o3,lag_7d,stations_positive,24.0,No inferential threshold or station exclusion
+temporal_gate,pm25,lag_1d,n_pairs,20496.0,Past values within continuous daily runs only
+temporal_gate,pm25,lag_1d,median_station_spearman,0.6947022178282882,Descriptive; not significance or predictive skill
+temporal_gate,pm25,lag_1d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,pm25,lag_1d,stations_positive,68.0,No inferential threshold or station exclusion
+temporal_gate,pm25,lag_2d,n_pairs,14017.0,Past values within continuous daily runs only
+temporal_gate,pm25,lag_2d,median_station_spearman,0.46769711433552685,Descriptive; not significance or predictive skill
+temporal_gate,pm25,lag_2d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,pm25,lag_2d,stations_positive,66.0,No inferential threshold or station exclusion
+temporal_gate,pm25,lag_3d,n_pairs,10188.0,Past values within continuous daily runs only
+temporal_gate,pm25,lag_3d,median_station_spearman,0.3687953939563404,Descriptive; not significance or predictive skill
+temporal_gate,pm25,lag_3d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,pm25,lag_3d,stations_positive,66.0,No inferential threshold or station exclusion
+temporal_gate,pm25,lag_7d,n_pairs,3400.0,Past values within continuous daily runs only
+temporal_gate,pm25,lag_7d,median_station_spearman,0.21797732596836145,Descriptive; not significance or predictive skill
+temporal_gate,pm25,lag_7d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,pm25,lag_7d,stations_positive,57.0,No inferential threshold or station exclusion
+temporal_gate,pressure_mb,lag_1d,n_pairs,20496.0,Past values within continuous daily runs only
+temporal_gate,pressure_mb,lag_1d,median_station_spearman,0.23653483674037423,Descriptive; not significance or predictive skill
+temporal_gate,pressure_mb,lag_1d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,pressure_mb,lag_1d,stations_positive,57.0,No inferential threshold or station exclusion
+temporal_gate,pressure_mb,lag_2d,n_pairs,14017.0,Past values within continuous daily runs only
+temporal_gate,pressure_mb,lag_2d,median_station_spearman,0.22604641073056586,Descriptive; not significance or predictive skill
+temporal_gate,pressure_mb,lag_2d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,pressure_mb,lag_2d,stations_positive,55.0,No inferential threshold or station exclusion
+temporal_gate,pressure_mb,lag_3d,n_pairs,10188.0,Past values within continuous daily runs only
+temporal_gate,pressure_mb,lag_3d,median_station_spearman,0.20198525796111882,Descriptive; not significance or predictive skill
+temporal_gate,pressure_mb,lag_3d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,pressure_mb,lag_3d,stations_positive,55.0,No inferential threshold or station exclusion
+temporal_gate,pressure_mb,lag_7d,n_pairs,3400.0,Past values within continuous daily runs only
+temporal_gate,pressure_mb,lag_7d,median_station_spearman,0.06117085663916222,Descriptive; not significance or predictive skill
+temporal_gate,pressure_mb,lag_7d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,pressure_mb,lag_7d,stations_positive,41.0,No inferential threshold or station exclusion
+temporal_gate,temperature_celsius,lag_1d,n_pairs,20496.0,Past values within continuous daily runs only
+temporal_gate,temperature_celsius,lag_1d,median_station_spearman,0.026578031409656637,Descriptive; not significance or predictive skill
+temporal_gate,temperature_celsius,lag_1d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,temperature_celsius,lag_1d,stations_positive,40.0,No inferential threshold or station exclusion
+temporal_gate,temperature_celsius,lag_2d,n_pairs,14017.0,Past values within continuous daily runs only
+temporal_gate,temperature_celsius,lag_2d,median_station_spearman,0.004658326097962291,Descriptive; not significance or predictive skill
+temporal_gate,temperature_celsius,lag_2d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,temperature_celsius,lag_2d,stations_positive,36.0,No inferential threshold or station exclusion
+temporal_gate,temperature_celsius,lag_3d,n_pairs,10188.0,Past values within continuous daily runs only
+temporal_gate,temperature_celsius,lag_3d,median_station_spearman,-0.012768135718320618,Descriptive; not significance or predictive skill
+temporal_gate,temperature_celsius,lag_3d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,temperature_celsius,lag_3d,stations_positive,33.0,No inferential threshold or station exclusion
+temporal_gate,temperature_celsius,lag_7d,n_pairs,3400.0,Past values within continuous daily runs only
+temporal_gate,temperature_celsius,lag_7d,median_station_spearman,-0.0013169936894648988,Descriptive; not significance or predictive skill
+temporal_gate,temperature_celsius,lag_7d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,temperature_celsius,lag_7d,stations_positive,33.0,No inferential threshold or station exclusion
+temporal_gate,wind_u,lag_1d,n_pairs,20496.0,Past values within continuous daily runs only
+temporal_gate,wind_u,lag_1d,median_station_spearman,-0.19232055775597776,Descriptive; not significance or predictive skill
+temporal_gate,wind_u,lag_1d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,wind_u,lag_1d,stations_positive,7.0,No inferential threshold or station exclusion
+temporal_gate,wind_u,lag_2d,n_pairs,14017.0,Past values within continuous daily runs only
+temporal_gate,wind_u,lag_2d,median_station_spearman,-0.16645048083763853,Descriptive; not significance or predictive skill
+temporal_gate,wind_u,lag_2d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,wind_u,lag_2d,stations_positive,11.0,No inferential threshold or station exclusion
+temporal_gate,wind_u,lag_3d,n_pairs,10188.0,Past values within continuous daily runs only
+temporal_gate,wind_u,lag_3d,median_station_spearman,-0.1524251609869774,Descriptive; not significance or predictive skill
+temporal_gate,wind_u,lag_3d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,wind_u,lag_3d,stations_positive,15.0,No inferential threshold or station exclusion
+temporal_gate,wind_u,lag_7d,n_pairs,3400.0,Past values within continuous daily runs only
+temporal_gate,wind_u,lag_7d,median_station_spearman,-0.09545835416999757,Descriptive; not significance or predictive skill
+temporal_gate,wind_u,lag_7d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,wind_u,lag_7d,stations_positive,22.0,No inferential threshold or station exclusion
+temporal_gate,wind_v,lag_1d,n_pairs,20496.0,Past values within continuous daily runs only
+temporal_gate,wind_v,lag_1d,median_station_spearman,0.09877039717760264,Descriptive; not significance or predictive skill
+temporal_gate,wind_v,lag_1d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,wind_v,lag_1d,stations_positive,50.0,No inferential threshold or station exclusion
+temporal_gate,wind_v,lag_2d,n_pairs,14017.0,Past values within continuous daily runs only
+temporal_gate,wind_v,lag_2d,median_station_spearman,0.04789938948677427,Descriptive; not significance or predictive skill
+temporal_gate,wind_v,lag_2d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,wind_v,lag_2d,stations_positive,41.0,No inferential threshold or station exclusion
+temporal_gate,wind_v,lag_3d,n_pairs,10188.0,Past values within continuous daily runs only
+temporal_gate,wind_v,lag_3d,median_station_spearman,0.023678129336687392,Descriptive; not significance or predictive skill
+temporal_gate,wind_v,lag_3d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,wind_v,lag_3d,stations_positive,37.0,No inferential threshold or station exclusion
+temporal_gate,wind_v,lag_7d,n_pairs,3400.0,Past values within continuous daily runs only
+temporal_gate,wind_v,lag_7d,median_station_spearman,-0.024947725017918723,Descriptive; not significance or predictive skill
+temporal_gate,wind_v,lag_7d,stations_estimable,68.0,At least 3 pairs and both variables nonconstant; mathematical computability only
+temporal_gate,wind_v,lag_7d,stations_positive,31.0,No inferential threshold or station exclusion

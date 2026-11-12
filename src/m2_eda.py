@@ -135,7 +135,7 @@ def figures(df):
     savefig(fig, "boxplots_robust")
 
     # by month
-    for v in ["pm25", "aod", "no2", "co", "o3", "temperature_celsius"]:
+    for v in PLOT_VARS:
         fig, ax = plt.subplots(figsize=(9, 4))
         data = [df.loc[df.month == m, v].dropna() for m in range(1, 13)]
         ax.boxplot(data, tick_labels=range(1, 13), showfliers=False)
@@ -220,7 +220,8 @@ def target(df):
   {np.log1p(y).skew():.2f}.
 - {(y > 25).mean():.1%} of station-days exceed 25 µg/m³ and {(y > 50).mean():.2%}
   exceed 50 µg/m³: high-pollution days are rare events.
-- Seasonal medians: {seas} (Kruskal-Wallis p = {p:.2g}).
+- Seasonal medians: {seas}. The pooled Kruskal-Wallis p-value ({p:.2g})
+  is exploratory because it does not account for repeated station observations.
 - The top 1 % of days carries {share_sq:.0%} of the total squared deviation but
   only {share_abs:.0%} of the absolute deviation. Consequences: RMSE will be
   dominated by a handful of extreme days, MAE much less so; a model can have a
@@ -297,8 +298,6 @@ def missingness(df):
     s5p_first = str(df.loc[~any_m, "date"].min().date())
     miss_after = int(any_m[df.date >= s5p_first].sum())
     n_before = int((df.date < s5p_first).sum())
-    first_fold = any_m.loc[df.sort_values("date").index][: len(df) // 6]
-    first_fold_share = first_fold.mean()
     add("5.3.1", "s5p", "all", "first_missing_date", gap_first)
     add("5.3.1", "s5p", "all", "last_missing_date", gap_last)
     add("5.3.1", "s5p", "all", "first_observed_date", s5p_first,
@@ -324,15 +323,16 @@ def missingness(df):
   many pre-{s5p_first[:4]} rows.
 - Missingness vs other variables (Mann-Whitney): PM2.5 p = {p_mw['pm25']:.2g},
   AOD p = {p_mw['aod']:.2g}, temperature p = {p_mw['temperature_celsius']:.2g}.
-  Gaps are not linked to the target.
+  These pooled comparisons are descriptive. The observation years and station
+  mix differ between the groups, so this cannot establish the missingness mechanism.
 
 ### Decision for the Thursday gate (§5.3.1)
 - **Option A (recommended): start the development data at {s5p_first}.** It drops
   {n_before} rows ({n_before/len(df):.1%}) and leaves essentially no missing
   values. Imputing two years of medians would invent pollutant data for a
   period with no satellite, and the missingness indicator would just become a
-  "before 2018" flag. With TimeSeriesSplit (5 folds) the first training
-  fold would be about {first_fold_share:.0%} imputed rows.
+  proxy for the early observation period. See `m2_s5p_stability.csv` for
+  complete-row counts under calendar-based folds.
 - **Option B: keep all rows.** Then median imputation fitted on the training
   fold + one indicator per S5P column, no forward-fill. `imputation.py`
   supports both options unchanged.
@@ -373,10 +373,8 @@ def outliers(df):
         add("5.3.3", v, "iso_and_lof", "median_flagged", Xc.loc[flagged, v].median())
         add("5.3.3", v, "iso_and_lof", "median_all", Xc[v].median())
 
-    # PM2.5: sensor error or real episode?
-    # A real episode is usually regional: other stations the same day are also
-    # high, or AOD is high. An isolated spike with low AOD and calm neighbours
-    # is more likely a sensor problem.
+    # Screen for corroboration from same-day station values or high AOD.
+    # These flags do not establish a cause for the extreme.
     q1, q3 = df.pm25.quantile([.25, .75]); hi = q3 + 3 * (q3 - q1)
     day_med = df.groupby("date").pm25.transform("median")
     day_n = df.groupby("date").pm25.transform("size")
@@ -399,7 +397,7 @@ def outliers(df):
     big_aod = df[df.aod > 1]
     add("5.3.3", "aod", "aod>1", "n", len(big_aod))
     add("5.3.3", "aod", "aod>1", "median_pm25_same_row", big_aod.pm25.median(),
-        "if PM2.5 is not elevated, high AOD is likely cloud contamination / dust aloft")
+        "high AOD alone cannot establish the cause or confirm a retrieval error")
     add("5.3.3", "aod", "aod==0", "n", int((df.aod == 0).sum()), "exact zero: suspicious retrieval")
 
     fig, ax = plt.subplots(figsize=(6, 5))
@@ -416,10 +414,11 @@ def outliers(df):
     counts = ext["class"].value_counts().to_dict()
     NOTES.append(f"""## Outliers - §5.1, §5.3.3
 
-- Domain limits: no value is physically impossible after Member 1's cleaning,
-  except {int((df.aod == 0).sum())} AOD values exactly at 0 (suspicious
-  retrievals) and {len(big_aod)} AOD values above 1 (median PM2.5 on those rows
-  {big_aod.pm25.median():.1f} µg/m³: likely dust/cloud, not local pollution).
+- Under the proposed domain limits, {int((~df.aod.between(*DOMAIN_LIMITS["aod"]) & df.aod.notna()).sum())}
+  observed AOD values fall outside the configured range. Separately,
+  {int((df.aod == 0).sum())} are exactly zero and {len(big_aod)} exceed 1
+  (median PM2.5 on those rows: {big_aod.pm25.median():.1f} µg/m³).
+  These are screening counts. High AOD alone does not establish a retrieval error.
 - Univariate rules flag very different numbers (see `n_flagged` rows): the
   1.5×IQR rule flags a lot on skewed variables (PM2.5, AOD) and is too
   aggressive; 3×IQR or robust z (MAD) is more sensible. Pressure is a good
@@ -427,7 +426,9 @@ def outliers(df):
   stations (pressure is multimodal), while 3×IQR flags none.
 - PM2.5 above 3×IQR (> {hi:.1f} µg/m³): {len(ext)} rows. Classification:
   {counts}. "episode_likely" = several stations high the same day or high AOD;
-  "isolated_suspect" = one station spikes alone with ordinary AOD.
+  "isolated_suspect" = no corroboration from these two screening rules.
+  Same-day stations need not be geographically nearby. The labels are provisional
+  until checked against nearby stations or independent evidence.
   List in `m2_pm25_extremes.csv`.
 - Isolation Forest and LOF (1 % each) agree on {int((iso_flag & lof_flag).sum())}
   predictor rows.

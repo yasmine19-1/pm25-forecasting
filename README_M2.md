@@ -21,14 +21,14 @@ python src/m2_s5p_stability.py  # rerun once Member 1 publishes folds_temporal.j
 pytest tests/
 ```
 
-Expects the clean development dataset at `data/clean_dev.parquet`.
-Needs `pandas`, `pyarrow`, `numpy`, `scipy`, `scikit-learn>=1.4`, `matplotlib>=3.10`, `pytest` (ask Member 1 to add them to `requirements.txt`).
+Expects the clean development dataset at `data/interim/clean_dev.parquet`.
+Install the pinned dependencies from `requirements.txt`. See the [shared methodology](results/19/phase1_methodology.md) for the imputation decision and limitations.
 
 ## For Member 3 (Pipeline)
 
 ```python
-from outliers import OutlierClipper
-from imputation import S5PImputer
+from src.outliers import OutlierClipper
+from src.imputation import S5PImputer
 
 Pipeline([
     ("outliers", OutlierClipper()),   # first: turns AOD == 0 into NaN

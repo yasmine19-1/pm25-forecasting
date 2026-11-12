@@ -2,7 +2,8 @@
 (§5.3.1, gate for KNN imputation)
 
 Uses Member 1's folds_temporal.json if present, otherwise a provisional
-TimeSeriesSplit(5, gap = 1 day) on the date-sorted data.
+TimeSeriesSplit on the complete calendar with a one-day gap. Provisional
+results cannot approve KNN.
 Expected fold file format (adapt load_folds if Member 1 uses another one):
     [{"train": [row positions...], "val": [row positions...]}, ...]
     or {"folds": [...same...]}
@@ -28,20 +29,25 @@ def load_folds(df):
     if path.exists():
         folds = json.loads(path.read_text())
         folds = folds["folds"] if isinstance(folds, dict) else folds
-        return [np.asarray(f["train"]) for f in folds], f"{path.name}"
-    order = np.argsort(df["date"].values, kind="stable")
-    # gap counted in rows: about one day of rows across all stations
-    gap = int(df.groupby("date").size().median())
-    tss = TimeSeriesSplit(n_splits=5, gap=gap)
-    return [order[tr] for tr, _ in tss.split(order)], "provisional TimeSeriesSplit"
+        return [np.asarray(f["train"]) for f in folds], path.name, True
+    dates = pd.to_datetime(df["date"]).dt.normalize()
+    calendar = pd.date_range(dates.min(), dates.max(), freq="D")
+    tss = TimeSeriesSplit(n_splits=5, gap=1)
+    return [np.flatnonzero(dates.isin(calendar[tr])) for tr, _ in tss.split(calendar)], "provisional calendar TimeSeriesSplit", False
 
 
 def main():
-    df = pd.read_parquet(DATA_PATH)
-    trains, source = load_folds(df)
+    df = pd.read_parquet(DATA_PATH, columns=["date", *S5P_COLS])
+    trains, source, final = load_folds(df)
     rows = []
+    availability = []
     for i, tr in enumerate(trains):
-        sub = df.iloc[tr][S5P_COLS].dropna()
+        training = df.iloc[tr][S5P_COLS]
+        for column, count in training.count().items():
+            availability.append(dict(section="5.3.1", variable=column, group=f"train_fold_{i}",
+                                     metric="observed_training_rows", value=int(count),
+                                     note=f"out of {len(training)} rows; folds: {source}"))
+        sub = training.dropna()
         c = sub.corr(method="spearman")
         for a, b in combinations(S5P_COLS, 2):
             rows.append(dict(section="5.3.1", variable=f"{a}~{b}", group=f"train_fold_{i}",
@@ -50,19 +56,21 @@ def main():
     out = pd.DataFrame(rows)
     verdicts = []
     for pair, g in out.groupby("variable"):
-        spread = g.value.max() - g.value.min()
+        complete = len(g) == 5 and np.isfinite(g.value).all()
+        spread = g.value.max() - g.value.min() if complete else np.nan
         verdicts.append(dict(section="5.3.1", variable=pair, group="all_folds",
                              metric="spearman_spread", value=spread,
-                             note="stable" if spread < TOL else "NOT stable"))
+                             note=("stable" if spread < TOL else "NOT stable") if complete else "Unavailable in at least one required fold"))
     out = pd.concat([out, pd.DataFrame(verdicts)], ignore_index=True)
-    stable = all(v["value"] < TOL for v in verdicts)
+    allowed = final and all(v["value"] < TOL for v in verdicts)
     out.loc[len(out)] = dict(section="5.3.1", variable="s5p", group="all_folds",
-                             metric="knn_imputation_allowed", value=int(stable),
-                             note=f"tolerance {TOL}")
+                             metric="knn_imputation_allowed", value=int(allowed),
+                             note=f"Requires five estimable shared folds and spread < {TOL}; folds: {source}")
     PARTS.mkdir(parents=True, exist_ok=True)
+    out = pd.concat([out, pd.DataFrame(availability)], ignore_index=True)
     out.to_csv(PARTS / "m2_s5p_stability.csv", index=False)
     print(pd.DataFrame(verdicts)[["variable", "value", "note"]].to_string(index=False))
-    print("KNN imputation allowed:", stable, f"(folds: {source})")
+    print("KNN imputation allowed:", allowed, f"(folds: {source})")
 
 
 if __name__ == "__main__":

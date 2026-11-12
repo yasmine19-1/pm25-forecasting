@@ -7,8 +7,8 @@ section,variable,group,metric,value,note
 5.1,temperature_celsius,all,max,34.86583099365237,
 5.1,temperature_celsius,all,mean,18.484588794802985,
 5.1,temperature_celsius,all,sd,6.194175851096559,
-5.1,temperature_celsius,all,skewness,-0.16958606529592235,
-5.1,temperature_celsius,all,kurtosis_excess,-0.8956116631489217,
+5.1,temperature_celsius,all,skewness,-0.16958606529592324,
+5.1,temperature_celsius,all,kurtosis_excess,-0.8956116631489213,
 5.1,pressure_mb,all,n,31282,
 5.1,pressure_mb,all,min,933.022568359375,
 5.1,pressure_mb,all,q1,987.1426770019532,
@@ -17,8 +17,8 @@ section,variable,group,metric,value,note
 5.1,pressure_mb,all,max,1033.6621761067709,
 5.1,pressure_mb,all,mean,993.5167538695065,
 5.1,pressure_mb,all,sd,17.67043615410523,
-5.1,pressure_mb,all,skewness,-1.019219590008573,
-5.1,pressure_mb,all,kurtosis_excess,0.42750311553898035,
+5.1,pressure_mb,all,skewness,-1.0192195900085534,
+5.1,pressure_mb,all,kurtosis_excess,0.4275031155389542,
 5.1,wind_u,all,n,31282,
 5.1,wind_u,all,min,-11.09872309366862,
 5.1,wind_u,all,q1,-1.0427004496256511,
@@ -27,8 +27,8 @@ section,variable,group,metric,value,note
 5.1,wind_u,all,max,8.834192276000977,
 5.1,wind_u,all,mean,0.3062658359438751,
 5.1,wind_u,all,sd,2.624834012519022,
-5.1,wind_u,all,skewness,-0.21958979107001636,
-5.1,wind_u,all,kurtosis_excess,0.9017657349553674,
+5.1,wind_u,all,skewness,-0.2195897910700161,
+5.1,wind_u,all,kurtosis_excess,0.9017657349553654,
 5.1,wind_v,all,n,31282,
 5.1,wind_v,all,min,-10.860048135121664,
 5.1,wind_v,all,q1,-0.6938371658325195,
@@ -38,7 +38,7 @@ section,variable,group,metric,value,note
 5.1,wind_v,all,mean,-0.17171617196684077,
 5.1,wind_v,all,sd,1.3606139067972296,
 5.1,wind_v,all,skewness,-1.4206485043322061,
-5.1,wind_v,all,kurtosis_excess,4.685233126886981,
+5.1,wind_v,all,kurtosis_excess,4.685233126886983,
 5.1,no2,all,n,28875,
 5.1,no2,all,min,2.6514267128116624e-05,
 5.1,no2,all,q1,7.535093881570714e-05,
@@ -47,8 +47,8 @@ section,variable,group,metric,value,note
 5.1,no2,all,max,0.0004831401596448,
 5.1,no2,all,mean,9.157053942037491e-05,
 5.1,no2,all,sd,2.71376079804689e-05,
-5.1,no2,all,skewness,2.1872926160934973,
-5.1,no2,all,kurtosis_excess,10.10942150394256,
+5.1,no2,all,skewness,2.1872926160934987,
+5.1,no2,all,kurtosis_excess,10.109421503942563,
 5.1,co,all,n,28875,
 5.1,co,all,min,0.0130575448112163,
 5.1,co,all,q1,0.0291687194819144,
@@ -57,8 +57,8 @@ section,variable,group,metric,value,note
 5.1,co,all,max,0.0608406765473278,
 5.1,co,all,mean,0.031680744227073836,
 5.1,co,all,sd,0.003746120317386786,
-5.1,co,all,skewness,0.47146952804799175,
-5.1,co,all,kurtosis_excess,2.0981400966278914,
+5.1,co,all,skewness,0.4714695280479919,
+5.1,co,all,kurtosis_excess,2.09814009662789,
 5.1,o3,all,n,28834,
 5.1,o3,all,min,0.1038994989882649,
 5.1,o3,all,q1,0.13337779673905498,
@@ -67,8 +67,8 @@ section,variable,group,metric,value,note
 5.1,o3,all,max,0.229321851252819,
 5.1,o3,all,mean,0.14236708171012638,
 5.1,o3,all,sd,0.014093232183550672,
-5.1,o3,all,skewness,1.2520327272245062,
-5.1,o3,all,kurtosis_excess,3.0460803920203703,
+5.1,o3,all,skewness,1.2520327272245027,
+5.1,o3,all,kurtosis_excess,3.046080392020363,
 5.1,aod,all,n,31282,
 5.1,aod,all,min,0.0,
 5.1,aod,all,q1,0.083,
@@ -77,8 +77,8 @@ section,variable,group,metric,value,note
 5.1,aod,all,max,5.4750000000000005,
 5.1,aod,all,mean,0.15165602689512606,
 5.1,aod,all,sd,0.10620917932929105,
-5.1,aod,all,skewness,8.649635751438158,
-5.1,aod,all,kurtosis_excess,306.5545893210214,
+5.1,aod,all,skewness,8.64963575143816,
+5.1,aod,all,kurtosis_excess,306.5545893210212,
 5.1,pm25,all,n,31282,
 5.1,pm25,all,min,0.0066666666666666,
 5.1,pm25,all,q1,4.539627192982456,
@@ -87,18 +87,18 @@ section,variable,group,metric,value,note
 5.1,pm25,all,max,484.9815,
 5.1,pm25,all,mean,9.316286113451735,
 5.1,pm25,all,sd,10.344959613228438,
-5.1,pm25,all,skewness,19.11215912814478,
-5.1,pm25,all,kurtosis_excess,666.5734609389469,
+5.1,pm25,all,skewness,19.112159128144796,
+5.1,pm25,all,kurtosis_excess,666.573460938947,
 5.1,wind_speed,all,n,31282,"wind_speed derived from u,v for description only"
-5.1,wind_speed,all,min,0.010349640134966568,"wind_speed derived from u,v for description only"
+5.1,wind_speed,all,min,0.01034964013496657,"wind_speed derived from u,v for description only"
 5.1,wind_speed,all,q1,0.9929897855536062,"wind_speed derived from u,v for description only"
 5.1,wind_speed,all,median,1.6979851989197574,"wind_speed derived from u,v for description only"
-5.1,wind_speed,all,q3,3.3637375402115848,"wind_speed derived from u,v for description only"
+5.1,wind_speed,all,q3,3.363737540211585,"wind_speed derived from u,v for description only"
 5.1,wind_speed,all,max,13.261387056540103,"wind_speed derived from u,v for description only"
 5.1,wind_speed,all,mean,2.3492181966558507,"wind_speed derived from u,v for description only"
 5.1,wind_speed,all,sd,1.8290189668031547,"wind_speed derived from u,v for description only"
-5.1,wind_speed,all,skewness,1.2089586528022709,"wind_speed derived from u,v for description only"
-5.1,wind_speed,all,kurtosis_excess,1.0168379635773586,"wind_speed derived from u,v for description only"
+5.1,wind_speed,all,skewness,1.2089586528022704,"wind_speed derived from u,v for description only"
+5.1,wind_speed,all,kurtosis_excess,1.016837963577357,"wind_speed derived from u,v for description only"
 5.1,dataset,all,n_rows,31282,
 5.1,dataset,all,n_stations,70,
 5.1,dataset,all,n_gee_ids,74,more gee_ids than stations: some stations map to several GEE cells
@@ -187,9 +187,9 @@ section,variable,group,metric,value,note
 5.1,year,2022,n_rows,4954,
 5.1,year,2023,n_rows,5400,
 5.1,year,2024,n_rows,8684,
-5.1,pm25,all,skewness,19.11215912814478,
-5.1,pm25,all,kurtosis_excess,666.5734609389469,
-5.1,pm25,all,skewness_log1p,-0.14180249976877068,log1p transform reduces skew
+5.1,pm25,all,skewness,19.112159128144796,
+5.1,pm25,all,kurtosis_excess,666.573460938947,
+5.1,pm25,all,skewness_log1p,-0.1418024997687702,log1p transform reduces skew
 5.1,pm25,all,share_above_25,0.02704430663001087,
 5.1,pm25,all,n_above_25,846,
 5.1,pm25,all,share_above_50,0.002909021162329774,
@@ -603,7 +603,7 @@ section,variable,group,metric,value,note
 5.3.1,pm25,s5p_missing_vs_present,mannwhitney_p,0.26984563300711273,
 5.3.1,aod,s5p_missing_vs_present,median_when_missing,0.132,
 5.3.1,aod,s5p_missing_vs_present,median_when_present,0.1305,
-5.3.1,aod,s5p_missing_vs_present,mannwhitney_p,0.10103655878616724,
+5.3.1,aod,s5p_missing_vs_present,mannwhitney_p,0.10103655878616721,
 5.3.1,temperature_celsius,s5p_missing_vs_present,median_when_missing,18.607054964701348,
 5.3.1,temperature_celsius,s5p_missing_vs_present,median_when_present,18.963226890563988,
 5.3.1,temperature_celsius,s5p_missing_vs_present,mannwhitney_p,2.6306156635129043e-12,
@@ -681,5 +681,5 @@ section,variable,group,metric,value,note
 5.3.3,pm25,extreme_isolated_suspect,n,122,regional = same-day median across stations > overall Q3; or AOD > P90
 5.3.3,pm25,extreme_undetermined_few_stations,n,2,regional = same-day median across stations > overall Q3; or AOD > P90
 5.3.3,aod,aod>1,n,23,
-5.3.3,aod,aod>1,median_pm25_same_row,14.36521739130435,"if PM2.5 is not elevated, high AOD is likely cloud contamination / dust aloft"
+5.3.3,aod,aod>1,median_pm25_same_row,14.36521739130435,high AOD alone cannot establish the cause or confirm a retrieval error
 5.3.3,aod,aod==0,n,5,exact zero: suspicious retrieval

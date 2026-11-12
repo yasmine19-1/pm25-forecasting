@@ -4,3 +4,11 @@ __pycache__/
 .ipynb_checkpoints/
 # datasets stay out of git (size + Kaggle licence); everyone rebuilds them with the scripts
 data/
+
+# Local Phase 1 working notes
+results/19/cleaning_decisions.md
+results/19/thursday_decision.md
+results/19/parts/m2_notes.md
+results/19/parts/gap_report_notes.md
+results/19/parts/station_eligibility_notes.md
+results/19/parts/thursday_evidence_notes.md

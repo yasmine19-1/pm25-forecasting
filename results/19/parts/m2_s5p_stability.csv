@@ -1,20 +1,35 @@
 section,variable,group,metric,value,note
-5.3.1,no2~co,train_fold_0,spearman,0.10951342399095552,n=2753; folds: provisional TimeSeriesSplit
-5.3.1,no2~o3,train_fold_0,spearman,-0.11721936868289973,n=2753; folds: provisional TimeSeriesSplit
-5.3.1,co~o3,train_fold_0,spearman,0.34028823975051375,n=2753; folds: provisional TimeSeriesSplit
-5.3.1,no2~co,train_fold_1,spearman,0.13514173191775145,n=7966; folds: provisional TimeSeriesSplit
-5.3.1,no2~o3,train_fold_1,spearman,0.016821435682618777,n=7966; folds: provisional TimeSeriesSplit
-5.3.1,co~o3,train_fold_1,spearman,0.3317488784181024,n=7966; folds: provisional TimeSeriesSplit
-5.3.1,no2~co,train_fold_2,spearman,0.11667809030804768,n=13179; folds: provisional TimeSeriesSplit
-5.3.1,no2~o3,train_fold_2,spearman,-0.02951667407560371,n=13179; folds: provisional TimeSeriesSplit
-5.3.1,co~o3,train_fold_2,spearman,0.30785001771578674,n=13179; folds: provisional TimeSeriesSplit
-5.3.1,no2~co,train_fold_3,spearman,0.1411427823693123,n=18392; folds: provisional TimeSeriesSplit
-5.3.1,no2~o3,train_fold_3,spearman,0.015820448100073724,n=18392; folds: provisional TimeSeriesSplit
-5.3.1,co~o3,train_fold_3,spearman,0.3554195365681678,n=18392; folds: provisional TimeSeriesSplit
-5.3.1,no2~co,train_fold_4,spearman,0.10794960014955138,n=23605; folds: provisional TimeSeriesSplit
-5.3.1,no2~o3,train_fold_4,spearman,-0.04781675540208342,n=23605; folds: provisional TimeSeriesSplit
-5.3.1,co~o3,train_fold_4,spearman,0.35374041365967995,n=23605; folds: provisional TimeSeriesSplit
-5.3.1,co~o3,all_folds,spearman_spread,0.04756951885238109,stable
-5.3.1,no2~co,all_folds,spearman_spread,0.03319318221976092,stable
-5.3.1,no2~o3,all_folds,spearman_spread,0.13404080436551852,stable
-5.3.1,s5p,all_folds,knn_imputation_allowed,1.0,tolerance 0.15
+5.3.1,no2~co,train_fold_0,spearman,,n=0; folds: folds_temporal.json
+5.3.1,no2~o3,train_fold_0,spearman,,n=0; folds: folds_temporal.json
+5.3.1,co~o3,train_fold_0,spearman,,n=0; folds: folds_temporal.json
+5.3.1,no2~co,train_fold_1,spearman,0.20920526597486705,n=1670; folds: folds_temporal.json
+5.3.1,no2~o3,train_fold_1,spearman,-0.04347737701377989,n=1670; folds: folds_temporal.json
+5.3.1,co~o3,train_fold_1,spearman,0.3636288977230245,n=1670; folds: folds_temporal.json
+5.3.1,no2~co,train_fold_2,spearman,0.1906951095700013,n=4880; folds: folds_temporal.json
+5.3.1,no2~o3,train_fold_2,spearman,0.03660680141668001,n=4880; folds: folds_temporal.json
+5.3.1,co~o3,train_fold_2,spearman,0.33695186445895625,n=4880; folds: folds_temporal.json
+5.3.1,no2~co,train_fold_3,spearman,0.1212847727399055,n=11784; folds: folds_temporal.json
+5.3.1,no2~o3,train_fold_3,spearman,-0.04629602923107978,n=11784; folds: folds_temporal.json
+5.3.1,co~o3,train_fold_3,spearman,0.32476174519214307,n=11784; folds: folds_temporal.json
+5.3.1,no2~co,train_fold_4,spearman,0.14100208733435252,n=17665; folds: folds_temporal.json
+5.3.1,no2~o3,train_fold_4,spearman,0.016024821550380992,n=17665; folds: folds_temporal.json
+5.3.1,co~o3,train_fold_4,spearman,0.36461864661756027,n=17665; folds: folds_temporal.json
+5.3.1,co~o3,all_folds,spearman_spread,,Unavailable in at least one required fold
+5.3.1,no2~co,all_folds,spearman_spread,,Unavailable in at least one required fold
+5.3.1,no2~o3,all_folds,spearman_spread,,Unavailable in at least one required fold
+5.3.1,s5p,all_folds,knn_imputation_allowed,0.0,Requires five estimable shared folds and spread < 0.15; folds: folds_temporal.json
+5.3.1,no2,train_fold_0,observed_training_rows,0.0,out of 2339 rows; folds: folds_temporal.json
+5.3.1,co,train_fold_0,observed_training_rows,0.0,out of 2339 rows; folds: folds_temporal.json
+5.3.1,o3,train_fold_0,observed_training_rows,0.0,out of 2339 rows; folds: folds_temporal.json
+5.3.1,no2,train_fold_1,observed_training_rows,1711.0,out of 4118 rows; folds: folds_temporal.json
+5.3.1,co,train_fold_1,observed_training_rows,1711.0,out of 4118 rows; folds: folds_temporal.json
+5.3.1,o3,train_fold_1,observed_training_rows,1670.0,out of 4118 rows; folds: folds_temporal.json
+5.3.1,no2,train_fold_2,observed_training_rows,4921.0,out of 7328 rows; folds: folds_temporal.json
+5.3.1,co,train_fold_2,observed_training_rows,4921.0,out of 7328 rows; folds: folds_temporal.json
+5.3.1,o3,train_fold_2,observed_training_rows,4880.0,out of 7328 rows; folds: folds_temporal.json
+5.3.1,no2,train_fold_3,observed_training_rows,11825.0,out of 14232 rows; folds: folds_temporal.json
+5.3.1,co,train_fold_3,observed_training_rows,11825.0,out of 14232 rows; folds: folds_temporal.json
+5.3.1,o3,train_fold_3,observed_training_rows,11784.0,out of 14232 rows; folds: folds_temporal.json
+5.3.1,no2,train_fold_4,observed_training_rows,17706.0,out of 20113 rows; folds: folds_temporal.json
+5.3.1,co,train_fold_4,observed_training_rows,17706.0,out of 20113 rows; folds: folds_temporal.json
+5.3.1,o3,train_fold_4,observed_training_rows,17665.0,out of 20113 rows; folds: folds_temporal.json

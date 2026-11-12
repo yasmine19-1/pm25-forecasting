@@ -1,13 +1,13 @@
 """Shared settings. Member 2 settings, kept separate so it never overwrites the team config."""
-from pathlib import Path
+if __package__:
+    from . import config
+else:
+    import config
 
-SEED = 42
-GROUP = "19"  # group folder used in the team repo (results/19)
-
-ROOT = Path(__file__).resolve().parents[1]
-DATA_PATH = ROOT / "data" / "clean_dev.parquet"
-RESULTS = ROOT / "results" / GROUP
-PARTS = RESULTS / "parts"
+SEED = config.SEED
+DATA_PATH = config.INTERIM / "clean_dev.parquet"
+PARTS = config.PARTS
+RESULTS = PARTS.parent
 FIGURES = RESULTS / "figures"
 
 TARGET = "pm25"
