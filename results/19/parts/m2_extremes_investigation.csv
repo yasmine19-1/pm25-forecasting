@@ -1,0 +1,269 @@
+date,station_id,pm25,aod,aod_high,n_neighbours_same_day,neighbours_high,neighbour_max,pm25_day_before,pm25_day_after,jump_vs_7day_median,repeated_value,month,verdict,reason
+2024-09-04,CENCA1,485.0,0.258,False,1,0,14.7,20.0,,24.2,False,9,probable data error,"one-day spike ×24, neighbours normal, AOD normal"
+2021-11-22,LOS BARRIOS,483.9,0.168,False,9,0,22.7,,299.6,66.7,False,11,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-11-02,HOSTELERÍA,445.1,0.512,True,4,0,11.0,,13.4,30.7,False,11,probable data error,"one-day spike ×31, neighbours normal, AOD normal"
+2022-01-19,LOS BARRIOS,399.4,0.164,False,12,0,19.3,,9.0,48.4,False,1,probable data error,"one-day spike ×48, neighbours normal, AOD normal"
+2022-01-07,HOSTELERÍA,373.0,0.054,False,12,0,29.6,,20.1,20.3,False,1,probable data error,"one-day spike ×20, neighbours normal, AOD normal"
+2022-02-14,GUADARRANQUE,338.8,0.124,False,12,0,17.5,124.3,13.2,24.0,False,2,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-11-07,CAMPAMENTO,315.0,0.048,False,10,1,63.2,2.6,208.2,81.2,False,11,real event,neighbouring station(s) also high
+2020-04-04,ALCORA,303.5,0.172,False,3,0,7.0,4.0,,75.9,False,4,probable data error,"one-day spike ×76, neighbours normal, AOD normal"
+2021-11-23,LOS BARRIOS,299.6,0.144,False,10,1,122.8,483.9,4.7,44.0,False,11,real event,neighbouring station(s) also high
+2024-10-17,CENCA1,295.2,0.261,False,1,0,7.1,,,48.4,False,10,probable data error,"one-day spike ×48, neighbours normal, AOD normal"
+2022-01-05,HOSTELERÍA,261.8,0.061,False,12,0,15.0,,,8.9,False,1,probable data error,"one-day spike ×9, neighbours normal, AOD normal"
+2021-09-07,MADREVIEJA,247.5,0.252,False,10,0,16.0,,2.7,55.0,False,9,probable data error,"one-day spike ×55, neighbours normal, AOD normal"
+2021-07-13,CENCA1,234.9,0.168,False,1,0,11.8,16.1,24.3,14.6,False,7,probable data error,"one-day spike ×15, neighbours normal, AOD normal"
+2021-11-08,CAMPAMENTO,208.2,0.058,False,10,1,53.4,315.0,4.9,42.2,False,11,real event,neighbouring station(s) also high
+2024-08-13,SAN ROQUE (S6),203.8,0.101,False,5,0,14.1,12.3,,26.0,False,8,probable data error,"one-day spike ×26, neighbours normal, AOD normal"
+2024-08-05,CENCA1,188.5,0.2,False,1,0,8.7,91.5,15.4,12.3,False,8,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-09-09,CENCA1,167.9,0.166,False,0,0,,,9.2,18.3,False,9,"suspect, unconfirmed","one-day spike ×18, no neighbour within 30 km to check"
+2021-12-03,E4:RINCONCILLO,159.2,0.039,False,5,0,14.1,4.1,,21.7,False,12,probable data error,"one-day spike ×22, neighbours normal, AOD normal"
+2022-01-08,GUADARRANQUE,149.4,0.044,False,12,0,26.0,9.5,9.3,16.1,False,1,probable data error,"one-day spike ×16, neighbours normal, AOD normal"
+2022-02-08,GUADARRANQUE,149.1,0.202,False,12,0,18.8,104.6,11.9,7.8,False,2,plausible local event,"station elevated on adjacent days, neighbours not high"
+2022-01-06,LOS BARRIOS,141.2,0.035,False,9,0,12.1,7.3,10.0,14.1,False,1,probable data error,"one-day spike ×14, neighbours normal, AOD normal"
+2021-03-14,ONTINYENT,135.8,0.033,False,0,0,,52.7,3.7,14.7,False,3,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-07-15,SAN ROQUE (S6),132.6,0.086,False,8,0,10.8,6.6,,20.5,False,7,probable data error,"one-day spike ×21, neighbours normal, AOD normal"
+2024-08-10,CENCA1,128.2,0.174,False,1,0,13.7,12.5,,10.3,False,8,probable data error,"one-day spike ×10, neighbours normal, AOD normal"
+2021-12-11,LOS BARRIOS,127.0,0.039,False,9,0,19.1,,90.2,15.7,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2017-03-31,ALMASSORA-C. P. OCHANDO,125.2,0.121,False,3,0,4.8,21.2,,4.2,False,3,undetermined,"moderate value, not enough evidence either way"
+2022-02-13,GUADARRANQUE,124.3,0.177,False,12,0,19.2,15.1,338.8,7.3,False,2,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-11-23,HOSTELERÍA,122.8,0.129,False,10,1,299.6,22.7,19.7,5.9,False,11,real event,neighbouring station(s) also high
+2022-04-24,LOS BARRIOS,120.0,0.299,True,10,0,13.9,4.6,,25.8,False,4,probable data error,"one-day spike ×26, neighbours normal, AOD normal"
+2022-02-10,GUADARRANQUE,117.7,0.187,False,12,0,17.6,11.9,19.2,1.9,False,2,undetermined,"moderate value, not enough evidence either way"
+2024-07-16,CENCA1,116.2,0.132,False,1,0,2.0,,,11.8,False,7,probable data error,"one-day spike ×12, neighbours normal, AOD normal"
+2024-07-29,CENCA1,112.0,0.189,False,1,0,8.9,9.3,,8.7,False,7,probable data error,"one-day spike ×9, neighbours normal, AOD normal"
+2021-08-31,BENICASSIM,111.2,0.313,True,1,0,11.8,,,,False,8,undetermined,"moderate value, not enough evidence either way"
+2022-02-07,GUADARRANQUE,104.6,0.171,False,12,0,20.3,12.4,149.1,1.6,False,2,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-07-13,E4:RINCONCILLO,103.9,0.066,False,12,0,22.3,,,9.5,False,7,probable data error,"one-day spike ×9, neighbours normal, AOD normal"
+2023-12-19,HOSTELERÍA,100.1,0.059,False,7,0,16.3,17.5,,3.1,False,12,undetermined,"moderate value, not enough evidence either way"
+2024-08-04,CENCA1,91.5,0.137,False,1,0,11.5,20.3,188.5,6.2,False,8,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-12-12,LOS BARRIOS,90.2,0.06,False,10,0,18.9,127.0,,10.1,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2022-02-04,CENCA1,88.4,0.058,False,1,0,10.0,77.8,10.1,2.0,False,2,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-12-17,GUADARRANQUE,85.9,0.243,False,7,1,82.2,,,6.2,False,12,real event,neighbouring station(s) also high
+2021-01-26,VALÈNCIA-PISTA DE SILLA,84.7,0.128,False,6,0,15.3,,50.9,5.6,False,1,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-07-08,E4:RINCONCILLO,84.0,0.088,False,12,0,17.2,12.4,,6.8,False,7,probable data error,"one-day spike ×7, neighbours normal, AOD normal"
+2017-04-13,ALMASSORA-C. P. OCHANDO,83.3,0.124,False,3,0,12.4,66.7,56.5,1.5,False,4,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-11-11,LOS BARRIOS,83.0,0.048,False,5,0,19.4,8.3,9.8,11.6,False,11,probable data error,"one-day spike ×12, neighbours normal, AOD normal"
+2021-11-18,CENCA1,82.6,0.102,False,1,0,8.9,22.9,22.7,3.6,False,11,undetermined,"moderate value, not enough evidence either way"
+2021-12-17,LOS BARRIOS,82.2,0.243,False,7,1,85.9,,,8.7,False,12,real event,neighbouring station(s) also high
+2023-05-25,CARRANQUE,80.6,0.077,False,1,0,10.4,3.6,76.5,2.1,False,5,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-05-10,E4:RINCONCILLO,79.0,0.166,False,11,0,17.5,10.2,46.4,6.6,False,5,plausible local event,"station elevated on adjacent days, neighbours not high"
+2022-02-03,CENCA1,77.8,0.057,False,1,0,9.7,,88.4,7.1,False,2,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-08-21,HOSTELERÍA,77.3,0.23,False,11,0,20.5,7.1,,3.7,False,8,undetermined,"moderate value, not enough evidence either way"
+2023-05-26,CARRANQUE,76.5,0.273,False,1,0,10.9,80.6,73.2,3.3,False,5,plausible local event,"station elevated on adjacent days, neighbours not high"
+2022-03-26,PUENTE MAYORGA,76.1,0.147,False,6,6,61.4,,,2.4,False,3,real event,neighbouring station(s) also high
+2021-11-15,LOS BARRIOS,74.2,0.06,False,6,0,18.0,,6.6,9.3,False,11,probable data error,"one-day spike ×9, neighbours normal, AOD normal"
+2023-05-27,CARRANQUE,73.2,0.358,True,0,0,,76.5,,1.5,False,5,real event,high AOD and elevated on adjacent days
+2023-10-14,HOSTELERÍA,72.6,0.178,False,11,1,26.8,,,5.1,False,10,real event,neighbouring station(s) also high
+2021-12-04,LOS BARRIOS,71.8,0.038,False,8,0,14.1,4.7,5.6,12.5,False,12,probable data error,"one-day spike ×12, neighbours normal, AOD normal"
+2024-03-29,CENMO1,69.8,0.176,False,1,1,60.6,13.2,,17.9,False,3,real event,neighbouring station(s) also high
+2020-11-25,VALÈNCIA-POLITÈCNIC,67.0,0.145,False,5,0,23.0,15.8,,4.9,False,11,undetermined,"moderate value, not enough evidence either way"
+2017-04-12,ALMASSORA-C. P. OCHANDO,66.7,0.082,False,3,0,8.4,53.0,83.3,1.3,False,4,plausible local event,"station elevated on adjacent days, neighbours not high"
+2020-03-02,ALCORA,65.3,0.135,False,3,0,5.5,,8.3,7.9,False,3,probable data error,"one-day spike ×8, neighbours normal, AOD normal"
+2023-06-14,LA LÍNEA,63.9,0.099,False,11,0,19.8,5.5,47.4,7.9,False,6,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-11-07,HOSTELERÍA,63.2,0.043,False,10,1,315.0,11.7,53.4,3.2,False,11,real event,neighbouring station(s) also high
+2024-10-23,CENCA1,63.0,0.231,False,1,0,2.3,,,4.8,False,10,undetermined,"moderate value, not enough evidence either way"
+2021-12-30,E4:RINCONCILLO,62.2,0.092,False,12,0,24.6,46.4,13.7,4.0,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2022-03-26,HOSTELERÍA,61.4,0.276,True,6,6,76.1,,,,False,3,real event,neighbouring station(s) also high
+2022-04-30,GUADARRANQUE,60.9,0.106,False,12,0,13.3,7.8,,1.0,True,4,probable data error,exact value repeated at this station (stuck sensor)
+2022-05-03,GUADARRANQUE,60.9,0.296,True,9,0,13.3,60.9,,1.0,True,5,real event,high AOD and elevated on adjacent days
+2022-05-02,GUADARRANQUE,60.9,0.235,False,4,0,10.4,,60.9,1.0,True,5,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-03-29,CENCA1,60.6,0.176,False,1,1,69.8,17.1,,3.5,False,3,real event,neighbouring station(s) also high
+2021-11-04,HOSTELERÍA,59.9,0.055,False,10,0,11.1,13.4,14.5,4.1,False,11,undetermined,"moderate value, not enough evidence either way"
+2022-03-26,CAMPAMENTO,58.6,0.147,False,6,6,76.1,,,2.2,False,3,real event,neighbouring station(s) also high
+2017-11-16,FR03006,58.5,0.074,False,3,2,49.0,25.0,,3.4,False,11,real event,neighbouring station(s) also high
+2021-01-01,CENCA1,57.1,0.103,False,1,1,34.8,19.4,,2.9,False,1,real event,neighbouring station(s) also high
+2017-04-14,ALMASSORA-C. P. OCHANDO,56.5,0.333,True,2,0,12.4,83.3,,0.8,False,4,real event,high AOD and elevated on adjacent days
+2022-03-26,ECONOMATO,56.2,0.147,False,6,6,76.1,,,2.3,False,3,real event,neighbouring station(s) also high
+2024-06-24,CAMPANILLAS CIFA,55.8,0.108,False,1,0,6.9,7.6,6.9,7.4,False,6,probable data error,"one-day spike ×7, neighbours normal, AOD normal"
+2023-09-06,MADREVIEJA,55.6,0.29,True,3,0,18.8,,,4.7,False,9,undetermined,"moderate value, not enough evidence either way"
+2019-04-30,ALMASSORA-C. P. OCHANDO,55.5,0.146,False,2,0,6.1,7.8,33.7,7.2,False,4,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-08-24,VILAMARXANT,55.3,0.387,True,1,0,9.2,6.0,,9.2,False,8,probable data error,"one-day spike ×9, neighbours normal, AOD normal"
+2024-05-24,ECONOMATO,53.9,0.139,False,10,0,16.9,,10.1,5.7,False,5,probable data error,"one-day spike ×6, neighbours normal, AOD normal"
+2021-11-08,HOSTELERÍA,53.4,0.048,False,10,1,208.2,63.2,19.1,2.8,False,11,real event,neighbouring station(s) also high
+2017-07-07,ELDA-LACY,53.4,0.418,True,0,0,,,16.9,5.6,False,7,"suspect, unconfirmed","one-day spike ×6, no neighbour within 30 km to check"
+2024-05-16,ECONOMATO,53.2,0.099,False,11,0,11.2,,,9.5,False,5,probable data error,"one-day spike ×9, neighbours normal, AOD normal"
+2022-11-17,VILAMARXANT,53.0,0.147,False,0,0,,,,38.7,False,11,"suspect, unconfirmed","one-day spike ×39, no neighbour within 30 km to check"
+2017-04-11,ALMASSORA-C. P. OCHANDO,53.0,0.072,False,3,0,11.1,16.7,66.7,0.9,False,4,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-03-13,ONTINYENT,52.7,0.104,False,0,0,,4.4,135.8,6.8,False,3,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-12-31,Fos Les Carabins,52.5,0.167,False,1,1,27.9,41.5,,1.7,False,12,real event,neighbouring station(s) also high
+2023-12-30,La Sagrera,51.0,0.111,False,1,1,45.3,,,1.6,False,12,real event,neighbouring station(s) also high
+2022-08-17,VALÈNCIA - AVD. FRANCIA,51.0,0.253,False,0,0,,17.7,7.5,6.4,False,8,"suspect, unconfirmed","one-day spike ×6, no neighbour within 30 km to check"
+2021-01-27,VALÈNCIA-PISTA DE SILLA,50.9,0.183,False,5,0,4.6,84.7,15.2,4.9,False,1,plausible local event,"station elevated on adjacent days, neighbours not high"
+2022-01-15,FR02013,50.5,0.048,False,1,1,42.1,31.6,23.9,2.0,False,1,real event,neighbouring station(s) also high
+2023-12-15,HOSTELERÍA,49.8,0.05,False,12,0,18.5,11.9,32.4,2.8,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-12-30,SAN BASILIO,49.8,0.093,False,0,0,,,,1.1,False,12,undetermined,"moderate value, not enough evidence either way"
+2024-06-19,E2: ALCORNOCALES,49.7,0.188,False,12,0,13.2,29.3,28.9,2.8,False,6,plausible local event,"station elevated on adjacent days, neighbours not high"
+2019-02-22,VALÈNCIA-PISTA DE SILLA,49.1,0.08,False,5,3,41.5,,36.1,1.4,False,2,real event,neighbouring station(s) also high
+2017-11-16,FR03043,49.0,0.074,False,3,2,58.5,23.0,,3.4,False,11,real event,neighbouring station(s) also high
+2024-03-18,VALÈNCIA OLIVERETA,49.0,0.246,False,1,1,35.0,,,,False,3,real event,neighbouring station(s) also high
+2017-11-18,VALÈNCIA-PISTA DE SILLA,48.3,0.095,False,4,2,38.2,,,1.3,False,11,real event,neighbouring station(s) also high
+2024-02-28,E2: ALCORNOCALES,48.2,0.025,False,6,0,11.1,15.5,13.8,5.0,False,2,probable data error,"one-day spike ×5, neighbours normal, AOD normal"
+2017-04-04,ALMASSORA-C. P. OCHANDO,48.1,0.166,False,2,0,2.8,38.1,5.1,2.2,False,4,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-07-16,VALÈNCIA - MOLÍ DEL SOL,47.9,0.241,False,3,0,20.6,41.0,18.0,2.7,False,7,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-06-15,LA LÍNEA,47.4,0.108,False,11,0,18.9,63.9,8.6,5.5,False,6,plausible local event,"station elevated on adjacent days, neighbours not high"
+2019-03-16,VALÈNCIA-PISTA DE SILLA,47.4,0.054,False,5,1,25.9,30.6,34.1,2.2,False,3,real event,neighbouring station(s) also high
+2020-02-17,VALÈNCIA - AVD. FRANCIA,47.2,0.069,False,5,5,44.8,45.1,,3.2,False,2,real event,neighbouring station(s) also high
+2017-11-16,FR03029,47.0,0.036,False,3,2,58.5,27.0,,2.6,False,11,real event,neighbouring station(s) also high
+2024-12-31,Barcelona - Porta - Can Dragó,46.6,0.125,False,1,0,24.7,39.1,,1.3,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-11-30,VALÈNCIA - MOLÍ DEL SOL,46.5,0.205,False,3,2,40.7,30.8,,1.5,False,11,real event,neighbouring station(s) also high
+2021-02-19,VALÈNCIA-POLITÈCNIC,46.5,0.154,False,4,4,41.8,38.4,,1.9,False,2,real event,neighbouring station(s) also high
+2023-05-11,E4:RINCONCILLO,46.4,0.174,False,12,0,18.8,79.0,12.1,3.9,False,5,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-12-29,E4:RINCONCILLO,46.4,0.05,False,10,0,17.0,,62.2,3.4,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2021-12-19,CENCA1,46.4,0.083,False,1,0,14.1,28.0,,1.5,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-12-27,SAN BASILIO,46.1,0.1,False,0,0,,39.3,,1.1,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-07-11,VALÈNCIA - MOLÍ DEL SOL,45.9,0.164,False,4,0,20.0,23.1,33.8,2.0,False,7,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-11-25,SAN BASILIO,45.9,0.244,False,2,2,44.6,26.1,,2.8,False,11,real event,neighbouring station(s) also high
+2017-11-20,VALÈNCIA-PISTA DE SILLA,45.5,0.116,False,4,2,37.1,,44.4,1.0,False,11,real event,neighbouring station(s) also high
+2023-12-30,Mollet del Vallès,45.3,0.085,False,1,1,51.0,,,1.2,False,12,real event,neighbouring station(s) also high
+2020-02-16,VALÈNCIA - AVD. FRANCIA,45.1,0.208,False,5,5,40.2,18.5,47.2,2.4,False,2,real event,neighbouring station(s) also high
+2020-02-17,VALÈNCIA-POLITÈCNIC,44.8,0.069,False,5,5,47.2,40.2,,2.9,False,2,real event,neighbouring station(s) also high
+2022-01-03,VALÈNCIA - AVD. FRANCIA,44.8,0.09,False,5,3,34.9,34.8,8.5,2.8,False,1,real event,neighbouring station(s) also high
+2024-11-25,RONDA SUR,44.6,0.244,False,2,2,45.9,23.3,,3.2,False,11,real event,neighbouring station(s) also high
+2017-11-21,VALÈNCIA-PISTA DE SILLA,44.4,0.071,False,4,2,30.6,45.5,43.9,1.0,False,11,real event,neighbouring station(s) also high
+2024-01-01,SAN BASILIO,44.3,0.033,False,0,0,,,,1.2,False,1,undetermined,"moderate value, not enough evidence either way"
+2020-02-28,ELDA-LACY,44.3,0.221,False,0,0,,13.1,25.0,6.2,False,2,"suspect, unconfirmed","one-day spike ×6, no neighbour within 30 km to check"
+2017-11-22,VALÈNCIA-PISTA DE SILLA,43.9,0.061,False,4,2,35.5,44.4,37.7,1.0,False,11,real event,neighbouring station(s) also high
+2023-12-30,TORREVIEJA,43.8,0.151,False,0,0,,,,1.7,False,12,undetermined,"moderate value, not enough evidence either way"
+2024-01-25,La Sagrera,43.7,0.108,False,1,1,39.5,42.1,,1.1,False,1,real event,neighbouring station(s) also high
+2024-09-23,CAMPAMENTO,43.1,0.263,False,10,8,40.4,,16.0,2.7,False,9,real event,neighbouring station(s) also high
+2023-07-19,CAMPANILLAS CIFA,42.4,0.371,True,1,1,33.3,,31.4,4.1,False,7,real event,neighbouring station(s) also high
+2022-01-15,FR02020,42.1,0.018,False,2,2,50.5,34.4,22.4,2.0,False,1,real event,neighbouring station(s) also high
+2024-01-24,La Sagrera,42.1,0.071,False,1,1,36.4,28.6,43.7,1.5,False,1,real event,neighbouring station(s) also high
+2022-01-01,VALÈNCIA - AVD. FRANCIA,42.0,0.101,False,5,2,28.0,23.4,34.8,2.3,False,1,real event,neighbouring station(s) also high
+2023-06-24,Mollet del Vallès,42.0,0.103,False,1,0,19.0,20.0,15.0,2.8,False,6,undetermined,"moderate value, not enough evidence either way"
+2023-12-25,SAN BASILIO,41.9,0.08,False,0,0,,37.0,39.3,1.1,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-10-07,La Sagrera,41.8,0.253,False,1,1,26.2,36.1,31.7,1.5,False,10,real event,neighbouring station(s) also high
+2021-02-19,SAGUNT CEA,41.8,0.333,True,5,4,46.5,,20.0,2.7,False,2,real event,neighbouring station(s) also high
+2024-12-30,Fos Les Carabins,41.5,0.087,False,1,1,38.7,30.9,52.5,1.4,False,12,real event,neighbouring station(s) also high
+2019-02-22,VALÈNCIA-POLITÈCNIC,41.5,0.08,False,5,3,49.1,,29.5,1.4,False,2,real event,neighbouring station(s) also high
+2022-11-19,E4:RINCONCILLO,41.5,0.103,False,12,1,25.8,21.4,,2.8,False,11,real event,neighbouring station(s) also high
+2022-02-04,ALMASSORA-C. P. OCHANDO,41.4,0.171,False,3,1,39.9,15.0,,4.6,False,2,real event,neighbouring station(s) also high
+2021-01-26,CENCA1,41.1,0.072,False,1,0,4.2,,,5.8,False,1,probable data error,"one-day spike ×6, neighbours normal, AOD normal"
+2021-09-28,E2: ALCORNOCALES,41.1,0.246,False,8,1,28.0,,,8.9,False,9,real event,neighbouring station(s) also high
+2024-11-25,MOLINA DE SEGURA,41.0,0.252,False,2,2,45.9,22.6,,3.2,False,11,real event,neighbouring station(s) also high
+2024-07-15,VALÈNCIA - MOLÍ DEL SOL,41.0,0.179,False,4,0,19.5,23.6,47.9,1.7,False,7,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-11-30,VALÈNCIA OLIVERETA,40.7,0.205,False,3,2,46.5,28.6,,1.7,False,11,real event,neighbouring station(s) also high
+2024-04-12,CAMPANILLAS CIFA,40.6,0.142,False,0,0,,39.8,3.4,4.6,False,4,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-10-31,LA ALJORRA,40.6,0.22,False,2,2,35.0,16.0,16.6,3.1,False,10,real event,neighbouring station(s) also high
+2022-01-01,TORREVIEJA,40.6,0.209,False,0,0,,29.0,32.9,1.4,False,1,plausible local event,"station elevated on adjacent days, neighbours not high"
+2020-02-17,SAGUNT CEA,40.5,0.189,False,6,6,47.2,31.9,,2.9,False,2,real event,neighbouring station(s) also high
+2024-09-23,CORTIJILLOS,40.4,0.319,True,10,8,43.1,18.2,17.4,2.4,False,9,real event,neighbouring station(s) also high
+2020-02-16,VALÈNCIA-POLITÈCNIC,40.2,0.208,False,5,5,45.1,27.6,44.8,1.5,False,2,real event,neighbouring station(s) also high
+2024-01-01,Mollet del Vallès,40.1,0.15,False,1,1,33.2,,,1.1,False,1,real event,neighbouring station(s) also high
+2022-03-24,FR02020,40.0,0.131,False,2,1,30.0,,13.8,3.3,False,3,real event,neighbouring station(s) also high
+2023-12-26,Mollet del Vallès,39.9,0.033,False,1,1,32.6,38.7,37.1,1.3,False,12,real event,neighbouring station(s) also high
+2022-02-04,BURRIANA,39.9,0.186,False,3,1,41.4,7.0,,9.6,False,2,real event,neighbouring station(s) also high
+2024-04-11,CAMPANILLAS CIFA,39.8,0.118,False,0,0,,,40.6,9.3,False,4,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-12-17,HOSTELERÍA,39.8,0.171,False,12,0,19.4,32.4,17.5,1.2,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-12-18,Rognac les Brets,39.6,0.077,False,2,1,36.6,,,5.6,False,12,real event,neighbouring station(s) also high
+2024-01-28,Mollet del Vallès,39.6,0.14,False,1,1,38.4,,,1.2,False,1,real event,neighbouring station(s) also high
+2023-12-18,La Sagrera,39.6,0.084,False,1,1,28.4,25.9,30.2,1.9,False,12,real event,neighbouring station(s) also high
+2024-12-25,SAN BASILIO,39.6,0.029,False,2,1,27.9,,26.6,1.9,False,12,real event,neighbouring station(s) also high
+2024-01-25,Mollet del Vallès,39.5,0.093,False,1,1,43.7,36.4,,1.1,False,1,real event,neighbouring station(s) also high
+2023-07-20,PALACIO CONGRESOS,39.5,0.262,False,1,0,17.7,35.7,10.4,2.3,False,7,plausible local event,"station elevated on adjacent days, neighbours not high"
+2022-01-18,FR02013,39.4,0.078,False,1,0,16.9,9.5,,2.4,False,1,undetermined,"moderate value, not enough evidence either way"
+2021-01-20,CENCA1,39.3,0.073,False,1,0,17.2,22.2,,2.0,False,1,undetermined,"moderate value, not enough evidence either way"
+2023-12-26,SAN BASILIO,39.3,0.081,False,0,0,,41.9,46.1,1.0,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-04-10,E4:RINCONCILLO,39.3,0.264,False,7,1,28.6,,11.2,4.7,False,4,real event,neighbouring station(s) also high
+2024-04-02,CAMPANILLAS CIFA,39.3,0.17,False,0,0,,4.7,3.8,9.3,False,4,"suspect, unconfirmed","one-day spike ×9, no neighbour within 30 km to check"
+2022-09-08,E4:RINCONCILLO,39.2,0.042,False,12,0,24.4,,13.5,2.9,False,9,undetermined,"moderate value, not enough evidence either way"
+2024-10-31,VALÈNCIA-CENTRE,39.2,0.257,False,2,1,35.9,,,4.0,False,10,real event,neighbouring station(s) also high
+2024-12-30,Barcelona - Porta - Can Dragó,39.1,0.071,False,1,1,25.1,36.1,46.6,1.1,False,12,real event,neighbouring station(s) also high
+2024-05-28,ECONOMATO,39.1,0.381,True,11,1,25.4,32.3,,3.9,False,5,real event,neighbouring station(s) also high
+2024-12-01,Barcelona - Porta - Can Dragó,39.0,0.106,False,1,1,26.6,38.3,,1.6,False,12,real event,neighbouring station(s) also high
+2024-10-31,SAN BASILIO,39.0,0.097,False,2,2,38.3,,28.1,2.7,False,10,real event,neighbouring station(s) also high
+2024-03-18,Mollet del Vallès,39.0,0.218,False,1,0,29.5,,14.0,1.5,False,3,undetermined,"moderate value, not enough evidence either way"
+2022-01-01,GRANADA - NORTE,39.0,0.067,False,0,0,,27.6,22.8,1.6,False,1,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-11-30,VALÈNCIA-CENTRE,38.8,0.222,False,3,2,46.5,29.3,,1.5,False,11,real event,neighbouring station(s) also high
+2024-12-30,Rognac les Brets,38.7,0.049,False,2,1,41.5,34.8,27.9,1.3,False,12,real event,neighbouring station(s) also high
+2023-12-25,Mollet del Vallès,38.7,0.074,False,1,1,34.2,23.9,39.9,1.6,False,12,real event,neighbouring station(s) also high
+2023-12-19,Mollet del Vallès,38.6,0.038,False,1,0,30.2,28.4,,5.5,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-12-05,SAN ROQUE (S6),38.6,0.072,False,7,0,16.7,12.7,10.4,3.3,False,12,undetermined,"moderate value, not enough evidence either way"
+2024-01-28,La Sagrera,38.4,0.075,False,1,1,39.6,,,1.1,False,1,real event,neighbouring station(s) also high
+2024-07-01,E2: ALCORNOCALES,38.4,0.157,False,12,0,13.4,4.4,5.4,6.5,False,7,probable data error,"one-day spike ×7, neighbours normal, AOD normal"
+2021-02-18,VALÈNCIA-POLITÈCNIC,38.4,0.243,False,4,3,32.6,,46.5,1.4,False,2,real event,neighbouring station(s) also high
+2024-04-04,LOS BARRIOS,38.4,0.199,False,9,0,13.6,1.1,,25.1,False,4,probable data error,"one-day spike ×25, neighbours normal, AOD normal"
+2024-10-31,RONDA SUR,38.3,0.097,False,2,2,39.0,,26.6,3.0,False,10,real event,neighbouring station(s) also high
+2024-11-30,Barcelona - Porta - Can Dragó,38.3,0.155,False,1,0,23.7,22.7,39.0,1.7,False,11,plausible local event,"station elevated on adjacent days, neighbours not high"
+2017-11-18,VALÈNCIA-POLITÈCNIC,38.2,0.095,False,4,2,48.3,,,1.4,False,11,real event,neighbouring station(s) also high
+2023-06-10,E4:RINCONCILLO,38.2,0.144,False,11,0,19.0,27.6,10.6,2.5,False,6,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-12-30,MOMPEAN,38.2,0.161,False,2,2,36.0,,,2.3,False,12,real event,neighbouring station(s) also high
+2017-04-03,ALMASSORA-C. P. OCHANDO,38.1,0.037,False,3,0,12.0,,48.1,1.3,False,4,plausible local event,"station elevated on adjacent days, neighbours not high"
+2017-12-06,FR03030,38.1,0.215,False,2,1,26.2,37.3,33.6,1.1,False,12,real event,neighbouring station(s) also high
+2024-02-07,Mollet del Vallès,38.0,0.089,False,1,0,21.6,,21.3,1.6,False,2,undetermined,"moderate value, not enough evidence either way"
+2022-02-04,VALÈNCIA - AVD. FRANCIA,37.9,0.174,False,3,3,29.6,27.5,,2.4,False,2,real event,neighbouring station(s) also high
+2021-12-27,GUADARRANQUE,37.9,0.239,False,9,0,17.1,,,3.4,False,12,undetermined,"moderate value, not enough evidence either way"
+2023-12-31,CENCA1,37.9,0.187,False,1,1,26.3,,,,False,12,real event,neighbouring station(s) also high
+2020-01-15,QUART DE POBLET,37.8,0.15,False,3,1,31.2,27.8,,1.7,False,1,real event,neighbouring station(s) also high
+2024-12-26,VALÈNCIA - MOLÍ DEL SOL,37.8,0.079,False,3,0,17.8,,12.0,3.3,False,12,undetermined,"moderate value, not enough evidence either way"
+2019-02-01,ALCORA,37.7,0.024,False,3,0,1.2,7.0,10.1,4.4,False,2,undetermined,"moderate value, not enough evidence either way"
+2019-02-21,QUART DE POBLET,37.7,0.158,False,2,0,20.7,29.2,36.4,1.3,False,2,plausible local event,"station elevated on adjacent days, neighbours not high"
+2017-11-23,VALÈNCIA-PISTA DE SILLA,37.7,0.118,False,4,1,27.9,43.9,,0.9,False,11,real event,neighbouring station(s) also high
+2024-12-24,VALÈNCIA - MOLÍ DEL SOL,37.3,0.072,False,3,0,12.3,,,3.1,False,12,undetermined,"moderate value, not enough evidence either way"
+2024-10-31,MOLINA DE SEGURA,37.3,0.178,False,2,2,39.0,,25.4,4.0,False,10,real event,neighbouring station(s) also high
+2017-12-05,FR03030,37.3,0.118,False,3,3,33.9,,38.1,1.0,False,12,real event,neighbouring station(s) also high
+2023-07-19,PUENTE MAYORGA,37.2,0.39,True,8,7,35.8,,,1.6,False,7,real event,neighbouring station(s) also high
+2024-11-15,CAMPAMENTO,37.1,0.347,True,7,0,20.6,,,2.7,False,11,undetermined,"moderate value, not enough evidence either way"
+2024-09-23,MADREVIEJA,37.1,0.364,True,10,8,43.1,12.1,16.6,2.6,False,9,real event,neighbouring station(s) also high
+2023-12-27,Mollet del Vallès,37.1,0.072,False,1,0,30.3,39.9,,0.9,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2017-11-20,VALÈNCIA-POLITÈCNIC,37.1,0.116,False,4,2,45.5,,30.6,1.1,False,11,real event,neighbouring station(s) also high
+2023-12-24,SAN BASILIO,37.0,0.055,False,0,0,,32.1,41.9,1.0,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2019-03-02,VALÈNCIA-PISTA DE SILLA,36.8,0.051,False,4,0,24.6,32.9,25.9,1.3,False,3,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-12-18,Fos Les Carabins,36.6,0.104,False,1,1,39.6,,14.1,4.7,False,12,real event,neighbouring station(s) also high
+2020-09-30,ALCORA,36.6,0.185,False,3,0,5.6,6.0,5.4,6.4,False,9,probable data error,"one-day spike ×6, neighbours normal, AOD normal"
+2024-01-24,Mollet del Vallès,36.4,0.071,False,1,1,42.1,27.7,39.5,1.3,False,1,real event,neighbouring station(s) also high
+2019-02-22,QUART DE POBLET,36.4,0.068,False,5,3,49.1,37.7,29.1,1.2,False,2,real event,neighbouring station(s) also high
+2023-11-17,MADREVIEJA,36.4,0.081,False,12,4,34.5,,24.6,1.9,False,11,real event,neighbouring station(s) also high
+2023-09-09,La Sagrera,36.3,0.11,False,1,0,23.0,20.0,19.0,1.9,False,9,undetermined,"moderate value, not enough evidence either way"
+2023-10-06,La Sagrera,36.1,0.342,True,1,1,28.0,25.2,41.8,1.3,False,10,real event,neighbouring station(s) also high
+2024-12-02,MOLINA DE SEGURA,36.1,0.151,False,2,2,36.1,,22.5,1.6,False,12,real event,neighbouring station(s) also high
+2024-12-02,SAN BASILIO,36.1,0.155,False,2,2,36.1,,26.9,1.2,False,12,real event,neighbouring station(s) also high
+2024-12-31,CENMO1,36.1,0.096,False,1,0,19.2,10.9,,3.3,False,12,undetermined,"moderate value, not enough evidence either way"
+2024-08-21,Barcelona - Porta - Can Dragó,36.1,0.252,False,1,0,20.8,34.9,,1.1,False,8,plausible local event,"station elevated on adjacent days, neighbours not high"
+2019-02-23,VALÈNCIA-PISTA DE SILLA,36.1,0.049,False,5,2,29.5,49.1,35.4,1.1,False,2,real event,neighbouring station(s) also high
+2024-12-29,Barcelona - Porta - Can Dragó,36.1,0.068,False,1,0,23.7,33.8,39.1,1.0,False,12,plausible local event,"station elevated on adjacent days, neighbours not high"
+2022-01-03,HOSTELERÍA,36.1,0.132,False,12,2,31.2,23.0,,1.6,False,1,real event,neighbouring station(s) also high
+2021-10-02,GRANADA - NORTE,36.1,0.133,False,0,0,,,,4.3,False,10,undetermined,"moderate value, not enough evidence either way"
+2017-07-09,ALCORA,36.0,0.129,False,3,0,6.0,34.6,36.0,1.0,True,7,plausible local event,"station elevated on adjacent days, neighbours not high"
+2017-07-11,ALCORA,36.0,0.193,False,3,0,8.7,36.0,12.3,1.5,True,7,plausible local event,"station elevated on adjacent days, neighbours not high"
+2017-07-10,ALCORA,36.0,0.202,False,3,0,8.1,36.0,36.0,1.0,True,7,plausible local event,"station elevated on adjacent days, neighbours not high"
+2023-12-30,VALLE,36.0,0.128,False,2,2,38.2,,,4.0,False,12,real event,neighbouring station(s) also high
+2024-10-31,VALÈNCIA OLIVERETA,35.9,0.224,False,2,1,39.2,,,3.6,False,10,real event,neighbouring station(s) also high
+2024-11-25,VALÈNCIA-CENTRE,35.8,0.247,False,3,1,33.4,,,2.0,False,11,real event,neighbouring station(s) also high
+2023-07-19,MADREVIEJA,35.8,0.307,True,8,7,37.2,,,3.6,False,7,real event,neighbouring station(s) also high
+2023-07-19,PALACIO CONGRESOS,35.7,0.316,True,1,0,15.4,17.1,39.5,1.9,False,7,real event,high AOD and elevated on adjacent days
+2022-01-15,FR03014,35.7,0.021,False,1,1,42.1,12.2,20.0,1.9,False,1,real event,neighbouring station(s) also high
+2017-12-24,FR03030,35.6,0.065,False,3,3,34.6,32.8,,1.1,False,12,real event,neighbouring station(s) also high
+2017-11-22,VALÈNCIA-POLITÈCNIC,35.5,0.061,False,4,2,43.9,30.6,27.9,1.2,False,11,real event,neighbouring station(s) also high
+2023-09-19,MADREVIEJA,35.5,0.067,False,11,0,14.7,,5.1,7.0,False,9,probable data error,"one-day spike ×7, neighbours normal, AOD normal"
+2018-05-29,VALÈNCIA-PISTA DE SILLA,35.5,0.304,True,4,0,19.5,,,,False,5,undetermined,"moderate value, not enough evidence either way"
+2024-08-23,Barcelona - Porta - Can Dragó,35.4,0.269,False,1,0,21.5,,31.9,1.1,False,8,plausible local event,"station elevated on adjacent days, neighbours not high"
+2024-11-01,CAMPAMENTO,35.4,0.243,False,8,2,29.2,,,,False,11,real event,neighbouring station(s) also high
+2023-07-20,CARRANQUE,35.4,0.276,True,1,1,31.4,33.3,11.5,3.5,False,7,real event,neighbouring station(s) also high
+2019-02-24,VALÈNCIA-PISTA DE SILLA,35.4,0.243,False,5,2,32.7,36.1,32.7,1.1,False,2,real event,neighbouring station(s) also high
+2024-12-29,SAN BASILIO,35.4,0.185,False,3,2,30.6,,26.9,1.3,False,12,real event,neighbouring station(s) also high
+2024-01-11,E2: ALCORNOCALES,35.3,0.046,False,1,0,9.4,,,,False,1,undetermined,"moderate value, not enough evidence either way"
+2024-04-07,HOSTELERÍA,35.2,0.585,True,10,6,35.0,,9.5,3.2,False,4,real event,neighbouring station(s) also high
+2020-02-17,QUART DE POBLET,35.2,0.055,False,5,5,47.2,30.8,,2.3,False,2,real event,neighbouring station(s) also high
+2024-10-30,SAGUNT PORT,35.0,1.037,True,0,0,,,,7.5,False,10,"suspect, unconfirmed","one-day spike ×8, no neighbour within 30 km to check"
+2024-10-31,MOMPEAN,35.0,0.168,False,2,2,40.6,,17.5,3.6,False,10,real event,neighbouring station(s) also high
+2024-04-07,LA LÍNEA,35.0,0.837,True,10,6,35.2,,2.5,4.3,False,4,real event,neighbouring station(s) also high
+2024-03-18,VALÈNCIA - MOLÍ DEL SOL,35.0,0.246,False,1,1,49.0,,,,False,3,real event,neighbouring station(s) also high
+2024-08-20,Barcelona - Porta - Can Dragó,34.9,0.412,True,1,0,18.0,17.9,36.1,1.9,False,8,real event,high AOD and elevated on adjacent days
+2022-01-03,VALÈNCIA-PISTA DE SILLA,34.9,0.09,False,5,3,44.8,22.5,6.9,2.9,False,1,real event,neighbouring station(s) also high
+2022-01-25,FR02020,34.8,0.103,False,1,0,17.6,24.0,34.2,1.4,False,1,plausible local event,"station elevated on adjacent days, neighbours not high"
+2022-01-02,VALÈNCIA - AVD. FRANCIA,34.8,0.107,False,4,0,22.8,42.0,44.8,1.9,False,1,plausible local event,"station elevated on adjacent days, neighbours not high"
+2022-01-31,GRANADA - NORTE,34.8,0.186,False,1,0,21.9,13.7,18.9,1.8,False,1,undetermined,"moderate value, not enough evidence either way"
+2023-07-31,SAN ROQUE (S6),34.8,0.057,False,12,1,30.3,25.6,16.5,2.8,False,7,real event,neighbouring station(s) also high
+2024-12-29,Rognac les Brets,34.8,0.035,False,2,1,30.9,32.3,38.7,1.2,False,12,real event,neighbouring station(s) also high
+2021-01-01,CENMO1,34.8,0.103,False,1,1,57.1,17.9,,2.3,False,1,real event,neighbouring station(s) also high
+2024-02-03,La Sagrera,34.7,0.159,False,1,1,28.0,,,1.2,False,2,real event,neighbouring station(s) also high
+2017-12-22,FR03030,34.6,0.093,False,3,2,30.0,30.2,32.8,1.1,False,12,real event,neighbouring station(s) also high
+2017-07-08,ALCORA,34.6,0.274,False,3,0,9.8,,36.0,1.0,False,7,plausible local event,"station elevated on adjacent days, neighbours not high"
+2017-12-24,FR03029,34.6,0.049,False,3,3,35.6,23.4,19.5,1.7,False,12,real event,neighbouring station(s) also high
+2022-01-26,FR03014,34.6,0.072,False,1,1,34.2,17.6,,2.0,False,1,real event,neighbouring station(s) also high
+2023-11-17,PUENTE MAYORGA,34.5,0.144,False,12,4,36.4,,23.8,1.5,False,11,real event,neighbouring station(s) also high
+2023-09-05,TORREVIEJA,34.5,0.192,False,0,0,,,6.5,4.8,False,9,undetermined,"moderate value, not enough evidence either way"
+2024-11-30,SAN BASILIO,34.5,0.108,False,2,2,28.1,31.7,,1.1,False,11,real event,neighbouring station(s) also high
+2024-06-30,CASTELLÓ-PENYETA,34.4,0.179,False,0,0,,2.5,13.3,15.8,False,6,"suspect, unconfirmed","one-day spike ×16, no neighbour within 30 km to check"
+2021-03-01,CENCA1,34.4,0.103,False,1,0,16.4,,26.0,1.3,False,3,plausible local event,"station elevated on adjacent days, neighbours not high"
