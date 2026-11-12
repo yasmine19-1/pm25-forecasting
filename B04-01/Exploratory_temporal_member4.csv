@@ -1,0 +1,193 @@
+section,variable,group,metric,value,note
+temporal_dependence,pm25,LA ALJORRA,acf_lag_1,0.6032302295823556,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_1,0.6032302295823557,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_2,0.2767348090348921,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_2,-0.13700688572458547,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_3,0.22889469337276552,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_3,0.1950346974374539,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_4,0.11188011274270862,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_4,-0.15646660500591208,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_5,0.07057661792783544,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_5,0.11724008474729282,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_6,-0.004260864820748562,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_6,-0.1745376952878468,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_7,-0.20934984282445418,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_7,-0.2101838336933023,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_8,-0.20960527257007625,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_8,0.06876192058018295,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_9,-0.20159354396920173,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_9,-0.1607528620467713,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_10,-0.3284987633750565,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_10,-0.16066942490126224,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_11,-0.36660220533940596,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_11,-0.12831620456074333,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_12,-0.30196416390228703,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_12,0.01587507828951468,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_13,-0.2136373534218892,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_13,0.022582236588368214,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,acf_lag_14,-0.10827408457371239,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,pacf_lag_14,-0.01447872821377718,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,ljung_box_pvalue_lag_7,0.005337985011243246,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,ljung_box_pvalue_lag_14,4.725726140361539e-05,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,adf_statistic,-2.5812577867852404,segment=34; observations=32
+temporal_dependence,pm25,LA ALJORRA,adf_pvalue,0.09693310184659781,segment=34; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_1,-0.0025763215785516037,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_1,-0.002576321578551585,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_2,0.059091824621292144,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_2,0.059085579364982974,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_3,-0.0838986968905093,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_3,-0.08389667613395098,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_4,0.10288636417580012,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_4,0.10045927971608512,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_5,0.04790604613518011,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_5,0.05763499351785087,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_6,-0.13739941273102912,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_6,-0.16047401103278133,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_7,-0.04681942878614541,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_7,-0.03435766672119237,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_8,-0.0734083181706979,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_8,-0.057144736446921536,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_9,-0.011262013292147991,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_9,-0.04519873224339818,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_10,-0.07665516045090706,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_10,-0.049373400894024096,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_11,-0.14244815910844302,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_11,-0.13398932030916413,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_12,-0.2700618417537544,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_12,-0.29246899873078885,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_13,-0.05987367735653436,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_13,-0.08033229992074027,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,acf_lag_14,-0.10335870316854943,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,pacf_lag_14,-0.13854632290946156,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,ljung_box_pvalue_lag_7,0.9710010136777317,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,ljung_box_pvalue_lag_14,0.879144107979353,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,adf_statistic,-5.292551662083817,segment=209; observations=32
+temporal_dependence,pm25,MEDITERRÁNEO,adf_pvalue,5.673568394352611e-06,segment=209; observations=32
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_1,0.4447188428835966,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_1,0.4447188428835967,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_2,0.3546647663225644,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_2,0.19556843481341846,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_3,0.2646551530490432,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_3,0.06584515068335725,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_4,-0.038462534429086606,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_4,-0.2864149260983704,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_5,-0.06504923718811244,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_5,-0.057621037219760016,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_6,-0.043403661806378585,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_6,0.08663433284237367,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_7,-0.1015954020516964,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_7,0.006526763179342615,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_8,-0.08534300092268123,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_8,-0.06896050836429965,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_9,0.041079090479919554,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_9,0.10698397132465427,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_10,-0.18101326023335534,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_10,-0.265334344126354,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_11,-0.19704125547894366,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_11,-0.14997904366520226,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_12,-0.2727000176178365,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_12,-0.18430157737360187,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_13,-0.28100272594737213,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_13,0.08214465977038295,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,acf_lag_14,-0.236490073399525,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,pacf_lag_14,-0.030654971709535545,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,ljung_box_pvalue_lag_7,0.04327363813962912,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,ljung_box_pvalue_lag_14,0.006889905038762876,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,adf_statistic,-3.1995855003267497,segment=34; observations=31
+temporal_dependence,pm25,MOLINA DE SEGURA,adf_pvalue,0.02000868462744204,segment=34; observations=31
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_1,0.5177834122816715,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_1,0.5177834122816716,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_2,0.12007644220346993,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_2,-0.2022450491578654,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_3,0.03681269180609035,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_3,0.0951387709855146,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_4,-0.0020623811671961843,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_4,-0.06260938343206232,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_5,-0.021758858644958367,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_5,0.008622771947590674,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_6,0.004921722636732247,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_6,0.024689225664412433,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_7,-0.0334423264695081,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_7,-0.07514260043871224,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_8,-0.047541458835677036,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_8,0.013669194448961334,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_9,-0.10183803047754177,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_9,-0.1189038149838477,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_10,-0.08254212569643263,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_10,0.04340225825692461,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_11,-0.011641696577948928,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_11,0.016415185785509923,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_12,-0.04880472579535206,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_12,-0.09534178535401068,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_13,-0.05632628515828112,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_13,0.03243260551788865,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,acf_lag_14,-0.11394584499858859,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,pacf_lag_14,-0.15874562913800233,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,ljung_box_pvalue_lag_7,0.21977761017479217,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,ljung_box_pvalue_lag_14,0.6483549739358659,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,adf_statistic,-2.3330410685907563,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA - MOLÍ DEL SOL,adf_pvalue,0.16153285403949985,segment=62; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_1,0.5279943101166203,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_1,0.5279943101166202,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_2,0.1883774924642413,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_2,-0.1253435114123123,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_3,0.15760457976410652,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_3,0.15756794553725384,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_4,0.10729989299274016,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_4,-0.04536427348491515,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_5,-0.0027673720762511934,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_5,-0.06413823296632572,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_6,-0.05096947050331809,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_6,-0.0261287316347864,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_7,-0.07382646518179585,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_7,-0.054111940875535135,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_8,-0.10719129121402561,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_8,-0.052065611963398394,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_9,-0.11238443145067932,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_9,-0.024086320357011266,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_10,-0.06685190506340985,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_10,0.021472210392336058,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_11,-0.10528466697083734,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_11,-0.10133237475870663,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_12,-0.08578751406057537,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_12,0.03992875148424127,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_13,-0.12486725263639961,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_13,-0.14342644621032738,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,acf_lag_14,-0.15537884550982334,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,pacf_lag_14,-0.0398335432028025,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,ljung_box_pvalue_lag_7,0.09779296292708617,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,ljung_box_pvalue_lag_14,0.2747461645155166,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,adf_statistic,-2.1342337618322773,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA OLIVERETA,adf_pvalue,0.23097363647691194,segment=32; observations=30
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_1,0.510349529506586,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_1,0.5103495295065859,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_2,0.17928872576392935,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_2,-0.10975410116932413,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_3,0.26170225075830483,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_3,0.2958698149451159,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_4,0.32539305552106446,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_4,0.10109930882298238,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_5,0.1878614049573519,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_5,-0.03911586477334443,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_6,-0.10593735821201473,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_6,-0.29843608296237556,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_7,-0.19355308548140993,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_7,-0.12677190238930378,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_8,-0.1471153094696791,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_8,-0.12370905722732126,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_9,-0.21672885078816034,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_9,-0.13074258243497452,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_10,-0.4359368846174181,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_10,-0.27303437723884844,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_11,-0.41847765804064624,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_11,0.012128308519356054,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_12,-0.27547463704479586,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_12,-0.034957331855699623,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_13,-0.1881482487275057,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_13,0.10786590375695754,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,acf_lag_14,-0.19692568051171935,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,pacf_lag_14,0.035742214237194446,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,ljung_box_pvalue_lag_7,0.005625808901422569,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,ljung_box_pvalue_lag_14,6.678326519467114e-06,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,adf_statistic,-1.8440905007751565,segment=32; observations=31
+temporal_dependence,pm25,VALÈNCIA-CENTRE,adf_pvalue,0.3588019405397946,segment=32; observations=31
