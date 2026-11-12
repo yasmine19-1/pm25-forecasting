@@ -1,0 +1,20 @@
+section,variable,group,metric,value,note
+5.3.1,no2~co,train_fold_0,spearman,0.10951342399095552,n=2753; folds: provisional TimeSeriesSplit
+5.3.1,no2~o3,train_fold_0,spearman,-0.11721936868289973,n=2753; folds: provisional TimeSeriesSplit
+5.3.1,co~o3,train_fold_0,spearman,0.34028823975051375,n=2753; folds: provisional TimeSeriesSplit
+5.3.1,no2~co,train_fold_1,spearman,0.13514173191775145,n=7966; folds: provisional TimeSeriesSplit
+5.3.1,no2~o3,train_fold_1,spearman,0.016821435682618777,n=7966; folds: provisional TimeSeriesSplit
+5.3.1,co~o3,train_fold_1,spearman,0.3317488784181024,n=7966; folds: provisional TimeSeriesSplit
+5.3.1,no2~co,train_fold_2,spearman,0.11667809030804768,n=13179; folds: provisional TimeSeriesSplit
+5.3.1,no2~o3,train_fold_2,spearman,-0.02951667407560371,n=13179; folds: provisional TimeSeriesSplit
+5.3.1,co~o3,train_fold_2,spearman,0.30785001771578674,n=13179; folds: provisional TimeSeriesSplit
+5.3.1,no2~co,train_fold_3,spearman,0.1411427823693123,n=18392; folds: provisional TimeSeriesSplit
+5.3.1,no2~o3,train_fold_3,spearman,0.015820448100073724,n=18392; folds: provisional TimeSeriesSplit
+5.3.1,co~o3,train_fold_3,spearman,0.3554195365681678,n=18392; folds: provisional TimeSeriesSplit
+5.3.1,no2~co,train_fold_4,spearman,0.10794960014955138,n=23605; folds: provisional TimeSeriesSplit
+5.3.1,no2~o3,train_fold_4,spearman,-0.04781675540208342,n=23605; folds: provisional TimeSeriesSplit
+5.3.1,co~o3,train_fold_4,spearman,0.35374041365967995,n=23605; folds: provisional TimeSeriesSplit
+5.3.1,co~o3,all_folds,spearman_spread,0.04756951885238109,stable
+5.3.1,no2~co,all_folds,spearman_spread,0.03319318221976092,stable
+5.3.1,no2~o3,all_folds,spearman_spread,0.13404080436551852,stable
+5.3.1,s5p,all_folds,knn_imputation_allowed,1.0,tolerance 0.15
