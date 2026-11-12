@@ -308,6 +308,12 @@ section,variable,group,metric,value,note
 5.1,temperature_celsius,aod_x_weather_model,std_coef_aod,0.8459006521538838,"pm25 on z(aod), z(weather) and their product; descriptive, no p-values (station clustering)"
 5.1,temperature_celsius,aod_x_weather_model,std_coef_weather,-0.5610290633982629,"pm25 on z(aod), z(weather) and their product; descriptive, no p-values (station clustering)"
 5.1,temperature_celsius,aod_x_weather_model,std_coef_interaction,0.029607522340149753,"pm25 on z(aod), z(weather) and their product; descriptive, no p-values (station clustering)"
+5.1,temperature_celsius,low (within station),aod_slope,8.914035653608215,tertiles made inside each of 63 stations; station means removed
+5.1,temperature_celsius,low (within station),aod_n,10345.0,
+5.1,temperature_celsius,middle (within station),aod_slope,10.941538920403246,tertiles made inside each of 63 stations; station means removed
+5.1,temperature_celsius,middle (within station),aod_n,10299.0,
+5.1,temperature_celsius,high (within station),aod_slope,6.569284465963939,tertiles made inside each of 63 stations; station means removed
+5.1,temperature_celsius,high (within station),aod_n,10314.0,
 5.1,pressure_mb,low (933 to 992),aod_n,10427.0,
 5.1,pressure_mb,low (933 to 992),aod_pearson,0.08980215582657494,
 5.1,pressure_mb,low (933 to 992),aod_spearman,0.17620880127767108,
@@ -323,6 +329,12 @@ section,variable,group,metric,value,note
 5.1,pressure_mb,aod_x_weather_model,std_coef_aod,0.7067250518365362,"pm25 on z(aod), z(weather) and their product; descriptive, no p-values (station clustering)"
 5.1,pressure_mb,aod_x_weather_model,std_coef_weather,1.075886365522981,"pm25 on z(aod), z(weather) and their product; descriptive, no p-values (station clustering)"
 5.1,pressure_mb,aod_x_weather_model,std_coef_interaction,-0.2686264750276136,"pm25 on z(aod), z(weather) and their product; descriptive, no p-values (station clustering)"
+5.1,pressure_mb,low (within station),aod_slope,11.591420088497756,tertiles made inside each of 63 stations; station means removed
+5.1,pressure_mb,low (within station),aod_n,10345.0,
+5.1,pressure_mb,middle (within station),aod_slope,7.656410067867184,tertiles made inside each of 63 stations; station means removed
+5.1,pressure_mb,middle (within station),aod_n,10299.0,
+5.1,pressure_mb,high (within station),aod_slope,4.031926774122925,tertiles made inside each of 63 stations; station means removed
+5.1,pressure_mb,high (within station),aod_n,10314.0,
 5.1,wind_speed,low (0.0103 to 1.21),aod_n,10426.0,
 5.1,wind_speed,low (0.0103 to 1.21),aod_pearson,0.0466322542633001,
 5.1,wind_speed,low (0.0103 to 1.21),aod_spearman,0.08530669442080394,
@@ -338,3 +350,9 @@ section,variable,group,metric,value,note
 5.1,wind_speed,aod_x_weather_model,std_coef_aod,0.632771121036259,"pm25 on z(aod), z(weather) and their product; descriptive, no p-values (station clustering)"
 5.1,wind_speed,aod_x_weather_model,std_coef_weather,-0.32137374360908383,"pm25 on z(aod), z(weather) and their product; descriptive, no p-values (station clustering)"
 5.1,wind_speed,aod_x_weather_model,std_coef_interaction,0.17612966973904512,"pm25 on z(aod), z(weather) and their product; descriptive, no p-values (station clustering)"
+5.1,wind_speed,low (within station),aod_slope,4.168681386337582,tertiles made inside each of 63 stations; station means removed
+5.1,wind_speed,low (within station),aod_n,10345.0,
+5.1,wind_speed,middle (within station),aod_slope,6.369799043718768,tertiles made inside each of 63 stations; station means removed
+5.1,wind_speed,middle (within station),aod_n,10299.0,
+5.1,wind_speed,high (within station),aod_slope,6.766803256438472,tertiles made inside each of 63 stations; station means removed
+5.1,wind_speed,high (within station),aod_n,10314.0,

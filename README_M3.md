@@ -8,13 +8,14 @@ Brief sections §5.1 (relationships), §5.3, §5.3.2. Seed 42; every output come
 |---|---|
 | `src/m3_common.py` | small helpers: load the development parquet, shared CSV schema, AOD == 0 rule |
 | `src/relationships.py` | Pearson/Spearman, pairs above 0.9, VIF, PCA, t-SNE (descriptive only) |
-| `src/stratified.py` | PM2.5 against AOD by season, by station and by temperature/pressure/wind |
+| `src/stratified.py` | PM2.5 against AOD by season, by station and by temperature/pressure/wind (pooled and inside each station) |
 | `src/scaling.py` | `TrainFoldScaler` (standard or robust) and `needs_scaling(model)` |
 | `src/selection.py` | `FeatureSelector`: ANOVA F, mutual information, RFE, L1, tree importance |
 | `src/pipeline.py` | `build_pipeline(model, ...)`: joins Member 2's steps, Member 4's features, scaler and selector |
 | `src/pipeline_check.py` | runs the Pipeline through the three shared fold files and logs the selected features |
 | `tests/test_m3_leakage.py` | leakage tests (every fitted step sees training rows only, no ids in the model) |
 | `tests/test_m3_modules.py` | tests for the scaler, the five selection methods and the Pipeline options |
+| `tests/test_m3_stratified.py` | tests for the within-station check (station differences are not mistaken for a weather effect) |
 | `tests/m3_synthetic.py`, `tests/conftest.py` | a fake development frame with the real columns, used by the tests |
 
 Nothing from Members 1, 2 or 4 was changed.
@@ -75,7 +76,11 @@ Nothing else needs to change.
    (`SCALE_SENSITIVE`); edit it if the team disagrees.
 2. **AOD == 0** is treated as a failed retrieval (missing) in the relationship analysis, the same
    rule as Member 2's `OutlierClipper`.
-3. **Stratified analysis** skips stations with fewer than 30 valid PM2.5/AOD pairs.
+3. **Stratified analysis** skips stations with fewer than 30 valid PM2.5/AOD pairs. For each weather
+   variable the thirds are made twice: pooled over all rows, and inside each station (stations with
+   at least 90 rows, station means removed). Comparing the two shows whether a pattern is weather or
+   just differences between stations such as altitude. The notes describe the three slopes in words
+   instead of relying on one linear interaction coefficient.
 4. **Correlated pairs are only reported.** No column is dropped by the analysis (ground rule 3).
 5. **First temporal fold**: Sentinel-5P is entirely missing there (see `phase1_methodology.md`).
    The imputer makes those columns constant, and `FeatureSelector` handles constant columns

@@ -63,6 +63,57 @@ def interaction(d, met):
     return dict(aod=beta[1], weather=beta[2], interaction=beta[3])
 
 
+def within_station_slopes(d, met):
+    """PM2.5-on-AOD slope in the low/middle/high third of `met`, with the thirds made INSIDE each station.
+
+    Station means of AOD and PM2.5 are removed inside each third, so only day-to-day variation
+    within a station counts. Stations with fewer than 3 * MIN_PAIRS rows are left out (thirds too thin).
+    Returns (slopes, rows per third, number of stations used).
+    """
+    size = d.groupby("station_id")[met].transform("size")
+    g = d[size >= 3 * MIN_PAIRS].copy()
+    g["third"] = g.groupby("station_id")[met].transform(
+        lambda s: pd.qcut(s.rank(method="first"), 3, labels=False))
+    slopes, counts = [], []
+    for k in range(3):
+        s = g[g["third"] == k]
+        dx = s["aod"] - s.groupby("station_id")["aod"].transform("mean")
+        dy = s[TARGET] - s.groupby("station_id")[TARGET].transform("mean")
+        den = (dx ** 2).sum()
+        slopes.append((dx * dy).sum() / den if den > 0 else np.nan)
+        counts.append(len(s))
+    return slopes, counts, g["station_id"].nunique()
+
+
+def pattern(slopes):
+    """Plain-words shape of three slopes (low, middle, high)."""
+    a, b, c = slopes
+    if np.isnan(slopes).any():
+        return "cannot be described (too few rows)"
+    if a < b < c:
+        return "rises steadily"
+    if a > b > c:
+        return "falls steadily"
+    if b < min(a, c):
+        return "is lowest in the middle third"
+    if b > max(a, c):
+        return "is highest in the middle third"
+    return "has no clear order"
+
+
+def verdict(pooled, inside):
+    """Does the pooled high-versus-low difference survive when the thirds are made inside stations?"""
+    dp, di = pooled[2] - pooled[0], inside[2] - inside[0]
+    if np.isnan(dp) or np.isnan(di):
+        return ""
+    if dp * di <= 0:
+        return ("Inside stations the high-versus-low difference points the other way, so the pooled "
+                "pattern mostly reflects differences between stations.")
+    if abs(di) >= 0.5 * abs(dp):
+        return "The pattern persists inside stations."
+    return "Inside stations the pattern is weaker, so part of it reflects differences between stations."
+
+
 def main():
     df = zero_aod_to_nan(load_dev())
     df["date"] = pd.to_datetime(df["date"])
@@ -130,29 +181,40 @@ def main():
         fig.savefig(FIGURES / "m3_pm25_aod_by_station.png", dpi=150)
         plt.close(fig)
 
-    # weather: split each variable in three equal-sized groups and compare the PM2.5-AOD link
-    fig, axes = plt.subplots(1, 3, figsize=(11, 3.8), sharey=True)
-    for ax, met in zip(axes, WEATHER):
+    # weather: split each variable in three equal-sized groups and compare the PM2.5-AOD link.
+    # Top row = all rows pooled. Bottom row = the same split made INSIDE each station, so that
+    # differences between stations (altitude, local climate) cannot pass for a weather effect.
+    fig, axes = plt.subplots(2, 3, figsize=(11, 7), sharey=True)
+    for j, met in enumerate(WEATHER):
         bins = pd.qcut(d[met], 3, labels=BIN_LABELS, duplicates="drop")
-        slopes = []
+        pooled = []
         for lab in bins.cat.categories:
             g = d[bins == lab]
             res = link(g["aod"], g[TARGET])
             lo, hi = g[met].min(), g[met].max()
             add_link(rows, met, f"{lab} ({lo:.3g} to {hi:.3g})", res)
-            slopes.append(res["slope"])
+            pooled.append(res["slope"])
         co = interaction(d, met)
         for k, v in co.items():
             add(rows, SEC, met, "aod_x_weather_model", f"std_coef_{k}", v,
                 "pm25 on z(aod), z(weather) and their product; descriptive, no p-values (station clustering)")
-        ax.bar(bins.cat.categories, slopes)
-        ax.set_title(f"{met}\ninteraction coef {co['interaction']:+.2f}")
-        ax.set_xlabel("tertile of the weather variable")
-        notes.append(f"{met}: slope of PM2.5 on AOD in the low/middle/high tertile = " +
-                     " / ".join(f"{s:.1f}" for s in slopes) +
-                     f"; standardised AOD x {met} coefficient {co['interaction']:+.2f} "
-                     f"({'steeper' if co['interaction'] > 0 else 'flatter'} PM2.5-AOD slope when {met} is higher).")
-    axes[0].set_ylabel("slope of PM2.5 on AOD (ug/m3 per AOD unit)")
+        inside, counts, n_st = within_station_slopes(d, met)
+        for lab, sl, n in zip(BIN_LABELS, inside, counts):
+            add(rows, SEC, met, f"{lab} (within station)", "aod_slope", sl,
+                f"tertiles made inside each of {n_st} stations; station means removed")
+            add(rows, SEC, met, f"{lab} (within station)", "aod_n", n)
+        axes[0, j].bar(list(bins.cat.categories), pooled)
+        axes[0, j].set_title(f"{met}\npooled, interaction coef {co['interaction']:+.2f}")
+        axes[1, j].bar(BIN_LABELS, inside, color="tab:green")
+        axes[1, j].set_title("same split inside each station")
+        axes[1, j].set_xlabel("tertile of the weather variable")
+        notes.append(f"{met}: pooled slope of PM2.5 on AOD in the low/middle/high tertile = "
+                     + " / ".join(f"{x:.1f}" for x in pooled) + f", it {pattern(pooled)}. "
+                     + "Inside stations: " + " / ".join(f"{x:.1f}" for x in inside)
+                     + f", it {pattern(inside)}. {verdict(pooled, inside)} "
+                     f"(Single AOD x {met} coefficient {co['interaction']:+.2f}; one linear number can hide a curved shape.)")
+    axes[0, 0].set_ylabel("slope of PM2.5 on AOD (pooled)")
+    axes[1, 0].set_ylabel("slope inside stations")
     fig.tight_layout()
     fig.savefig(FIGURES / "m3_pm25_aod_by_weather.png", dpi=150)
     plt.close(fig)
