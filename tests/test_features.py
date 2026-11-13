@@ -66,7 +66,6 @@ class TestFeatureEngineering(unittest.TestCase):
         )
 
 
-
     def test_features_do_not_cross_metadata_changes(self):
         data = pd.DataFrame({
             "date": pd.to_datetime([
