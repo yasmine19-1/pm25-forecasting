@@ -1,4 +1,4 @@
-"""Member 3 - leakage tests for the Pipeline (brief 5.3 and 6.1).   Run:  pytest tests/
+"""Leakage tests for the Pipeline (brief 5.3 and 6.1).   Run:  pytest tests/
 
 What is checked
   1. every fitted step sees training-fold rows only (spy step inside the Pipeline)

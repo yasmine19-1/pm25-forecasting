@@ -1,4 +1,4 @@
-"""Member 3 - run the full Pipeline once through Member 1's shared folds.
+"""Run the full Pipeline once through the shared shared folds.
 
 This is a smoke run, NOT the Phase 2 model comparison: two cheap models, no tuning.
 It shows that

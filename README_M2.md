@@ -1,4 +1,4 @@
-# Member 2: descriptive EDA, missingness, outliers
+# Descriptive EDA, missingness, outliers
 
 Brief sections §5.1, §5.3.1, §5.3.3. Seed 42; every output comes from a script.
 
@@ -17,14 +17,14 @@ Brief sections §5.1, §5.3.1, §5.3.3. Seed 42; every output comes from a scrip
 
 ```bash
 python src/m2_eda.py            # -> results/<GROUP_DIR>/parts/m2_eda.csv, m2_notes.md, figures/m2_*.png
-python src/m2_s5p_stability.py  # rerun once Member 1 publishes folds_temporal.json
+python src/m2_s5p_stability.py  # rerun once you generate folds_temporal.json
 pytest tests/
 ```
 
 Expects the clean development dataset at `data/interim/clean_dev.parquet`.
 Install the pinned dependencies from `requirements.txt`. See the shared methodology at `results/<GROUP_DIR>/phase1_methodology.md` for the imputation decision and limitations.
 
-## For Member 3 (Pipeline)
+## Pipeline integration
 
 ```python
 from src.outliers import OutlierClipper

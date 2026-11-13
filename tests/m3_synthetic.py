@@ -1,6 +1,6 @@
 """Synthetic development frame with the SAME columns as data/interim/clean_dev.parquet.
 
-Only for Member 3's tests and quick checks (the real parquet is not in git).
+Only for the tests and quick checks (the real parquet is not in git).
 Mimics what matters for the Pipeline: station/date identifiers, Sentinel-5P
 columns that are completely missing in the first years, AOD zeros, a skewed
 PM2.5, and station coverage that changes over time.

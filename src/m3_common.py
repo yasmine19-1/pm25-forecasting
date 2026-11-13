@@ -1,7 +1,7 @@
-"""Member 3 - small helpers shared by relationships.py and stratified.py.
+"""Small helpers shared by relationships.py and stratified.py.
 
 Nothing in here learns anything from the data that a model would use: the
-scripts of Member 3 that run on the whole development set are descriptive only.
+scripts that run on the whole development set are descriptive only.
 """
 import pandas as pd
 
@@ -14,7 +14,7 @@ COLUMNS = ["section", "variable", "group", "metric", "value", "note"]  # shared 
 
 
 def load_dev(path=None):
-    """Read the development dataset published by Member 1 (test year already removed)."""
+    """Read the development dataset published by the cleaner (test year already removed)."""
     path = path or DEV_FILE
     if not path.exists():
         raise SystemExit(f"{path} not found. Run `python -m src.clean` first.")
@@ -22,7 +22,7 @@ def load_dev(path=None):
 
 
 def zero_aod_to_nan(df):
-    """Same convention as Member 2's OutlierClipper: AOD == 0 is a failed retrieval."""
+    """Same convention as the OutlierClipper: AOD == 0 is a failed retrieval."""
     df = df.copy()
     if "aod" in df.columns:
         df["aod"] = df["aod"].mask(df["aod"] == 0)

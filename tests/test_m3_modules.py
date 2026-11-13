@@ -1,4 +1,4 @@
-"""Member 3 - tests for scaling.py, selection.py and the build_pipeline options.   Run:  pytest tests/"""
+"""Tests for scaling.py, selection.py and the build_pipeline options.   Run:  pytest tests/"""
 import numpy as np
 import pandas as pd
 import pytest

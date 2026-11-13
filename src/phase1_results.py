@@ -33,7 +33,7 @@ def main():
     extremes = pd.read_csv(parts / "m2_extremes_investigation.csv")
     for verdict, count in extremes["verdict"].value_counts().items():
         add(rows, "5.3.3", "pm25", verdict, "n_flagged", count,
-            "Neighbor and adjacent-day screening; retain plausible extremes")
+            "Provisional corroboration label from neighbor and adjacent-day screening")
     selected = pd.read_csv(parts / "m3_selected_features.csv")
     for row in selected.itertuples(index=False):
         group = f"{row.scheme}/fold{row.fold}"

@@ -1,4 +1,4 @@
-"""Member 2 - imputation step for the Pipeline (§5.3.1).
+"""Imputation step for the Pipeline (§5.3.1).
 
 S5PImputer
     * median imputation, medians learned in fit() = on the training fold only

@@ -1,8 +1,8 @@
-# Member 4 — Temporal Analysis and Feature Engineering
+# Temporal Analysis and Feature Engineering
 
 ## 1. Completed work
 
-Member 4 analysed the temporal structure of the PM2.5 dataset and prepared time-based features for forecasting.
+The temporal analysis examined the temporal structure of the PM2.5 dataset and prepared time-based features for forecasting.
 
 ### Timestamp quality
 - Audited timestamp regularity for each station.
@@ -47,9 +47,9 @@ The suite covers standalone feature generation and integration with the shared P
 
 ## 4. Main outputs
 
-The shared reproduction commands in README.md generate Member 4 CSVs in the configured parts directory and figures in the corresponding figures directory. The root B04-01 folder contains historical outputs.
+The shared reproduction commands in README.md generate temporal CSVs in the configured parts directory and figures in the corresponding figures directory. The root B04-01 folder contains historical outputs.
 
-- Exploratory_temporal_M4.csv: combined Member 4 results using the shared six-column schema.
+- Exploratory_temporal_M4.csv: combined temporal results using the shared six-column schema.
 - Exploratory_temporal_member4.csv: temporal dependence diagnostics.
 - member4_gap_report.csv: timestamp quality by station.
 - member4_drift_summary.csv: monthly and yearly drift summaries.

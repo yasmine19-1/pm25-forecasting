@@ -1,9 +1,8 @@
-"""Member 3 - the Pipeline that joins everybody's steps (brief 5.3).
+"""Pipeline assembly and fold-local preprocessing (brief 5.3).
 
 Order of the steps:
 
     features  ->  drop_ids  ->  outliers  ->  impute  ->  scale  ->  select  ->  model
-    (Member 4)    (here)        (Member 2)    (Member 2)   (here)    (here)
 
 Every step that learns something (clipping limits, medians, scaler, selected
 columns) does it in fit(). Because they all sit in one sklearn Pipeline, a
@@ -17,7 +16,7 @@ Usage (X = the development frame rows of a fold, y = its pm25):
     pred = pipe.predict(X_val)
 
     build_pipeline(ExtraTreesRegressor(random_state=42), selector="tree")
-    pipe.set_params(outliers__enabled=False)               # Member 2's with/without switch
+    pipe.set_params(outliers__enabled=False)               # disable predictor clipping
 
 Pass the full development rows, ids included. The `drop_ids` step removes the
 station id, coordinates, dates, GEE id and the target itself before anything is
@@ -74,10 +73,10 @@ def build_pipeline(model, *, scaled=None, scaler="standard", selector=None,
     scaler        "standard" or "robust", used only when scaled
     selector      None (keep every column), a method name ("f_test", "mutual_info",
                   "rfe", "l1", "tree") or a FeatureSelector instance
-    features      Member 4's transformer, if any. It runs first and receives the full
+    features      the temporal transformer, if any. It runs first and receives the full
                   frame (it needs station_id and date to build past-only lags) and must
                   return the same rows in the same order.
-    clip_outliers False switches Member 2's clipper off from the start
+    clip_outliers False switches the clipper off from the start
     """
     if scaled is None:
         scaled = needs_scaling(model)

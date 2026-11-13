@@ -40,7 +40,7 @@ add("basics", "column_names", ", ".join(df.columns))
 for k, v in found.items():
     add("basics", f"detected_{k}", v)
 add("manual", "source", "https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026")
-add("manual", "license", "Reported upstream sources: OpenAQ, Copernicus and NASA. License for this combined Kaggle release has not been independently verified.")
+add("manual", "license", "Reported upstream terms: OpenAQ CC BY 4.0 where applicable (see provider terms); Copernicus Sentinel open access; NASA Earth science open data. Combined Kaggle release license text: unverified.")
 add("manual", "units", "pm25 ug/m3; temperature_celsius degC; pressure_mb hPa; wind_u and wind_v m/s; NO2, CO, O3 mol/m2 (Sentinel-5P); AOD dimensionless (MODIS) - per the Kaggle dataset description")
 
 # 2. Timestamps ---------------------------------------------------------

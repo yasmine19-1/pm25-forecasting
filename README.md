@@ -66,7 +66,7 @@ must preserve row alignment and follow the forecast-time rules in
 `results/<GROUP_DIR>/phase1_methodology.md`. Exclude the target and `config.NON_FEATURE_COLS`
 from the model input.
 
-### Preprocessing in Member 3's Pipeline
+### Fold-local preprocessing
 
 Import `OutlierClipper` from `src.outliers` and `S5PImputer` from
 `src.imputation`. Put `("outliers", OutlierClipper())` before
@@ -154,7 +154,7 @@ results = config.PARTS.parent
 train, val = load_folds(results / "folds_temporal.json", dev)[0]
 
 # Rolling next-day diagnostic. Assume yesterday's observations are released
-# before today's forecast. Earlier validation dates may supply a prior value.
+# Before today's forecast. Earlier validation dates may supply a prior value.
 rolling = rolling_forecast_features(dev)
 rolling_predictions = (
     build_pipeline(Ridge())
@@ -164,7 +164,7 @@ rolling_predictions = (
 
 # Fixed origin at the end of the last observed training day.
 # Freeze observed values at that cutoff. Keep validation station/date keys
-# and static location metadata so features align with the scored rows.
+# And static location metadata so features align with the scored rows.
 cutoff = dev["date"].iloc[train].max()
 history = dev.iloc[train].loc[lambda rows: rows["date"].le(cutoff)]
 fixed_inputs = X.iloc[val].copy()
@@ -174,7 +174,7 @@ fixed = build_pipeline(Ridge(), features=TemporalFeatures(history=history))
 fixed_predictions = fixed.fit(X.iloc[train], y.iloc[train]).predict(fixed_inputs)
 
 # Cold start at held-out stations. The same-day inputs must be available at
-# prediction time. Keep only training-station history and disable PM2.5 lags.
+# Prediction time. Keep only training-station history and disable PM2.5 lags.
 train, val = load_folds(results / "folds_spatial.json", dev)[0]
 cold = build_pipeline(
     Ridge(),
@@ -205,6 +205,44 @@ by both runs. The table reports unweighted means across each scheme's five folds
 | Spatial | Off | 9.7364 | 4.8162 | 0.0486 |
 | Standard | On | 9.9630 | 4.7531 | 0.0464 |
 | Standard | Off | 9.9740 | 4.7578 | 0.0442 |
+
+## Design decisions and switches
+
+| Decision | Current default | Implementation | How to switch |
+| --- | --- | --- | --- |
+| Station retention | All 70 stations. The ≥100-observed-day sensitivity cohort contains 63 stations and 30,963 rows. | [Station eligibility](src/station_eligibility.py#L143), [retention decision](src/thursday_evidence.py#L66) | Needs code change. Rebuild the cohort and its folds in a separate experiment. |
+| No prior-day PM2.5 value | Keep all 10,786 rows without a usable lag and flag them with `pm25_lag_1_missing`. | [Rolling features](src/features.py#L230) | Argument for the general transformer (`use_target_lags=False`), or use the calendar-only columns for the rolling diagnostic. A different row policy needs code change. |
+| Sentinel-5P column entirely missing in training | Fill missing values with zero. Keep observed validation values and add a missingness indicator. | [Fold-local imputer](src/imputation.py#L47) | Changing the placeholder needs code change. The `add_indicator` argument controls the indicators. |
+| Predictor clipping | Enabled. Fit thresholds on each training fold before imputation. | [Outlier clipper](src/outliers.py#L46), [Pipeline](src/pipeline.py#L63) | Argument `clip_outliers=False` or `outliers__enabled=False`. |
+| Extreme PM2.5 | Flag 268 values above Q3 + 3×IQR and keep them in development. Episode and data-quality labels are provisional, based on corroboration from nearby stations, adjacent days, AOD and repeated readings. | [Extreme screen](src/m2_eda.py#L378), [Corroboration review](src/m2_review.py#L120) | Changing retention of flagged extremes needs code change. |
+
+The development data run from 2016-11-25 through 2024-12-31. The earlier
+recommendation to start after Sentinel-5P coverage began is superseded. The
+first-pass `parts/m2_eda.csv` has 684 rows. The canonical `figures/` directory
+contains 42 figures, including the 19-figure initial exploratory subset. The
+verified test suite passes 94 tests.
+
+Upstream terms referenced for the audit are CC BY 4.0 for applicable OpenAQ
+records (check provider terms), open access for Copernicus Sentinel data, and
+NASA's Earth science open-data policy. The combined Kaggle release's own license
+text is unverified. [OpenAQ licenses](https://docs.openaq.org/resources/licenses) ·
+[Copernicus Sentinel license](https://cds.climate.copernicus.eu/licences/ec-sentinel) ·
+[NASA Earthdata policy](https://www.earthdata.nasa.gov/engage/open-data-services-software).
+
+## Historical / non-canonical files
+
+- The root `member4_gap_report.csv` and the `B04-01/` temporal diagnostics,
+  drift, patterns, lead–lag, weekly-cycle and gap CSVs are historical copies.
+  Use the consolidated tables and generated `parts/` outputs under the
+  configured group directory.
+- The two large observation-level historical files in `B04-01/` are
+  `member4_features_preview.csv` (22.7 MB) and `member4_daily_values.csv`
+  (6.0 MB). The feature preview contains a shifted target.
+- There are six historical figure copies outside the canonical `figures/`
+  directory. Both `src/` and `results/<GROUP_DIR>/` contain a copy of each:
+  `m4_acf_pm25.png`, `m4_lead_lag.png` and `m4_seasonal_profile.png`.
+- The decision-gate note preserves the exploratory discussion. The Phase 1
+  methodology records the final station, imputation and lag choices.
 
 ## Conventions
 - Random seed: `SEED = 42` (see `src/config.py`)

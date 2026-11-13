@@ -1,4 +1,4 @@
-# Member 3 - PM2.5 and AOD (auto-generated, check the numbers before pasting)
+# PM2.5 and AOD (auto-generated, check the numbers before pasting)
 
 Overall (n = 31277): Pearson 0.07, Spearman 0.15, slope 6.5 ug/m3 per AOD unit.
 

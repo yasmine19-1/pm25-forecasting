@@ -1,4 +1,4 @@
-"""Lets the Member 3 tests do `from src import ...` when run as plain `pytest tests/`."""
+"""Lets the tests do `from src import ...` when run as plain `pytest tests/`."""
 import sys
 from pathlib import Path
 

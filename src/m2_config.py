@@ -1,4 +1,4 @@
-"""Shared settings. Member 2 settings, kept separate so it never overwrites the team config."""
+"""Shared settings. EDA settings, kept separate so it never overwrites the team config."""
 if __package__:
     from . import config
 else:

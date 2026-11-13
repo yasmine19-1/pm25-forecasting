@@ -1,11 +1,11 @@
-"""Member 4: past-only temporal features.
+"""Past-only temporal features.
 
 Two things live here:
 
 * build_features(...)   the feature table (one row per station and day). Fast,
                         vectorised version of the original function; the numbers
                         match the original on unchanged station segments.
-* TemporalFeatures      a scikit-learn step that plugs into Member 3's pipeline:
+* TemporalFeatures      a scikit-learn step that plugs into the pipeline:
                         build_pipeline(model, features=TemporalFeatures(history=available_history))
                         It returns the SAME rows in the SAME order as it receives,
                         with the new columns added.

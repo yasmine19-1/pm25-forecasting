@@ -1,4 +1,4 @@
-# Member 3: relationships, scaling, feature selection and the Pipeline
+# Relationships, scaling, feature selection and the Pipeline
 
 Brief sections §5.1 (relationships), §5.3, §5.3.2. Seed 42; every output comes from a script.
 
@@ -11,7 +11,7 @@ Brief sections §5.1 (relationships), §5.3, §5.3.2. Seed 42; every output come
 | `src/stratified.py` | PM2.5 against AOD by season, by station and by temperature/pressure/wind (pooled and inside each station) |
 | `src/scaling.py` | `TrainFoldScaler` (standard or robust) and `needs_scaling(model)` |
 | `src/selection.py` | `FeatureSelector`: ANOVA F, mutual information, RFE, L1, tree importance |
-| `src/pipeline.py` | `build_pipeline(model, ...)`: joins Member 2's steps, Member 4's features, scaler and selector |
+| `src/pipeline.py` | `build_pipeline(model, ...)`: assembles temporal features, clipping, imputation, scaling and selection |
 | `src/pipeline_check.py` | runs the Pipeline through the three shared fold files and logs the selected features |
 | `tests/test_m3_leakage.py` | leakage tests (every fitted step sees training rows only, no ids in the model) |
 | `tests/test_m3_modules.py` | tests for the scaler, the five selection methods and the Pipeline options |
@@ -33,7 +33,7 @@ Outputs, all in `results/<GROUP_DIR>/`:
 
 | File | Content |
 |---|---|
-| `parts/m3_relationships.csv`, `parts/m3_stratified.csv` | rows in the shared schema, for Member 1 to merge into `Exploratory_Data.csv` |
+| `parts/m3_relationships.csv`, `parts/m3_stratified.csv` | rows in the shared schema, for the consolidation step to merge into `Exploratory_Data.csv` |
 | `parts/m3_pipeline_check.csv` | RMSE/MAE per fold of the smoke run (shared schema) |
 | `parts/m3_selected_features.csv` | for every fold and model: method, number of columns kept, their names (§5.3.2) |
 | `parts/m3_relationships_notes.md`, `parts/m3_stratified_notes.md` | auto-written sentences for report section 5; check the numbers before pasting |
@@ -47,7 +47,7 @@ from src.pipeline import build_pipeline
 pipe = build_pipeline(model)                       # scaling decided from the model family
 pipe = build_pipeline(model, selector="tree")      # "f_test" | "mutual_info" | "rfe" | "l1" | "tree"
 pipe = build_pipeline(model, scaled=True, scaler="robust")
-pipe.set_params(outliers__enabled=False)           # Member 2's with/without switch
+pipe.set_params(outliers__enabled=False)           # disable predictor clipping
 
 for train, val in load_folds(path, dev):           # dev = the whole clean_dev.parquet
     pipe.fit(dev.iloc[train].drop(columns="pm25"), dev["pm25"].iloc[train])
@@ -62,7 +62,7 @@ Steps: `features -> drop_ids -> outliers -> impute -> scale -> select -> model`.
   Trees and boosting get no scaler.
 * Build a fresh pipeline for every fold (or `sklearn.base.clone` it). Never fit once and reuse.
 
-### For Member 4 (`features.py`)
+### Temporal features (`src/features.py`)
 
 Pass your transformer as `build_pipeline(model, features=MyFeatures())`. It runs first and
 receives the full frame, so it can still use `station_id` and `date`. It must return the same
@@ -75,7 +75,7 @@ Nothing else needs to change.
    ElasticNet and Huber because their penalty depends on column scale. One set in `scaling.py`
    (`SCALE_SENSITIVE`); edit it if the team disagrees.
 2. **AOD == 0** is treated as a failed retrieval (missing) in the relationship analysis, the same
-   rule as Member 2's `OutlierClipper`.
+   rule as the `OutlierClipper`.
 3. **Stratified analysis** skips stations with fewer than 30 valid PM2.5/AOD pairs. For each weather
    variable the thirds are made twice: pooled over all rows, and inside each station (stations with
    at least 90 rows, station means removed). Comparing the two shows whether a pattern is weather or
