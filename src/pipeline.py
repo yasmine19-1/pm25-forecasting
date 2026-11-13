@@ -31,6 +31,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.utils.validation import check_is_fitted
 
 from src import config
+from src.features import TemporalFeatures
 from src.imputation import S5PImputer
 from src.outliers import OutlierClipper
 from src.scaling import TrainFoldScaler, needs_scaling
@@ -64,8 +65,22 @@ class DropNonFeatures(TransformerMixin, BaseEstimator):
         return pd.DataFrame(X, columns=getattr(self, "feature_names_in_", None))
 
 
+def temporal_step(scheme, history, scenario="next_day"):
+    """TemporalFeatures set up for one fold scheme ("temporal", "spatial" or "standard").
+
+    Next-day scenario: PM2.5 lags are allowed, except for the spatial scheme, where the held-out
+    stations have no PM2.5 history at forecast time (cold-start rule in the methodology).
+    `history` is the development frame; lags only ever look at earlier days.
+    """
+    if scenario == "next_day":
+        lags = scheme != "spatial"
+    else:
+        lags = None          # same_day: the transformer decides (no PM2.5 lags)
+    return TemporalFeatures(scenario=scenario, history=history, use_target_lags=lags)
+
+
 def build_pipeline(model, *, scaled=None, scaler="standard", selector=None,
-                   features=None, clip_outliers=True):
+                   features=None, clip_outliers=True, imputer=None):
     """Assemble the full Pipeline around `model`.
 
     scaled        True / False, or None (default) to decide from the model family
@@ -77,6 +92,9 @@ def build_pipeline(model, *, scaled=None, scaler="standard", selector=None,
                   frame (it needs station_id and date to build past-only lags) and must
                   return the same rows in the same order.
     clip_outliers False switches the clipper off from the start
+    imputer       None = the default S5PImputer(). Pass S5PImputer(s5p_cols=...) to also get a
+                  0/1 missing indicator for other columns, e.g. the lag columns, which are
+                  often missing and otherwise get the training median without a trace
     """
     if scaled is None:
         scaled = needs_scaling(model)
@@ -89,7 +107,7 @@ def build_pipeline(model, *, scaled=None, scaler="standard", selector=None,
     steps += [
         ("drop_ids", DropNonFeatures()),
         ("outliers", OutlierClipper(enabled=clip_outliers)),
-        ("impute", S5PImputer()),
+        ("impute", imputer if imputer is not None else S5PImputer()),
     ]
     if scaled:
         steps.append(("scale", TrainFoldScaler(kind=scaler)))
