@@ -17,7 +17,7 @@ python -m src.config        # creates data/ and results/ folders
 
 ## Phase 1 - data audit and cleaning
 1. Download the [Kaggle dataset](https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026) and place `combined_gee_pm25.csv`, `pm25.csv` and `gee_features_daily.csv` directly in `data/raw/`.
-   Phase 1 uses only observations dated before 2025. The 2025 final test and the 2026 set-aside remain in the original input files. The workflow leaves those files unchanged and produces only development data.
+   Phase 1 analyzes observations dated before 2025. For the 2025 final test and the 2026 set-aside, the cleaner reports raw row counts and date ranges. The workflow leaves the original input files unchanged and writes only development datasets.
 2. `python -m src.first_look`   - list columns, types, missing values
 3. `python -m src.audit`        - dataset audit -> `results/<GROUP_ID>/parts/audit.csv`
 4. `python -m src.clean`        - screens dates before PM2.5 cleaning and duplicate checks, then writes `data/interim/clean_dev.parquet`, `clean_dev.csv`, and development cleaning logs

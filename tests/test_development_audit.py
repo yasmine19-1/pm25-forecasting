@@ -57,6 +57,12 @@ def test_cleaner_uses_only_dated_development_rows(tmp_path, monkeypatch):
     counts = pd.read_csv(parts / "cleaning_counts.csv")
     assert counts.loc[counts.section.eq("date_screening"), "value"].tolist() == [1]
     assert counts.loc[counts.section.eq("split"), "variable"].unique().tolist() == ["development"]
+    reserved_counts = counts.loc[counts.section.eq("raw_reserved_dates")]
+    assert reserved_counts["metric"].tolist() == ["rows", "rows"]
+    assert reserved_counts["value"].tolist() == [2, 1]
+    assert reserved_counts["note"].tolist() == [
+        "2025-01-01 to 2025-01-01", "2026-01-01 to 2026-01-01",
+    ]
     assert source.read_bytes() == original
     assert list(reserved.iterdir()) == [existing]
     assert existing.read_bytes() == b"reserved file must stay untouched"

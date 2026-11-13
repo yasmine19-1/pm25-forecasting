@@ -15,7 +15,13 @@ found = detect_columns(df.columns)
 require(found, ["date", "pm25", "station_id", "lat", "lon"])
 dates = parse_dates(df[found["date"]])
 unknown_dates = int(dates.isna().sum())
-is_dev = dates.lt(pd.Timestamp(config.TEST_START))
+test_start = pd.Timestamp(config.TEST_START)
+test_end = pd.Timestamp(config.TEST_END)
+is_dev = dates.lt(test_start)
+reserved_dates = {
+    "final_test": dates.loc[dates.between(test_start, test_end)],
+    "after_test_period": dates.loc[dates.gt(test_end)],
+}
 df = df.loc[is_dev].copy()
 df[found["date"]] = dates.loc[is_dev]
 canonical = {"date": "date", "station_id": "station_id", "lat": "lat", "lon": "lon", "pm25": "pm25"}
@@ -117,6 +123,10 @@ rows.append(("date_screening", "unknown_date", "", "rows_excluded", unknown_date
 rng = f"{dev['date'].min().date()} to {dev['date'].max().date()}" if len(dev) else ""
 rows.append(("split", "development", "", "rows", len(dev), rng))
 rows.append(("split", "development", "", "stations", int(dev["station_id"].nunique()), ""))
+for name, period in reserved_dates.items():
+    date_range = f"{period.min().date()} to {period.max().date()}" if len(period) else ""
+    rows.append(("raw_reserved_dates", name, "", "rows", len(period), date_range))
+    print(f"Raw {name}: {len(period):,} rows{f', {date_range}' if date_range else ''}")
 pd.DataFrame(rows, columns=["section", "variable", "group", "metric", "value", "note"]).to_csv(
     config.PARTS / "cleaning_counts.csv", index=False, encoding="utf-8")
 
