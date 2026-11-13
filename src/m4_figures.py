@@ -1,12 +1,10 @@
 """Member 4: the three figures for report sections 5 to 7.
 
-Reads the CSV files already produced by the Member 4 scripts (folder B04-01/)
-and writes three PNG files to results/19/figures/. Nothing is fitted or learned.
+Reads the CSV files generated in the shared parts directory and writes three
+PNG files to the corresponding figures directory.
 
-Run from the repo root:   python src/m4_figures.py
+Run from the repo root:   python -m src.m4_figures
 """
-from pathlib import Path
-
 import matplotlib
 
 matplotlib.use("Agg")
@@ -14,9 +12,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[1]
-INPUT = ROOT / "B04-01"
-OUTPUT = ROOT / "results" / "19" / "figures"
+from src import config
+
+INPUT = config.PARTS
+OUTPUT = config.PARTS.parent / "figures"
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 

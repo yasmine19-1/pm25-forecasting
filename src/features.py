@@ -4,7 +4,7 @@ Two things live here:
 
 * build_features(...)   the feature table (one row per station and day). Fast,
                         vectorised version of the original function; the numbers
-                        are the same.
+                        match the original on unchanged station segments.
 * TemporalFeatures      a scikit-learn step that plugs into Member 3's pipeline:
                         build_pipeline(model, features=TemporalFeatures(history=dev))
                         It returns the SAME rows in the SAME order as it receives,
@@ -60,7 +60,7 @@ def build_features(data, forecast_horizon_days=1, high_aod_threshold=None):
     changed = pd.Series(False, index=daily.index)
     for column in metadata:
         current, previous = daily[column], daily[column].shift(1)
-        same = (current.isna() & previous.isna()) | (current == previous)
+        same = current.notna() & current.eq(previous).fillna(False)
         changed = changed | ~same
     mixed_boundary = daily["_mixed"] | daily["_mixed"].shift(1, fill_value=False)
     breaks = new_station | date_gap | changed | mixed_boundary
@@ -71,7 +71,7 @@ def build_features(data, forecast_horizon_days=1, high_aod_threshold=None):
     groups = daily.groupby(segment)
 
     # --- calendar features (known in advance) -----------------------------------
-    day_of_year = daily["date"].dt.dayofyear
+    day_of_year = daily["date"].dt.day_of_year
     new_columns = {
         "day_of_year_sin": np.sin(2 * np.pi * day_of_year / 365.25),
         "day_of_year_cos": np.cos(2 * np.pi * day_of_year / 365.25),
@@ -123,10 +123,12 @@ class TemporalFeatures(TransformerMixin, BaseEstimator):
     use_target_lags : None, True or False
         PM2.5 lag features. None = True for next_day, False for same_day.
         Set False for held-out-station (spatial) experiments.
+        same_day requires False or None.
     history : DataFrame or None
-        All development rows (with pm25). Lags for validation rows then come from
-        earlier days that are not in the fold; they are only ever past values.
-        Needed whenever X has no pm25 column, which is the case in Member 3's loop.
+        History available at the forecast origin. For rolling temporal validation,
+        earlier validation observations may be used only when they would
+        already have been released. Supply fold-specific history for other
+        experiments and exclude held-out stations for cold-start evaluation.
     aod_quantile : float
         high-AOD threshold = this quantile of the TRAINING aod values.
     """
@@ -142,6 +144,8 @@ class TemporalFeatures(TransformerMixin, BaseEstimator):
     def fit(self, X, y=None):
         if self.scenario not in ("next_day", "same_day"):
             raise ValueError("scenario must be 'next_day' or 'same_day'")
+        if self.scenario == "same_day" and self.use_target_lags:
+            raise ValueError("Same-day nowcasting cannot use PM2.5 lags.")
         X = self._check(X)
         self.use_target_lags_ = (self.scenario == "next_day"
                                  if self.use_target_lags is None else bool(self.use_target_lags))
@@ -170,11 +174,12 @@ class TemporalFeatures(TransformerMixin, BaseEstimator):
         if len(merged) != len(X):
             raise ValueError("feature table is not unique per station and day")
 
-        result = X.copy()
+        inputs = KEYS + METADATA
+        if self.scenario == "same_day":
+            inputs += [column for column in VARIABLES if column != "pm25"]
+        result = X.loc[:, X.columns.isin(inputs)].copy()
         for column in new_cols:
             result[column] = merged[column].to_numpy()
-        if self.scenario == "next_day":
-            result = result.drop(columns=[c for c in VARIABLES if c != "pm25" and c in result.columns])
         return result
 
     # ------------------------------------------------------------------
@@ -238,7 +243,7 @@ def rolling_forecast_features(data):
             or keys["station_id"].isna().any()
             or keys.duplicated(["station_id", "date"]).any()):
         raise ValueError("Expected unique, normalized pre-holdout station-days.")
-    ordered = keys.sort_values(["station_id", "date"])
+    ordered = keys.reset_index(drop=True).sort_values(KEYS)
     group = ordered.groupby("station_id", sort=False)
     consecutive = group["date"].diff().eq(pd.Timedelta(days=1))
     for column in ("gee_id", "lat", "lon"):
@@ -253,7 +258,9 @@ def rolling_forecast_features(data):
         "pm25_lag_1": lag,
         "pm25_lag_1_missing": lag.isna().astype(int),
     })
-    return predictors.reindex(data.index)
+    predictors = predictors.sort_index()
+    predictors.index = data.index
+    return predictors
 
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 
 from src import config
+from src.common import read_development_csv
 
 warnings.filterwarnings("ignore")
 
@@ -49,9 +50,9 @@ def safe(fn):
         traceback.print_exc(limit=2)
 
 
-A = pd.read_csv(find(A_FILE), low_memory=False)
-B = pd.read_csv(find(B_FILE), low_memory=False)
-C = pd.read_csv(find(C_FILE), low_memory=False)
+A = read_development_csv(find(A_FILE))
+B = read_development_csv(find(B_FILE))
+C = read_development_csv(find(C_FILE))
 for df in (A, B, C):
     df["date"] = day(df["date"])
 

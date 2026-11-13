@@ -7,7 +7,9 @@ Use the supplied merged dataset and keep all 70 development stations
 the later 2026 records are reserved outside development. Cleaning removes
 missing PM2.5 and values outside the strict interval (0, 500), checks duplicate
 records, and removes both observations in conflicting station-date groups.
-The audit and cleaning counts are in `parts/`.
+The audit and cleaning counts are in `parts/`. Raw exploratory statistics
+use dates before the holdout cutoff. Cleaning also logs row counts and date
+ranges for the separately reserved periods.
 
 All development rows matched the corresponding station/date/coordinate and GEE
 ID/date records in the supplied sources. Each assigned GEE position matched a
@@ -79,3 +81,9 @@ same validation rows and fit preprocessing on the training fold. Adding the
 lag reduced MAE in five of five folds and RMSE in four of five. This is a
 development smoke check under the rolling availability assumption.
 Phase 2 still covers model comparison and the clipping-on/off experiment.
+
+The regenerated tables were checked with CPython 3.14.7 on macOS arm64.
+The shared folds reproduce byte for byte. Smoke-test runtimes are machine
+specific, and the regenerated ExtraTrees scores differ slightly from the
+historical table. The combined dataset license and operational release times
+still require source confirmation.

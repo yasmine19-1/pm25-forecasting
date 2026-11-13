@@ -1,42 +1,42 @@
 section,variable,group,metric,value,note
 5.1,aod,station,kruskal_H,1447.791188516594,
-5.1,aod,station,kruskal_p,2.498860088880387e-258,
-5.1,aod,station,eta_squared,0.02983989983666583,share of the variance explained by the station
+5.1,aod,station,kruskal_p,2.498860088880386e-258,
+5.1,aod,station,eta_squared,0.02983989983666582,share of the variance explained by the station
 5.1,aod,station,median_min,0.0916666666666666,E2: ALCORNOCALES
 5.1,aod,station,median_max,0.207,TORRENT-EL VEDAT
 5.1,no2,station,kruskal_H,6352.160927770964,
 5.1,no2,station,kruskal_p,0.0,
-5.1,no2,station,eta_squared,0.18890002416306675,share of the variance explained by the station
+5.1,no2,station,eta_squared,0.1889000241630666,share of the variance explained by the station
 5.1,no2,station,median_min,6.818191942297267e-05,ALCANTARILLA
 5.1,no2,station,median_max,0.0001191740422779,La Sagrera
 5.1,co,station,kruskal_H,2760.6456601793802,
 5.1,co,station,kruskal_p,0.0,
-5.1,co,station,eta_squared,0.09274329046364677,share of the variance explained by the station
+5.1,co,station,eta_squared,0.0927432904636469,share of the variance explained by the station
 5.1,co,station,median_min,0.0282747898453487,PALACIO CONGRESOS
 5.1,co,station,median_max,0.0345132112432605,FR03006
 5.1,o3,station,kruskal_H,989.7862614796455,
-5.1,o3,station,kruskal_p,3.118287428167925e-164,
-5.1,o3,station,eta_squared,0.04225144689980366,share of the variance explained by the station
+5.1,o3,station,kruskal_p,3.118287428168103e-164,
+5.1,o3,station,eta_squared,0.04225144689980373,share of the variance explained by the station
 5.1,o3,station,median_min,0.1339061015810892,VALLE DE ESCOMBRERAS
 5.1,o3,station,median_max,0.1495926741221416,"C. Restoy, 51, Almeria, Spain"
 5.1,temperature_celsius,station,kruskal_H,1277.496517006601,
-5.1,temperature_celsius,station,kruskal_p,4.1042086643891624e-223,
-5.1,temperature_celsius,station,eta_squared,0.04669402455258433,share of the variance explained by the station
+5.1,temperature_celsius,station,kruskal_p,4.104208664389162e-223,
+5.1,temperature_celsius,station,eta_squared,0.04669402455258436,share of the variance explained by the station
 5.1,temperature_celsius,station,median_min,9.731564776102715,ALCANTARILLA
 5.1,temperature_celsius,station,median_max,24.63879610697433,TORRENT-EL VEDAT
 5.1,pressure_mb,station,kruskal_H,24978.534025497705,
 5.1,pressure_mb,station,kruskal_p,0.0,
-5.1,pressure_mb,station,eta_squared,0.897706151383921,share of the variance explained by the station
+5.1,pressure_mb,station,eta_squared,0.8977061513839228,share of the variance explained by the station
 5.1,pressure_mb,station,median_min,948.8295499674477,GRANADA - NORTE
 5.1,pressure_mb,station,median_max,1011.9757275390624,FR02013
 5.1,wind_u,station,kruskal_H,1081.2799110940055,
-5.1,wind_u,station,kruskal_p,7.4413503670109635e-183,
+5.1,wind_u,station,kruskal_p,7.441350367010962e-183,
 5.1,wind_u,station,eta_squared,0.026626194462823452,share of the variance explained by the station
 5.1,wind_u,station,median_min,-1.1421839396158855,TORRENT-EL VEDAT
 5.1,wind_u,station,median_max,2.4156068166097007,Rosia Road
 5.1,wind_v,station,kruskal_H,1665.2040570719626,
 5.1,wind_v,station,kruskal_p,1.4429037567601853e-303,
-5.1,wind_v,station,eta_squared,0.09551337589961316,share of the variance explained by the station
+5.1,wind_v,station,eta_squared,0.09551337589961313,share of the variance explained by the station
 5.1,wind_v,station,median_min,-1.4716906348864236,Fos Les Carabins
 5.1,wind_v,station,median_max,0.8937130173047383,Sant Andreu de la Barca
 5.3.3,pm25,extremes,threshold_q3_plus_3iqr,34.38111842105263,

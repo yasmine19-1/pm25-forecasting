@@ -65,10 +65,13 @@ def test_clipper_train_limits_applied_unchanged(data):
     assert len(out) == len(va2)  # rows are never dropped
 
 
-def test_clipper_switch_is_passthrough(data):
+def test_disabling_clipping_keeps_aod_normalization(data):
     tr, va = data
     clip = OutlierClipper(enabled=False).fit(tr)
-    pd.testing.assert_frame_equal(clip.transform(va), va)
+    va = va.copy()
+    va.iloc[0, va.columns.get_loc("aod")] = 0.0
+    expected = va.assign(aod=va.aod.mask(va.aod.eq(0)))
+    pd.testing.assert_frame_equal(clip.transform(va), expected)
 
 
 def test_clipper_aod_zero_becomes_nan_and_input_untouched(data):

@@ -53,11 +53,21 @@ def load_raw():
     return pd.read_csv(path, low_memory=False), path
 
 
-def detect_columns(columns):
+def development_rows(frame, date_column):
+    """Exclude rows whose dates cannot be confirmed to precede the holdout."""
+    dates = parse_dates(frame[date_column])
+    return frame.loc[dates.lt(pd.Timestamp(config.TEST_START))].copy()
+
+
+def read_development_csv(path, date_column="date"):
+    return development_rows(pd.read_csv(path, low_memory=False), date_column)
+
+
+def detect_columns(columns, *, use_overrides=True):
     normed = {c: norm(c) for c in columns}
     found = {}
     for key, cands in CANDIDATES.items():
-        override = config.COLUMN_OVERRIDES.get(key)
+        override = config.COLUMN_OVERRIDES.get(key) if use_overrides else None
         if override:
             if override not in normed:
                 sys.exit(f"COLUMN_OVERRIDES['{key}'] = '{override}' is not a column in the raw file.")
