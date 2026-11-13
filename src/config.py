@@ -49,7 +49,7 @@ NON_FEATURE_COLS = ["date", "datetime_utc", "station_id", "gee_id", "lat", "lon"
 
 
 def ensure_dirs():
-    for d in (RAW, INTERIM, FINAL_TEST, PARTS):
+    for d in (RAW, INTERIM, PARTS):
         d.mkdir(parents=True, exist_ok=True)
     (PARTS / ".gitkeep").touch()
 

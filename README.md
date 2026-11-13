@@ -17,10 +17,10 @@ python -m src.config        # creates data/ and results/ folders
 
 ## Phase 1 - data audit and cleaning
 1. Download the [Kaggle dataset](https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026) and place `combined_gee_pm25.csv`, `pm25.csv` and `gee_features_daily.csv` directly in `data/raw/`.
-   The raw inspection commands summarize only dated observations before 2025. The cleaner writes the reserved periods to separate files.
+   Phase 1 uses only observations dated before 2025. The 2025 final test and the 2026 set-aside remain in the original input files. The workflow leaves those files unchanged and produces only development data.
 2. `python -m src.first_look`   - list columns, types, missing values
 3. `python -m src.audit`        - dataset audit -> `results/<GROUP_ID>/parts/audit.csv`
-4. `python -m src.clean`        - cleaning -> `data/interim/clean_dev.parquet`, reserved test files, and cleaning logs
+4. `python -m src.clean`        - screens dates before PM2.5 cleaning and duplicate checks, then writes `data/interim/clean_dev.parquet`, `clean_dev.csv`, and development cleaning logs
 5. `python -m src.gap_report`   - development-only station coverage -> `results/<GROUP_ID>/parts/gap_report_enhanced.csv`, metric verification and explanatory notes; preserves the original gap report
 6. `python -m src.station_eligibility` - metadata evidence table and acceptance checks; the >=100-day flag is sensitivity only
 7. `python -m src.thursday_evidence` - source-matching verification, development-only lag diagnostics and retained-station list; see `results/19/phase1_methodology.md` for the documented decisions and limitations
@@ -106,9 +106,12 @@ JSON bytes. Model timings vary by machine. Record Python and platform alongside
 ExtraTrees results. The earlier audit observed score differences across runs with
 the same package version pins. Their detailed outputs remain available separately.
 The rolling check uses `src.features.rolling_forecast_features` on the development
-data before applying the shared temporal indices. It assumes prior-day PM2.5
-has been observed at prediction time. Keep the exploratory feature preview out
-of the Pipeline because it contains future labels and same-day measurements.
+data before applying the shared temporal indices. It is a Phase 1 diagnostic
+under the assumption that each previous day's PM2.5 is available at the next
+forecast origin. It can use an earlier validation observation under that
+assumption. Actual release times and permission for within-fold updates in
+scored evaluation still need confirmation. Keep the exploratory feature preview
+out of the Pipeline because it contains future labels and same-day measurements.
 
 For a comparison with the rolling features, keep the same fold positions and
 rows, including rows with no prior-day observation. Compare calendar-only

@@ -111,5 +111,24 @@ def test_pipeline_drops_exploratory_future_target():
     assert DropNonFeatures().fit_transform(preview).columns.tolist() == ["aod"]
 
 
+def test_rolling_features_use_only_the_previous_days_label():
+    from src.features import rolling_forecast_features
+
+    observations = pd.DataFrame({
+        "station_id": ["a"] * 4,
+        "date": pd.date_range("2024-01-01", periods=4),
+        "pm25": [10.0, 20.0, 30.0, 40.0],
+    })
+    baseline = rolling_forecast_features(observations)
+    # Days 2 through 4 are validation dates. Changing day 3 can affect day 4
+    # under the rolling assumption, but it cannot affect day 3 or earlier.
+    changed = observations.copy()
+    changed.loc[2, "pm25"] = 300.0
+    updated = rolling_forecast_features(changed)
+    pd.testing.assert_frame_equal(baseline.iloc[:3], updated.iloc[:3])
+    assert updated.loc[2, "pm25_lag_1"] == 20.0
+    assert updated.loc[3, "pm25_lag_1"] == 300.0
+
+
 if __name__ == "__main__":
     unittest.main()

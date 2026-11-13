@@ -1,6 +1,7 @@
 """Check metadata boundaries and non-destructive failure behavior."""
 import contextlib
 import io
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -9,7 +10,7 @@ from unittest.mock import patch
 import pandas as pd
 
 from src import config
-from src.station_eligibility import coordinate_evidence, main, test_presence as presence
+from src.station_eligibility import coordinate_evidence, main
 
 
 class StationEvidenceTests(unittest.TestCase):
@@ -31,12 +32,19 @@ class StationEvidenceTests(unittest.TestCase):
         self.assertEqual(result['n_conflicting_coordinate_dates'], 1)
         self.assertTrue(pd.isna(result['max_coordinate_change_km']))
 
-    def test_unavailable_test_metadata_and_projection(self):
-        with patch('src.station_eligibility.pd.read_parquet', side_effect=OSError('not accessible')) as read:
-            counts, note = presence()
-        self.assertIsNone(counts)
-        self.assertTrue(note.startswith('unavailable:'))
-        read.assert_called_once_with(config.FINAL_TEST / 'final_test.parquet', columns=['station_id', 'date'])
+    def test_report_reads_only_the_development_parquet(self):
+        columns = ['station_id', 'date', 'gee_id', 'lat', 'lon']
+        dev = pd.read_parquet(config.INTERIM / 'clean_dev.parquet', columns=columns)
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp)
+            for name in ('column_mapping.csv', 'gap_report_enhanced.csv', 'audit.csv'):
+                shutil.copyfile(config.PARTS / name, output / name)
+            with patch.object(config, 'PARTS', output), patch.object(config, 'INTERIM', output), patch(
+                'src.station_eligibility.pd.read_parquet', return_value=dev
+            ) as read, contextlib.redirect_stdout(io.StringIO()):
+                main()
+            read.assert_called_once_with(output / 'clean_dev.parquet', columns=columns)
+            assert 'obs_2025' not in pd.read_csv(output / 'station_eligibility.csv').columns
 
     def test_failed_acceptance_writes_nothing(self):
         cols = ['station_id', 'date', 'gee_id', 'lat', 'lon']
