@@ -1,14 +1,14 @@
-"""Shared settings for the whole project. Edit GROUP_ID first."""
+"""Shared settings for the whole project. Edit GROUP_DIR first."""
 from pathlib import Path
 
 SEED = 42
-GROUP_ID = "19"  # <- replace with your real group ID, e.g. "B03-02"
+GROUP_DIR = "19"  # <- replace with your real group ID, e.g. "B03-02"
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw"
 INTERIM = ROOT / "data" / "interim"
 FINAL_TEST = ROOT / "data" / "final_test"
-PARTS = ROOT / "results" / GROUP_ID / "parts"
+PARTS = ROOT / "results" / GROUP_DIR / "parts"
 
 # Which CSV in data/raw to use. None = auto (works only if there is exactly one CSV).
 RAW_FILE = "combined_gee_pm25.csv"

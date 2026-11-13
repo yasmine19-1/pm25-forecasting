@@ -16,14 +16,17 @@ python -m src.config        # creates data/ and results/ folders
 ```
 
 ## Phase 1 - data audit and cleaning
+
+Set `GROUP_DIR` in [src/config.py](src/config.py) to the assigned course folder code.
+The current setting is `19`. All paths below use that setting for `<GROUP_DIR>`.
 1. Download the [Kaggle dataset](https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026) and place `combined_gee_pm25.csv`, `pm25.csv` and `gee_features_daily.csv` directly in `data/raw/`.
    Phase 1 analyzes observations dated before 2025. For the 2025 final test and the 2026 set-aside, the cleaner reports raw row counts and date ranges. The workflow leaves the original input files unchanged and writes only development datasets.
 2. `python -m src.first_look`   - list columns, types, missing values
-3. `python -m src.audit`        - dataset audit -> `results/<GROUP_ID>/parts/audit.csv`
+3. `python -m src.audit`        - dataset audit -> `results/<GROUP_DIR>/parts/audit.csv`
 4. `python -m src.clean`        - screens dates before PM2.5 cleaning and duplicate checks, then writes `data/interim/clean_dev.parquet`, `clean_dev.csv`, and development cleaning logs
-5. `python -m src.gap_report`   - development-only station coverage -> `results/<GROUP_ID>/parts/gap_report_enhanced.csv`, metric verification and explanatory notes; preserves the original gap report
+5. `python -m src.gap_report`   - development-only station coverage -> `results/<GROUP_DIR>/parts/gap_report_enhanced.csv`, metric verification and explanatory notes; preserves the original gap report
 6. `python -m src.station_eligibility` - metadata evidence table and acceptance checks; the >=100-day flag is sensitivity only
-7. `python -m src.thursday_evidence` - source-matching verification, development-only lag diagnostics and retained-station list; see `results/19/phase1_methodology.md` for the documented decisions and limitations
+7. `python -m src.thursday_evidence` - source-matching verification, development-only lag diagnostics and retained-station list; see `results/<GROUP_DIR>/phase1_methodology.md` for the documented decisions and limitations
 
 ## Shared cross-validation folds
 
@@ -34,7 +37,7 @@ python -m src.folds
 python -m src.folds --verify
 ```
 
-The files are under `results/<GROUP_ID>/`. Each contains five `train` and `val`
+The files are under `results/<GROUP_DIR>/`. Each contains five `train` and `val`
 position lists, the ordered `[station_id, date]` keys, the development parquet's
 SHA-256, and the splitter settings. Positions refer to the original parquet order.
 Verification checks the split rules and compares the regenerated JSON byte for byte.
@@ -60,7 +63,7 @@ for train, val in splits:
 
 Select the spatial file for the held-out-station experiment. Feature construction
 must preserve row alignment and follow the forecast-time rules in
-`results/19/phase1_methodology.md`. Exclude the target and `config.NON_FEATURE_COLS`
+`results/<GROUP_DIR>/phase1_methodology.md`. Exclude the target and `config.NON_FEATURE_COLS`
 from the model input.
 
 ### Preprocessing in Member 3's Pipeline
@@ -77,8 +80,8 @@ first temporal fold's limitation.
 
 ## Reproduce the Phase 1 deliverables
 
-The final tables are [Exploratory_Data.csv](results/19/Exploratory_Data.csv)
-and [Exploratory_temporal.csv](results/19/Exploratory_temporal.csv).
+The final tables are `Exploratory_Data.csv`
+and `Exploratory_temporal.csv` in `results/<GROUP_DIR>/`.
 From the repository root, after running the audit and cleaning steps and generating the shared folds, run the full set of result producers:
 
 ```bash

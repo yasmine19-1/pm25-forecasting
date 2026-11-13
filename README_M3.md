@@ -29,7 +29,7 @@ python -m src.pipeline_check
 pytest tests/
 ```
 
-Outputs, all in `results/<GROUP_ID>/`:
+Outputs, all in `results/<GROUP_DIR>/`:
 
 | File | Content |
 |---|---|
