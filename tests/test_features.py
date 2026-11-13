@@ -66,5 +66,22 @@ class TestFeatureEngineering(unittest.TestCase):
         )
 
 
+
+    def test_features_do_not_cross_metadata_changes(self):
+        data = pd.DataFrame({
+            "date": pd.to_datetime([
+                "2024-01-01", "2024-01-02", "2024-01-03"
+            ]),
+            "station_id": ["Station A"] * 3,
+            "lat": [36.0, 36.0, 37.0],
+            "pm25": [10, 20, 30],
+            "aod": [0.1, 0.2, 0.3]
+        })
+
+        result = build_features(data, forecast_horizon_days=1)
+        row = result[result["date"] == pd.Timestamp("2024-01-03")].iloc[0]
+        self.assertTrue(pd.isna(row["pm25_lag_1"]))
+
+
 if __name__ == "__main__":
     unittest.main()
