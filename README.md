@@ -93,6 +93,7 @@ From the repository root, after running the audit and cleaning steps and generat
     python -m src.relationships
     python -m src.stratified
     python -m src.pipeline_check
+    python -m src.clipping_check
     for script in temporal_analysis temporal_patterns weekly_cycle lead_lag_analysis drift_seasonality; do
         python "${script}.py"
     done
@@ -129,6 +130,22 @@ remove AOD, the three Sentinel-5P columns, or the four weather columns from
 both training and validation inputs before building the pipeline. If using
 `TemporalFeatures`, also remove the ablated source columns from its history
 so it cannot regenerate derived features from them.
+
+## Paired predictor clipping comparison
+
+`python -m src.clipping_check` writes `results/<GROUP_DIR>/clipping_comparison.csv`.
+The two default Ridge fits per fold use the same validation rows. Clipping
+thresholds are fitted per training fold. The AOD zero-to-missing rule is shared
+by both runs. The table reports unweighted means across each scheme's five folds.
+
+| Scheme | Clipping | RMSE | MAE | R² |
+| --- | --- | ---: | ---: | ---: |
+| Temporal | On | 9.1867 | 4.8137 | 0.0334 |
+| Temporal | Off | 9.1965 | 4.8201 | 0.0306 |
+| Spatial | On | 9.7219 | 4.8115 | 0.0518 |
+| Spatial | Off | 9.7364 | 4.8162 | 0.0486 |
+| Standard | On | 9.9630 | 4.7531 | 0.0464 |
+| Standard | Off | 9.9740 | 4.7578 | 0.0442 |
 
 ## Conventions
 - Random seed: `SEED = 42` (see `src/config.py`)
