@@ -131,6 +131,65 @@ both training and validation inputs before building the pipeline. If using
 `TemporalFeatures`, also remove the ablated source columns from its history
 so it cannot regenerate derived features from them.
 
+## Forecast history examples
+
+Run these examples from the repository root after generating the shared folds.
+Each example fits preprocessing on the training rows and uses the stored
+validation positions.
+
+```python
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import Ridge
+
+from src import config
+from src.features import VARIABLES, TemporalFeatures, rolling_forecast_features
+from src.folds import load_folds
+from src.pipeline import build_pipeline
+
+dev = pd.read_parquet(config.INTERIM / "clean_dev.parquet")
+y = dev[config.TARGET]
+X = dev.drop(columns=config.TARGET)
+results = config.PARTS.parent
+train, val = load_folds(results / "folds_temporal.json", dev)[0]
+
+# Rolling next-day diagnostic. Assume yesterday's observations are released
+# before today's forecast. Earlier validation dates may supply a prior value.
+rolling = rolling_forecast_features(dev)
+rolling_predictions = (
+    build_pipeline(Ridge())
+    .fit(rolling.iloc[train], y.iloc[train])
+    .predict(rolling.iloc[val])
+)
+
+# Fixed origin at the end of the last observed training day.
+# Freeze observed values at that cutoff. Keep validation station/date keys
+# and static location metadata so features align with the scored rows.
+cutoff = dev["date"].iloc[train].max()
+history = dev.iloc[train].loc[lambda rows: rows["date"].le(cutoff)]
+fixed_inputs = X.iloc[val].copy()
+for column in fixed_inputs.columns.intersection(VARIABLES):
+    fixed_inputs[column] = np.nan
+fixed = build_pipeline(Ridge(), features=TemporalFeatures(history=history))
+fixed_predictions = fixed.fit(X.iloc[train], y.iloc[train]).predict(fixed_inputs)
+
+# Cold start at held-out stations. The same-day inputs must be available at
+# prediction time. Keep only training-station history and disable PM2.5 lags.
+train, val = load_folds(results / "folds_spatial.json", dev)[0]
+cold = build_pipeline(
+    Ridge(),
+    features=TemporalFeatures(
+        scenario="same_day", use_target_lags=False, history=X.iloc[train],
+    ),
+)
+cold_predictions = cold.fit(X.iloc[train], y.iloc[train]).predict(X.iloc[val])
+```
+
+The rolling example is a Phase 1 diagnostic. Actual release times are unverified.
+Confirm the within-fold observation policy before using rolling scores for model
+selection. In the fixed-origin example, later validation rows contribute no observed
+targets or weather/satellite values to history.
+
 ## Paired predictor clipping comparison
 
 `python -m src.clipping_check` writes `results/<GROUP_DIR>/clipping_comparison.csv`.

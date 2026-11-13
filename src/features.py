@@ -6,7 +6,7 @@ Two things live here:
                         vectorised version of the original function; the numbers
                         match the original on unchanged station segments.
 * TemporalFeatures      a scikit-learn step that plugs into Member 3's pipeline:
-                        build_pipeline(model, features=TemporalFeatures(history=dev))
+                        build_pipeline(model, features=TemporalFeatures(history=available_history))
                         It returns the SAME rows in the SAME order as it receives,
                         with the new columns added.
 
