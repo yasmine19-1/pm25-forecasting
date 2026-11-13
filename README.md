@@ -69,6 +69,31 @@ If a predictor is entirely missing in training, its missing entries use a fixed
 zero placeholder with the indicator set to 1. See the methodology for the
 first temporal fold's limitation.
 
+## Reproduce the Phase 1 deliverables
+
+The final tables are [Exploratory_Data.csv](results/19/Exploratory_Data.csv)
+and [Exploratory_temporal.csv](results/19/Exploratory_temporal.csv).
+From the repository root, with the existing development parquet and shared folds:
+
+```bash
+(
+    set -e
+    for script in temporal_analysis temporal_patterns weekly_cycle lead_lag_analysis drift_seasonality; do
+        .venv/bin/python "${script}.py"
+    done
+    .venv/bin/python -m src.rolling_check
+    .venv/bin/python -m src.phase1_results
+    .venv/bin/python -m src.folds --verify
+)
+```
+
+The consolidation uses the saved audit, Member 2 EDA and Member 3 results
+in the parts directory. Their detailed outputs remain available separately.
+The rolling check uses `src.features.rolling_forecast_features` on the development
+data before applying the shared temporal indices. It assumes prior-day PM2.5
+has been observed at prediction time. Keep the exploratory feature preview out
+of the Pipeline because it contains future labels and same-day measurements.
+
 ## Conventions
 - Random seed: `SEED = 42` (see `src/config.py`)
 - Canonical column names: `date, station_id, lat, lon, pm25`, everything else lower snake_case

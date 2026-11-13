@@ -66,5 +66,34 @@ class TestFeatureEngineering(unittest.TestCase):
         )
 
 
+def test_rolling_features_preserve_alignment_and_reset_at_boundaries():
+    from src.features import rolling_forecast_features
+
+    data = pd.DataFrame({
+        "station_id": ["a", "a", "a", "a", "b"],
+        "date": pd.to_datetime(["2024-01-03", "2024-01-02", "2024-01-01",
+                                "2024-01-05", "2024-01-02"]),
+        "gee_id": [2, 1, 1, 2, 1],
+        "pm25": [30, 20, 10, 50, 100],
+        "aod": [.3, .2, .1, .5, .9],
+    }, index=[7, 6, 2, 9, 13])
+    result = rolling_forecast_features(data)
+    assert result.index.equals(data.index)
+    assert set(result.columns) == {
+        "day_of_year_sin", "day_of_year_cos", "pm25_lag_1", "pm25_lag_1_missing",
+    }
+    assert result.loc[6, "pm25_lag_1"] == 10
+    assert result.loc[[7, 2, 9, 13], "pm25_lag_1"].isna().all()
+    assert result["pm25_lag_1_missing"].tolist() == [1, 0, 1, 1, 1]
+
+
+def test_pipeline_drops_exploratory_future_target():
+    from src.pipeline import DropNonFeatures
+
+    preview = pd.DataFrame({"pm25": [10], "target_pm25": [99],
+                            "segment_id": [1], "aod": [.3]})
+    assert DropNonFeatures().fit_transform(preview).columns.tolist() == ["aod"]
+
+
 if __name__ == "__main__":
     unittest.main()

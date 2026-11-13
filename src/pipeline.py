@@ -37,7 +37,7 @@ from src.outliers import OutlierClipper
 from src.scaling import TrainFoldScaler, needs_scaling
 from src.selection import FeatureSelector
 
-NEVER_FEATURES = tuple(config.NON_FEATURE_COLS) + (config.TARGET,)
+NEVER_FEATURES = tuple(config.NON_FEATURE_COLS) + (config.TARGET, "target_pm25", "segment_id")
 
 
 class DropNonFeatures(TransformerMixin, BaseEstimator):
