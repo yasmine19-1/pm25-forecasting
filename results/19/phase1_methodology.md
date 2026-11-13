@@ -7,9 +7,10 @@ Use the supplied merged dataset and keep all 70 development stations
 the later 2026 records are reserved outside development. Cleaning removes
 missing PM2.5 and values outside the strict interval (0, 500), checks duplicate
 records, and removes both observations in conflicting station-date groups.
-The audit and cleaning counts are in `parts/`. Raw exploratory statistics
-use dates before the holdout cutoff. Cleaning also logs row counts and date
-ranges for the separately reserved periods.
+The audit and cleaning counts are in `parts/`. The raw audit, cleaning and
+station coverage use dates before the holdout cutoff. Rows with unparseable
+dates are counted at date screening and excluded before target cleaning. The
+reserved periods remain in the unchanged raw files.
 
 All development rows matched the corresponding station/date/coordinate and GEE
 ID/date records in the supplied sources. Each assigned GEE position matched a

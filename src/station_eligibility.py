@@ -54,25 +54,6 @@ def coordinate_evidence(g, bounds):
                 coordinate_change_to_date=end.strftime('%Y-%m-%d') if pd.notna(end) else '')
 
 
-def test_presence():
-    path = config.FINAL_TEST / 'final_test.parquet'
-    try:
-        if config.TEST_START != '2025-01-01' or config.TEST_END != '2025-12-31':
-            raise ValueError('Configured holdout dates differ from 2025')
-        # Path and column names follow src/clean.py; no target or predictor is read.
-        t = pd.read_parquet(path, columns=['station_id', 'date'])
-        dates = parse_dates(t.date)
-        if not (dates.notna().all() and dates.between(config.TEST_START, config.TEST_END).all()
-                and dates.eq(dates.dt.normalize()).all()
-                and t.station_id.notna().all() and t.station_id.astype(str).str.strip().ne('').all()):
-            raise ValueError('Holdout identifier/date validation failed')
-        if t.assign(date=dates).duplicated(['station_id', 'date']).any():
-            raise ValueError('Duplicate holdout station-days')
-        return t.groupby('station_id').size(), 'available: station_id/date projection only'
-    except Exception as exc:
-        return None, f'unavailable: {type(exc).__name__}: {exc}'
-
-
 def main():
     mapping = pd.read_csv(config.PARTS / 'column_mapping.csv')
     df = pd.read_parquet(config.INTERIM / 'clean_dev.parquet',
@@ -161,11 +142,8 @@ def main():
     report = original[['station_id', 'number_of_rows', 'unique_dates', 'first_date', 'last_date'] + METRICS].rename(
         columns={'number_of_rows': 'n_obs', 'unique_dates': 'n_observed_days'})
     report = report.merge(pd.DataFrame(evidence), on='station_id', validate='one_to_one', how='left')
-    presence, presence_note = test_presence()
-    report['obs_2025'] = report.station_id.map(presence).fillna(0).astype('Int64') if presence is not None else pd.NA
     report['in_ge100_days'] = report.n_observed_days >= 100
     ended = report.loc[report.last_date < '2024-01-01', 'station_id'].tolist()
-    zero = report.loc[report.obs_2025.eq(0), 'station_id'].tolist() if presence is not None else []
     checks.append(check('Final evidence join and annual counts',
                         len(report) == 70 and report.station_id.is_unique and report.integrity_ok.notna().all()
                         and report[[f'obs_{y}' for y in range(2016, 2025)]].sum(axis=1).eq(report.n_obs).all(),
@@ -180,8 +158,6 @@ def main():
     add('integrity_ok', 'all', 'stations', int(report.integrity_ok.sum()), 'Defined metadata checks only; not a retention decision')
     add('needs_review', 'all', 'stations', int(report.needs_review.sum()))
     add('last_date_before_2024', 'all', 'stations', len(ended), json.dumps(ended, ensure_ascii=False))
-    add('zero_obs_2025', 'development_stations', 'stations', len(zero) if presence is not None else 'unavailable',
-        json.dumps(zero, ensure_ascii=False) if presence is not None else presence_note)
     for metric, value in [('stations', int(report.in_ge100_days.sum())),
                           ('observations', int(report.loc[report.in_ge100_days, 'n_obs'].sum()))]:
         add('in_ge100_days', 'sensitivity', metric, value, 'sensitivity cohort only, not a retention rule')
@@ -198,11 +174,7 @@ separate consideration. The brief supplies no minimum-observation threshold;
 Development projection: station_id, date, gee_id, lat, lon only. Saved column_mapping.csv
 and cleaning code confirm raw sensor_name -> development station_id -> report station_id;
 raw id -> gee_id, latitude -> lat, longitude -> lon. No target/predictor values are read.
-The locked file is config.FINAL_TEST / final_test.parquet, as written by src/clean.py.
-Its only projected columns are station_id and date. obs_2025 is a count for each
-DEVELOPMENT station, not an evaluation or a list of test-only stations. Status: {presence_note}.
-If this check is unavailable, obs_2025 is written as the literal 'unavailable', never zero.
-No 2026 file is opened. The configured test dates must equal calendar 2025.
+Station coverage and eligibility use development observations only.
 
 ## Dates and gap metrics
 Use src.common.parse_dates (UTC converted to timezone-naive), then verify midnight;
@@ -267,8 +239,6 @@ The four documented multi-ID stations remain explicit review cases.
 All five required acceptance checks passed before report generation.
 Integrity checks passed: {int(report.integrity_ok.sum())}/70. Review flags: {int(report.needs_review.sum())}.
 Stations ending before 2024: {len(ended)}: {json.dumps(ended, ensure_ascii=False)}.
-Development stations with zero 2025 observations: {len(zero) if presence is not None else 'unavailable'}:
-{json.dumps(zero, ensure_ascii=False) if presence is not None else presence_note}.
 '''
     config.PARTS.mkdir(parents=True, exist_ok=True)
     report.to_csv(config.INTERIM / 'station_eligibility.csv', index=False, na_rep='unavailable', float_format='%.6f')
@@ -277,8 +247,7 @@ Development stations with zero 2025 observations: {len(zero) if presence is not 
     print(report.loc[~report.integrity_ok | report.needs_review, ['station_id', 'integrity_ok', 'integrity_note',
         'coordinate_change_from_date', 'coordinate_change_to_date']].to_string(index=False))
     print('Ending before 2024:', json.dumps(ended, ensure_ascii=False))
-    print('Zero observations in 2025:', json.dumps(zero, ensure_ascii=False) if presence is not None else presence_note)
-    print(f'Wrote evidence table, summary and notes; 2025 metadata {presence_note}.')
+    print('Wrote development station evidence, summary and notes.')
 
 
 if __name__ == '__main__':

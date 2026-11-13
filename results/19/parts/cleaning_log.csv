@@ -1,9 +1,8 @@
 step,rule,rows_before,rows_removed,rows_after,note
-0_start,raw file combined_gee_pm25.csv,41718,0,41718,
-1_missing_pm25,pm25 is missing,41718,0,41718,(0 were non-numeric text)
-2_pm25_nonpositive,pm25 <= 0,41718,727,40991,
-3_pm25_too_high,pm25 >= 500,40991,8,40983,
-4_exact_duplicates,"identical in all columns, keep first",40983,0,40983,
-5_key_duplicates,date+lat+lon+station_id; rule=first,40983,0,40983,
-6_same_sensor_same_day,station_id+date; rule=drop_all,40983,4,40979,"(2 groups, saved in sensor_day_duplicates.csv)"
-7_unparseable_date,date could not be parsed,40979,0,40979,
+0_start,combined_gee_pm25.csv; dated rows before 2025-01-01,31998,0,31998,
+1_missing_pm25,pm25 is missing,31998,0,31998,(0 were non-numeric text)
+2_pm25_nonpositive,pm25 <= 0,31998,704,31294,
+3_pm25_too_high,pm25 >= 500,31294,8,31286,
+4_exact_duplicates,"identical in all columns, keep first",31286,0,31286,
+5_key_duplicates,date+lat+lon+station_id; rule=first,31286,0,31286,
+6_same_sensor_same_day,station_id+date; rule=drop_all,31286,4,31282,"(2 groups, saved in sensor_day_duplicates.csv)"
