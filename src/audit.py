@@ -6,7 +6,7 @@ import warnings
 import pandas as pd
 
 from src import config
-from src.common import detect_columns, load_raw, parse_dates, require, save_rows
+from src.common import detect_columns, development_rows, load_raw, parse_dates, require, save_rows
 
 warnings.filterwarnings("ignore")
 pd.set_option("display.width", 200)
@@ -14,6 +14,7 @@ pd.set_option("display.width", 200)
 df, path = load_raw()
 found = detect_columns(df.columns)
 require(found, ["date", "pm25", "station_id", "lat", "lon"])
+df = development_rows(df, found["date"])
 rows = []
 
 
@@ -32,21 +33,19 @@ gee_c = "id" if "id" in df.columns else None
 # 1. Basics -------------------------------------------------------------
 head("1. Basics")
 add("basics", "file", path.name)
+add("basics", "scope", f"Development dates before {config.TEST_START}")
 add("basics", "rows", len(df))
 add("basics", "columns", df.shape[1])
 add("basics", "column_names", ", ".join(df.columns))
 for k, v in found.items():
     add("basics", f"detected_{k}", v)
 add("manual", "source", "https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026")
-add("manual", "license", "Dataset description: raw data from OpenAQ (CC BY 4.0), Copernicus open-access and NASA open data; check individual source licenses before commercial use")
+add("manual", "license", "Reported upstream sources: OpenAQ, Copernicus and NASA. License for this combined Kaggle release has not been independently verified.")
 add("manual", "units", "pm25 ug/m3; temperature_celsius degC; pressure_mb hPa; wind_u and wind_v m/s; NO2, CO, O3 mol/m2 (Sentinel-5P); AOD dimensionless (MODIS) - per the Kaggle dataset description")
-add("manual", "description_vs_combined_file", "Kaggle description lists 125 PM2.5 sensors and 100 GEE ids; the combined file has 94 sensor names and 98 GEE ids")
 
 # 2. Timestamps ---------------------------------------------------------
 head("2. Timestamps")
 d = parse_dates(df[date_c])
-add("time", "date_missing_raw", int(df[date_c].isna().sum()))
-add("time", "date_unparseable", int(d.isna().sum() - df[date_c].isna().sum()))
 add("time", "date_min", d.min().date() if d.notna().any() else "NA")
 add("time", "date_max", d.max().date() if d.notna().any() else "NA")
 add("time", "distinct_days", int(d.dt.normalize().nunique()))
@@ -56,13 +55,9 @@ if "datetime_utc" in df.columns:
     add("time", "datetime_utc_unparseable", int(dt.isna().sum()))
     add("time", "datetime_utc_not_midnight", int((dt[both] != dt[both].dt.normalize()).sum()))
     add("time", "date_vs_datetime_utc_day_mismatch", int((d[both].dt.normalize() != dt[both].dt.normalize()).sum()))
-full_years = []
 for yr, g in d.dropna().groupby(d.dropna().dt.year):
     months = g.dt.month.nunique()
     add("time", f"year_{yr}_rows_and_months_present", f"{len(g)} rows, {months}/12 months")
-    if months == 12:
-        full_years.append(int(yr))
-add("time", "proposed_test_year_(last full calendar year)", max(full_years) if full_years else "none")
 
 # 3. Spatial coverage ---------------------------------------------------
 head("3. Spatial coverage")

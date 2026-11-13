@@ -3,15 +3,21 @@
 Daily surface PM2.5 forecasting on the Kaggle "Air Quality - Mediterranean Basin (2016-2026)" dataset.
 
 ## Setup (macOS / Linux)
+
+Use CPython 3.14 (verified with 3.14.7). If an existing environment uses
+Anaconda Python 3.13 and pytest crashes while importing readline, create a
+fresh environment with CPython 3.14 in a new directory and activate it.
+Use the active environment for all commands below.
 ```bash
-python3 -m venv .venv
+python3.14 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 python -m src.config        # creates data/ and results/ folders
 ```
 
 ## Phase 1 - data audit and cleaning
-1. Download the dataset from Kaggle and unzip it into `data/raw/`.
+1. Download the [Kaggle dataset](https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026) and place `combined_gee_pm25.csv`, `pm25.csv` and `gee_features_daily.csv` directly in `data/raw/`.
+   The raw inspection commands summarize only dated observations before 2025. The cleaner writes the reserved periods to separate files.
 2. `python -m src.first_look`   - list columns, types, missing values
 3. `python -m src.audit`        - dataset audit -> `results/<GROUP_ID>/parts/audit.csv`
 4. `python -m src.clean`        - cleaning -> `data/interim/clean_dev.parquet`, reserved test files, and cleaning logs
@@ -24,8 +30,8 @@ python -m src.config        # creates data/ and results/ folders
 From the repository root, with the cleaned development parquet and retained-station list in place:
 
 ```bash
-.venv/bin/python -m src.folds
-.venv/bin/python -m src.folds --verify
+python -m src.folds
+python -m src.folds --verify
 ```
 
 The files are under `results/<GROUP_ID>/`. Each contains five `train` and `val`
@@ -68,6 +74,55 @@ training medians and adds one missingness indicator per Sentinel-5P predictor.
 If a predictor is entirely missing in training, its missing entries use a fixed
 zero placeholder with the indicator set to 1. See the methodology for the
 first temporal fold's limitation.
+
+## Reproduce the Phase 1 deliverables
+
+The final tables are [Exploratory_Data.csv](results/19/Exploratory_Data.csv)
+and [Exploratory_temporal.csv](results/19/Exploratory_temporal.csv).
+From the repository root, after running the audit and cleaning steps and generating the shared folds, run the full set of result producers:
+
+```bash
+(
+    set -e
+    python src/m2_eda.py
+    python src/m2_review.py
+    python src/m2_s5p_stability.py
+    python -m src.relationships
+    python -m src.stratified
+    python -m src.pipeline_check
+    for script in temporal_analysis temporal_patterns weekly_cycle lead_lag_analysis drift_seasonality; do
+        python "${script}.py"
+    done
+    python -m src.m4_figures
+    python -m src.rolling_check
+    python -m src.phase1_results
+    python -m src.folds --verify
+    python -m pytest -q
+)
+```
+
+The consolidation reads the generated parts directory. Fold verification compares
+JSON bytes. Model timings vary by machine. Record Python and platform alongside
+ExtraTrees results. The earlier audit observed score differences across runs with
+the same package version pins. Their detailed outputs remain available separately.
+The rolling check uses `src.features.rolling_forecast_features` on the development
+data before applying the shared temporal indices. It assumes prior-day PM2.5
+has been observed at prediction time. Keep the exploratory feature preview out
+of the Pipeline because it contains future labels and same-day measurements.
+
+For a comparison with the rolling features, keep the same fold positions and
+rows, including rows with no prior-day observation. Compare calendar-only
+columns with the full rolling frame, which has a missing-lag indicator. For
+same-day or cold-start experiments, omit target-history features. For
+preprocessing comparisons, `impute__add_indicator=False` disables the Sentinel-5P
+indicators, and `outliers__enabled=False` disables clipping while retaining the
+AOD zero-to-missing conversion. To train on log1p PM2.5, wrap the pipeline in
+`TransformedTargetRegressor(regressor=pipe, func=np.log1p, inverse_func=np.expm1)`
+and score predictions in the original units. For same-day feature ablations,
+remove AOD, the three Sentinel-5P columns, or the four weather columns from
+both training and validation inputs before building the pipeline. If using
+`TemporalFeatures`, also remove the ablated source columns from its history
+so it cannot regenerate derived features from them.
 
 ## Conventions
 - Random seed: `SEED = 42` (see `src/config.py`)

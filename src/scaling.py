@@ -19,10 +19,10 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import RobustScaler, StandardScaler
 from sklearn.utils.validation import check_is_fitted
 
-# Brief: "SVR, KNN, neural networks and PCA". Lasso, ElasticNet and Huber are added
+# Brief: "SVR, KNN, neural networks and PCA". Ridge, Lasso, ElasticNet and Huber are added
 # because their penalty depends on the scale of the columns. Team can still remove them.
 SCALE_SENSITIVE = {
-    "Lasso", "ElasticNet", "HuberRegressor",
+    "Ridge", "Lasso", "ElasticNet", "HuberRegressor",
     "KNeighborsRegressor", "SVR",
     "MLPRegressor", "LSTM", "GRU", "BiLSTM", "CNN1D", "Transformer", "PatchTST",
     "CNNLSTM", "PCA",

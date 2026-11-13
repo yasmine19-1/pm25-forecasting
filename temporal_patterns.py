@@ -1,13 +1,13 @@
 
 import pandas as pd
-import os
+from src import config
 
 # Load the cleaned dataset
-data = pd.read_parquet("clean_dev.parquet")
+data = pd.read_parquet(config.INTERIM / "clean_dev.parquet")
 data["date"] = pd.to_datetime(data["date"], errors="coerce")
 data = data.dropna(subset=["date", "station_id"])
 
-os.makedirs("results/B04-01", exist_ok=True)
+config.PARTS.mkdir(parents=True, exist_ok=True)
 
 # Variables to analyse
 variables = [
@@ -87,8 +87,8 @@ for (station, season), group in daily.groupby(["station_id", "season"]):
 patterns = pd.DataFrame(results)
 
 # Save outputs
-daily.to_csv("results/B04-01/member4_daily_values.csv", index=False)
-patterns.to_csv("results/B04-01/member4_temporal_patterns.csv", index=False)
+daily.to_csv(config.PARTS / "member4_daily_values.csv", index=False)
+patterns.to_csv(config.PARTS / "member4_temporal_patterns.csv", index=False)
 
 print("Daily rows:", len(daily))
 print("Pattern rows:", len(patterns))

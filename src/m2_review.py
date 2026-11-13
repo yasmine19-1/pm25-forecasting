@@ -181,7 +181,7 @@ def investigate_extremes(df):
                         repeated_value=stuck, month=d.month,
                         verdict=verdict, reason=why))
 
-    ext = pd.DataFrame(out).sort_values("pm25", ascending=False)
+    ext = pd.DataFrame(out).sort_values(["pm25", "station_id", "date"], ascending=[False, True, True])
     ext.to_csv(PARTS / "m2_extremes_investigation.csv", index=False)
 
     add("5.3.3", "pm25", "extremes", "threshold_q3_plus_3iqr", thr)

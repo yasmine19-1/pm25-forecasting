@@ -1,12 +1,12 @@
 section,variable,group,metric,value,note
-5.1,temperature_celsius,pearson,r_with_pm25,-0.030162033344667435,
-5.1,pressure_mb,pearson,r_with_pm25,0.10699035835459542,
-5.1,wind_u,pearson,r_with_pm25,-0.05367394617956411,
-5.1,wind_v,pearson,r_with_pm25,0.044522322460418935,
-5.1,no2,pearson,r_with_pm25,0.12824658299351782,
-5.1,co,pearson,r_with_pm25,0.019157205089320933,
-5.1,o3,pearson,r_with_pm25,-0.08570987712010306,
-5.1,aod,pearson,r_with_pm25,0.06660912429052168,
+5.1,temperature_celsius,pearson,r_with_pm25,-0.03016203334466743,
+5.1,pressure_mb,pearson,r_with_pm25,0.1069903583545951,
+5.1,wind_u,pearson,r_with_pm25,-0.053673946179564086,
+5.1,wind_v,pearson,r_with_pm25,0.04452232246041893,
+5.1,no2,pearson,r_with_pm25,0.12824658299351777,
+5.1,co,pearson,r_with_pm25,0.019157205089320943,
+5.1,o3,pearson,r_with_pm25,-0.08570987712010311,
+5.1,aod,pearson,r_with_pm25,0.06660912429052171,
 5.1,temperature_celsius,spearman,r_with_pm25,0.021933611328139403,
 5.1,pressure_mb,spearman,r_with_pm25,0.16755999278139383,
 5.1,wind_u,spearman,r_with_pm25,-0.12495167470253933,
@@ -15,34 +15,34 @@ section,variable,group,metric,value,note
 5.1,co,spearman,r_with_pm25,0.013717836024453823,
 5.1,o3,spearman,r_with_pm25,-0.13362913555653805,
 5.1,aod,spearman,r_with_pm25,0.14501523688909274,
-5.1,temperature_celsius|pressure_mb,pearson,r_pair,-0.0757722265925081,
-5.1,temperature_celsius|wind_u,pearson,r_pair,-0.15220617426331826,
-5.1,temperature_celsius|wind_v,pearson,r_pair,0.3386966075564009,
-5.1,temperature_celsius|no2,pearson,r_pair,-0.08768661999557792,
-5.1,temperature_celsius|co,pearson,r_pair,-0.25581735453219845,
-5.1,temperature_celsius|o3,pearson,r_pair,-0.2364466147189541,
-5.1,temperature_celsius|aod,pearson,r_pair,0.297182397523766,
-5.1,pressure_mb|wind_u,pearson,r_pair,-0.0830701135156934,
-5.1,pressure_mb|wind_v,pearson,r_pair,-0.051057710171738616,
-5.1,pressure_mb|no2,pearson,r_pair,0.15981477555652374,
-5.1,pressure_mb|co,pearson,r_pair,0.21511365474480645,
-5.1,pressure_mb|o3,pearson,r_pair,-0.03479657013987171,
-5.1,pressure_mb|aod,pearson,r_pair,0.02069480009851237,
-5.1,wind_u|wind_v,pearson,r_pair,-0.22143720059442332,
-5.1,wind_u|no2,pearson,r_pair,-0.06627465201201191,
+5.1,temperature_celsius|pressure_mb,pearson,r_pair,-0.07577222659250876,
+5.1,temperature_celsius|wind_u,pearson,r_pair,-0.15220617426331828,
+5.1,temperature_celsius|wind_v,pearson,r_pair,0.33869660755640085,
+5.1,temperature_celsius|no2,pearson,r_pair,-0.0876866199955779,
+5.1,temperature_celsius|co,pearson,r_pair,-0.2558173545321984,
+5.1,temperature_celsius|o3,pearson,r_pair,-0.23644661471895415,
+5.1,temperature_celsius|aod,pearson,r_pair,0.29718239752376596,
+5.1,pressure_mb|wind_u,pearson,r_pair,-0.0830701135156936,
+5.1,pressure_mb|wind_v,pearson,r_pair,-0.05105771017173847,
+5.1,pressure_mb|no2,pearson,r_pair,0.15981477555652365,
+5.1,pressure_mb|co,pearson,r_pair,0.21511365474480643,
+5.1,pressure_mb|o3,pearson,r_pair,-0.034796570139871814,
+5.1,pressure_mb|aod,pearson,r_pair,0.020694800098512316,
+5.1,wind_u|wind_v,pearson,r_pair,-0.2214372005944234,
+5.1,wind_u|no2,pearson,r_pair,-0.06627465201201199,
 5.1,wind_u|co,pearson,r_pair,0.05653574765138861,
-5.1,wind_u|o3,pearson,r_pair,0.13185646185958705,
+5.1,wind_u|o3,pearson,r_pair,0.13185646185958702,
 5.1,wind_u|aod,pearson,r_pair,-0.24145729978806435,
-5.1,wind_v|no2,pearson,r_pair,0.09153943488786992,
-5.1,wind_v|co,pearson,r_pair,-0.11458642392273999,
-5.1,wind_v|o3,pearson,r_pair,-0.09024374695991622,
-5.1,wind_v|aod,pearson,r_pair,0.14809773214699715,
-5.1,no2|co,pearson,r_pair,0.11575299579383104,
-5.1,no2|o3,pearson,r_pair,-0.07398983148081667,
-5.1,no2|aod,pearson,r_pair,-0.0928234501027212,
-5.1,co|o3,pearson,r_pair,0.275679361250236,
+5.1,wind_v|no2,pearson,r_pair,0.09153943488787,
+5.1,wind_v|co,pearson,r_pair,-0.11458642392274002,
+5.1,wind_v|o3,pearson,r_pair,-0.09024374695991634,
+5.1,wind_v|aod,pearson,r_pair,0.14809773214699717,
+5.1,no2|co,pearson,r_pair,0.11575299579383097,
+5.1,no2|o3,pearson,r_pair,-0.07398983148081663,
+5.1,no2|aod,pearson,r_pair,-0.09282345010272111,
+5.1,co|o3,pearson,r_pair,0.2756793612502362,
 5.1,co|aod,pearson,r_pair,0.03278844746927414,
-5.1,o3|aod,pearson,r_pair,0.05196403803218342,
+5.1,o3|aod,pearson,r_pair,0.051964038032183406,
 5.1,temperature_celsius|pressure_mb,spearman,r_pair,-0.1165837707039692,
 5.1,temperature_celsius|wind_u,spearman,r_pair,-0.21753714458850862,
 5.1,temperature_celsius|wind_v,spearman,r_pair,0.3861134086119371,
@@ -72,43 +72,43 @@ section,variable,group,metric,value,note
 5.1,co|aod,spearman,r_pair,-0.026318936223660546,
 5.1,o3|aod,spearman,r_pair,0.08609070210600706,
 5.1,predictor_pairs,all,n_pairs_above_0.9,0.0,
-5.1,temperature_celsius,all,vif,1.3571819573837614,listwise rows used: 28829
-5.1,pressure_mb,all,vif,1.091310869464797,listwise rows used: 28829
-5.1,wind_u,all,vif,1.1296316155356385,listwise rows used: 28829
-5.1,wind_v,all,vif,1.184591072862567,listwise rows used: 28829
-5.1,no2,all,vif,1.0804891646390766,listwise rows used: 28829
-5.1,co,all,vif,1.2095244850806732,listwise rows used: 28829
-5.1,o3,all,vif,1.171128969903115,listwise rows used: 28829
-5.1,aod,all,vif,1.1906220525506577,listwise rows used: 28829
-5.1,PC1,all,explained_variance_ratio,0.23362386857564135,cumulative 0.2336
-5.1,PC2,all,explained_variance_ratio,0.16911017813928392,cumulative 0.4027
-5.1,PC3,all,explained_variance_ratio,0.15009179789378943,cumulative 0.5528
-5.1,PC4,all,explained_variance_ratio,0.11583505062098823,cumulative 0.6687
-5.1,PC5,all,explained_variance_ratio,0.10006647753080684,cumulative 0.7687
-5.1,PC6,all,explained_variance_ratio,0.08862495427531598,cumulative 0.8574
-5.1,PC7,all,explained_variance_ratio,0.07866319616966783,cumulative 0.9360
-5.1,PC8,all,explained_variance_ratio,0.0639844767945065,cumulative 1.0000
-5.1,temperature_celsius,PC1,loading,0.5529285237104145,
-5.1,pressure_mb,PC1,loading,-0.11644452656284376,
-5.1,wind_u,PC1,loading,-0.36006436188112645,
-5.1,wind_v,PC1,loading,0.443721488469852,
-5.1,no2,PC1,loading,-0.058027837267064876,
-5.1,co,PC1,loading,-0.36195188888143576,
-5.1,o3,PC1,loading,-0.3273165382121917,
-5.1,aod,PC1,loading,0.3356532435777555,
-5.1,temperature_celsius,PC2,loading,-0.033152188414802705,
+5.1,temperature_celsius,all,vif,1.357181957383763,listwise rows used: 28829
+5.1,pressure_mb,all,vif,1.0913108694647966,listwise rows used: 28829
+5.1,wind_u,all,vif,1.129631615535638,listwise rows used: 28829
+5.1,wind_v,all,vif,1.1845910728625675,listwise rows used: 28829
+5.1,no2,all,vif,1.080489164639076,listwise rows used: 28829
+5.1,co,all,vif,1.2095244850806728,listwise rows used: 28829
+5.1,o3,all,vif,1.1711289699031144,listwise rows used: 28829
+5.1,aod,all,vif,1.190622052550657,listwise rows used: 28829
+5.1,PC1,all,explained_variance_ratio,0.23362386857564127,cumulative 0.2336
+5.1,PC2,all,explained_variance_ratio,0.1691101781392839,cumulative 0.4027
+5.1,PC3,all,explained_variance_ratio,0.15009179789378946,cumulative 0.5528
+5.1,PC4,all,explained_variance_ratio,0.11583505062098827,cumulative 0.6687
+5.1,PC5,all,explained_variance_ratio,0.10006647753080668,cumulative 0.7687
+5.1,PC6,all,explained_variance_ratio,0.08862495427531611,cumulative 0.8574
+5.1,PC7,all,explained_variance_ratio,0.07866319616966781,cumulative 0.9360
+5.1,PC8,all,explained_variance_ratio,0.0639844767945064,cumulative 1.0000
+5.1,temperature_celsius,PC1,loading,0.5529285237104137,
+5.1,pressure_mb,PC1,loading,-0.11644452656284467,
+5.1,wind_u,PC1,loading,-0.36006436188112634,
+5.1,wind_v,PC1,loading,0.4437214884698522,
+5.1,no2,PC1,loading,-0.05802783726706513,
+5.1,co,PC1,loading,-0.36195188888143587,
+5.1,o3,PC1,loading,-0.3273165382121918,
+5.1,aod,PC1,loading,0.3356532435777557,
+5.1,temperature_celsius,PC2,loading,-0.03315218841480203,
 5.1,pressure_mb,PC2,loading,0.5457312787872941,
-5.1,wind_u,PC2,loading,-0.38870439420784014,
-5.1,wind_v,PC2,loading,0.18264685415875687,
-5.1,no2,PC2,loading,0.4207665265334157,
-5.1,co,PC2,loading,0.48406668644613504,
-5.1,o3,PC2,loading,0.12302211591559664,
-5.1,aod,PC2,loading,0.3002130186444838,
-5.1,temperature_celsius,PC3,loading,0.09881665646161017,
-5.1,pressure_mb,PC3,loading,-0.22139110766537584,
-5.1,wind_u,PC3,loading,0.008746139209977336,
-5.1,wind_v,PC3,loading,-0.00969379929563284,
-5.1,no2,PC3,loading,-0.517699858709246,
-5.1,co,PC3,loading,0.24411786310270614,
-5.1,o3,PC3,loading,0.5821144323410726,
-5.1,aod,PC3,loading,0.5240103949573979,
+5.1,wind_u,PC2,loading,-0.38870439420783925,
+5.1,wind_v,PC2,loading,0.18264685415875717,
+5.1,no2,PC2,loading,0.42076652653341695,
+5.1,co,PC2,loading,0.4840666864461348,
+5.1,o3,PC2,loading,0.12302211591559609,
+5.1,aod,PC2,loading,0.30021301864448396,
+5.1,temperature_celsius,PC3,loading,0.09881665646160931,
+5.1,pressure_mb,PC3,loading,-0.22139110766537506,
+5.1,wind_u,PC3,loading,0.008746139209976876,
+5.1,wind_v,PC3,loading,-0.00969379929563258,
+5.1,no2,PC3,loading,-0.5176998587092458,
+5.1,co,PC3,loading,0.24411786310270622,
+5.1,o3,PC3,loading,0.5821144323410724,
+5.1,aod,PC3,loading,0.5240103949573981,

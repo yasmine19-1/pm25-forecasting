@@ -41,13 +41,13 @@ Feature calculations are separated by station and continuous date segments. They
 
 Run from the project root:
 
-    python -m unittest discover -s tests -v
+    python -m pytest -q
 
-The eight feature tests passed in the current Colab environment.
+The suite covers standalone feature generation and integration with the shared Pipeline.
 
 ## 4. Main outputs
 
-All Member 4 outputs are stored in B04-01/.
+The shared reproduction commands in README.md generate Member 4 CSVs in the configured parts directory and figures in the corresponding figures directory. The root B04-01 folder contains historical outputs.
 
 - Exploratory_temporal_M4.csv: combined Member 4 results using the shared six-column schema.
 - Exploratory_temporal_member4.csv: temporal dependence diagnostics.
@@ -65,12 +65,11 @@ All Member 4 outputs are stored in B04-01/.
 - The seven-day cycle assessment is exploratory.
 - Lead-lag correlations are descriptive and do not establish causality.
 - Sparse station segments should be interpreted cautiously.
-- The feature transformer still needs to be tested with Member 3's actual pipeline.
 - Validation must preserve past-only information and must not allow features to cross station gaps.
-- Historical PM2.5 handling and validation-fold context must be confirmed during integration.
+- Use PM2.5 history only for rolling next-day forecasts where yesterday’s observation would have been released.
 
 ## 6. Handoff
 
-Exploratory_temporal_M4.csv is the Member 4 contribution for Member 1 to merge into the shared Exploratory_temporal.csv.
+Run `python -m src.phase1_results` to consolidate the regenerated diagnostics into the shared Exploratory_temporal.csv.
 
 Retain the detailed CSV files as supporting outputs.

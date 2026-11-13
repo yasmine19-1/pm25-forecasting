@@ -2,15 +2,15 @@
 import pandas as pd
 from statsmodels.tsa.stattools import acf, pacf, adfuller
 from statsmodels.stats.diagnostic import acorr_ljungbox
-import os
+from src import config
 
-data = pd.read_parquet("clean_dev.parquet")
+data = pd.read_parquet(config.INTERIM / "clean_dev.parquet")
 
 data["date"] = pd.to_datetime(data["date"], errors="coerce")
 data = data.dropna(subset=["date", "station_id"])
 data = data.sort_values(["station_id", "date"])
 
-os.makedirs("results/B04-01", exist_ok=True)
+config.PARTS.mkdir(parents=True, exist_ok=True)
 
 daily = (
     data.groupby(["station_id", "date"])["pm25"]
@@ -68,7 +68,7 @@ for station, group in daily.groupby("station_id"):
                     "note": note
                 })
 
-            adf = adfuller(series, autolag="AIC")
+            adf = adfuller(series, autolag="AIC", result_object=False)
 
             for metric, value in [
                 ("adf_statistic", adf[0]),
@@ -92,7 +92,7 @@ diagnostics = pd.DataFrame(
 )
 
 diagnostics.to_csv(
-    "results/B04-01/Exploratory_temporal_member4.csv",
+    config.PARTS / "Exploratory_temporal_member4.csv",
     index=False
 )
 

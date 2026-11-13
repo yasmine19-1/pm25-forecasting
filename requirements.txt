@@ -9,5 +9,6 @@ pytest==9.2.0
 python-dateutil==4.0.0
 scikit-learn==1.9.1
 scipy==1.18.1
+statsmodels==0.15.0
 threadpoolctl==3.8.0
 tzdata==2026.6

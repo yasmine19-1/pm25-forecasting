@@ -7,7 +7,9 @@ Use the supplied merged dataset and keep all 70 development stations
 the later 2026 records are reserved outside development. Cleaning removes
 missing PM2.5 and values outside the strict interval (0, 500), checks duplicate
 records, and removes both observations in conflicting station-date groups.
-The audit and cleaning counts are in `parts/`.
+The audit and cleaning counts are in `parts/`. Raw exploratory statistics
+use dates before the holdout cutoff. Cleaning also logs row counts and date
+ranges for the separately reserved periods.
 
 All development rows matched the corresponding station/date/coordinate and GEE
 ID/date records in the supplied sources. Each assigned GEE position matched a
@@ -52,17 +54,36 @@ treatment uses training IQR bounds constrained by configured domain limits, flag
 zero AOD as missing, and has a switch for the Phase 2 comparison. Extreme PM2.5
 values within the cleaning interval are retained. Descriptive EDA found a median
 of 7.7 µg/m³, with 2.7% of observations above 25 and 0.29% above 50 µg/m³.
-The 268 extreme flags are provisional screens for corroboration.
+The 268 extreme flags are screening candidates. Member 2 added station
+predictor distributions and reviewed extremes against nearby stations and
+adjacent days. The resulting verdicts do not independently confirm causes.
 
-## Phase 1 work still open
+## Phase 1 deliverables and limits
 
-Complete predictor distributions by station and corroborate suspected retrieval
-errors and pollution episodes with nearby stations or independent evidence.
-The available gap summaries, lag correlations and temporal profiles do not
-provide formal ACF/PACF, stationarity or residual-autocorrelation diagnostics.
-Complete applicable diagnostics with attention to the short, irregular series.
-Finish the predictor relationships and feature-selection analysis, assemble and
-verify the full Pipeline, and consolidate the required `Exploratory_Data.csv`
-and `Exploratory_temporal.csv`. The clipping-on/off score comparison belongs to
-Phase 2. This methodology is shared project documentation. The brief specifies
-the exploratory CSVs, source code and reproducibility information as deliverables.
+`Exploratory_Data.csv` combines the audit, cleaning, station eligibility,
+descriptive EDA, predictor relationships, feature selection, and Pipeline
+checks. `Exploratory_temporal.csv` combines station coverage, temporal profiles,
+drift and seasonality, and lead–lag results. Both use the shared six-column schema.
+
+The ACF, PACF, Ljung–Box and ADF calculations use uninterrupted PM2.5 segments
+with at least 30 observations. Six stations have eligible diagnostic segments.
+The CSV explicitly marks the other 64 stations without estimates. The lag-7
+screen covers 123 segments and has a median Pearson correlation of about
+−0.090. It does not establish weekly seasonality. Short segments limit formal
+inference, and the tests apply to the PM2.5 series rather than model residuals.
+
+The original feature preview includes a shifted target for exploratory use.
+The rolling comparison instead constructs calendar features and exact
+previous-day observed PM2.5 before slicing the existing temporal folds.
+It preserves row order, resets at date gaps and metadata changes, and keeps
+the target and same-day measurements out of predictors. Both variants use the
+same validation rows and fit preprocessing on the training fold. Adding the
+lag reduced MAE in five of five folds and RMSE in four of five. This is a
+development smoke check under the rolling availability assumption.
+Phase 2 still covers model comparison and the clipping-on/off experiment.
+
+The regenerated tables were checked with CPython 3.14.7 on macOS arm64.
+The shared folds reproduce byte for byte. Smoke-test runtimes are machine
+specific, and the regenerated ExtraTrees scores differ slightly from the
+historical table. The combined dataset license and operational release times
+still require source confirmation.

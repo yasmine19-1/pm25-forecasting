@@ -1,8 +1,8 @@
 
 import pandas as pd
-import os
+from src import config
 
-data = pd.read_parquet("clean_dev.parquet")
+data = pd.read_parquet(config.INTERIM / "clean_dev.parquet")
 data["date"] = pd.to_datetime(data["date"], errors="coerce")
 data = data.dropna(subset=["date", "station_id"])
 
@@ -69,13 +69,13 @@ summary = (
     })
 )
 
-os.makedirs("results/B04-01", exist_ok=True)
+config.PARTS.mkdir(parents=True, exist_ok=True)
 
 detail.to_csv(
-    "results/B04-01/member4_lead_lag_detail.csv", index=False
+    config.PARTS / "member4_lead_lag_detail.csv", index=False
 )
 summary.to_csv(
-    "results/B04-01/member4_lead_lag_summary.csv", index=False
+    config.PARTS / "member4_lead_lag_summary.csv", index=False
 )
 
 print("Detailed results:", len(detail))

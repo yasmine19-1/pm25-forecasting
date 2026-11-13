@@ -8,7 +8,7 @@ OutlierClipper
       validation and test: rows are never dropped, so X and y stay aligned
     * zero_as_missing: columns where an exact 0 is a failed retrieval (AOD)
       are set to NaN; put S5PImputer after this step to fill them
-    * enabled=False makes the step a pure passthrough, for the with-vs-without
+    * enabled=False disables clipping but retains zero-to-missing normalization, for the with-vs-without
       comparison of MAE, RMSE and R² in Phase 2:
           pipe.set_params(outliers__enabled=False)
       or in a grid: {"outliers__enabled": [True, False]}
@@ -69,10 +69,7 @@ class OutlierClipper(TransformerMixin, BaseEstimator):
 
     def transform(self, X):
         check_is_fitted(self, "lower_")
-        X = self._as_frame(X)
-        if not self.enabled:
-            return X
-        X = self._zero_to_nan(X)
+        X = self._zero_to_nan(self._as_frame(X))
         for c in self.lower_:
             X[c] = X[c].clip(self.lower_[c], self.upper_[c])
         return X

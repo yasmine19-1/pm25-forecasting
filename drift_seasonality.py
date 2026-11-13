@@ -1,13 +1,13 @@
 
 import pandas as pd
-import os
+from src import config
 
-data = pd.read_parquet("clean_dev.parquet")
+data = pd.read_parquet(config.INTERIM / "clean_dev.parquet")
 
 data["date"] = pd.to_datetime(data["date"], errors="coerce")
 data = data.dropna(subset=["date", "station_id"])
 
-os.makedirs("results/B04-01", exist_ok=True)
+config.PARTS.mkdir(parents=True, exist_ok=True)
 
 variables = [
     "pm25", "aod", "no2", "co", "o3",
@@ -69,7 +69,7 @@ for period_column, period_name in [
 drift_df = pd.DataFrame(results)
 
 drift_df.to_csv(
-    "results/B04-01/member4_drift_summary.csv",
+    config.PARTS / "member4_drift_summary.csv",
     index=False
 )
 

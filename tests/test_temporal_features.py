@@ -100,6 +100,15 @@ class TestTemporalFeatures(unittest.TestCase):
         self.assertIn("aod", out.columns)
         self.assertFalse([c for c in out.columns if c.startswith("pm25_")])
 
+    def test_same_day_rejects_explicit_target_lags(self):
+        with self.assertRaisesRegex(ValueError, "Same-day"):
+            TemporalFeatures(scenario="same_day", use_target_lags=True).fit(small_frame())
+
+    def test_next_day_drops_precomputed_labels_and_unapproved_columns(self):
+        df = small_frame().assign(target_pm25=100.0, future_aod=1.0)
+        result = TemporalFeatures().fit_transform(df)
+        self.assertFalse({"pm25", "target_pm25", "future_aod"} & set(result))
+
     def test_missing_pm25_history_is_an_error(self):
         df = small_frame().drop(columns="pm25")
         with self.assertRaises(ValueError):
