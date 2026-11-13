@@ -1,11 +1,11 @@
-"""Member 3 - PM2.5 against AOD, by season, by station and by weather (brief 5.1).
+"""PM2.5 against AOD, by season, by station and by weather (brief 5.1).
 
 Questions answered:
   * how strongly is PM2.5 linked to AOD overall, in each season and at each station?
   * does the PM2.5-AOD link change with temperature, pressure or wind?
 
 DESCRIPTIVE ONLY, on the development data. Rows with AOD missing or AOD == 0
-(failed retrieval, same rule as Member 2) are left out of this analysis.
+(failed retrieval, consistent with the predictor clipper) are left out of this analysis.
 
 Run from the repo root:   python -m src.stratified
 
@@ -120,7 +120,7 @@ def main():
     df["season"] = df["date"].dt.month.map(SEASONS)
     df["wind_speed"] = np.hypot(df["wind_u"], df["wind_v"])  # derived for this description only
     d = df.dropna(subset=["aod", TARGET]).copy()
-    rows, notes = [], ["# Member 3 - PM2.5 and AOD (auto-generated, check the numbers before pasting)\n"]
+    rows, notes = [], ["# PM2.5 and AOD (auto-generated, check the numbers before pasting)\n"]
     FIGURES.mkdir(parents=True, exist_ok=True)
 
     # overall

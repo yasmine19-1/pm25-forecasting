@@ -1,7 +1,7 @@
-"""Member 4 - tests for the TemporalFeatures pipeline step.
+"""Tests for the TemporalFeatures pipeline step.
 
 Run from the repo root:   python -m unittest discover -s tests -v     (or: pytest tests/)
-The last test needs Member 3's pipeline and synthetic frame; it is skipped
+The last test needs the pipeline and synthetic frame; it is skipped
 until their files are merged into your branch.
 """
 import sys
@@ -119,7 +119,7 @@ class TestTemporalFeatures(unittest.TestCase):
             build_features(small_frame(), forecast_horizon_days=0)
 
 
-@unittest.skipUnless(HAVE_PIPELINE, "needs Member 3's pipeline.py and m3_synthetic.py")
+@unittest.skipUnless(HAVE_PIPELINE, "needs the pipeline.py and m3_synthetic.py")
 class TestInsideMember3Pipeline(unittest.TestCase):
 
     def test_pipeline_runs_and_model_sees_no_ids_or_target(self):

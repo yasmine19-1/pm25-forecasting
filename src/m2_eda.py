@@ -1,8 +1,8 @@
-"""Member 2 - descriptive EDA, target analysis, missingness and outlier inspection.
+"""Descriptive EDA, target analysis, missingness and outlier inspection.
 
 Brief sections: 5.1, 5.3.1, 5.3.3.
 Everything here is DESCRIPTIVE and runs on the development data only (test
-period already removed by Member 1). No threshold computed here is used to
+period already removed by the cleaner). No threshold computed here is used to
 transform data: the Pipeline learns its own thresholds per training fold.
 
 Run from the repo root:  python src/m2_eda.py
@@ -38,7 +38,7 @@ DOMAIN_LIMITS = {
     "co": (0, 0.2),        # mol/m2
     "o3": (0, 0.5),        # mol/m2
     "aod": (0, 5),
-    "pm25": (0, 500),      # cleaning rule already applied by Member 1
+    "pm25": (0, 500),      # cleaning rule already applied by the cleaner
 }
 SEASONS = {12: "DJF", 1: "DJF", 2: "DJF", 3: "MAM", 4: "MAM", 5: "MAM",
            6: "JJA", 7: "JJA", 8: "JJA", 9: "SON", 10: "SON", 11: "SON"}
@@ -327,13 +327,13 @@ def missingness(df):
   mix differ between the groups, so this cannot establish the missingness mechanism.
 
 ### Decision for the Thursday gate (§5.3.1)
-- **Option A (recommended): start the development data at {s5p_first}.** It drops
+- **Superseded proposal: start the development data at {s5p_first}.** It drops
   {n_before} rows ({n_before/len(df):.1%}) and leaves essentially no missing
   values. Imputing two years of medians would invent pollutant data for a
   period with no satellite, and the missingness indicator would just become a
   proxy for the early observation period. See `m2_s5p_stability.csv` for
   complete-row counts under calendar-based folds.
-- **Option B: keep all rows.** Then median imputation fitted on the training
+- **Current decision: keep all cleaned development rows through 2024-12-31.** Then median imputation fitted on the training
   fold + one indicator per S5P column, no forward-fill. `imputation.py`
   supports both options unchanged.
 - KNN imputation is not worth it here: there is no partially observed period
@@ -460,7 +460,7 @@ def main():
     outliers(df)
     out = pd.DataFrame(ROWS, columns=["section", "variable", "group", "metric", "value", "note"])
     out.to_csv(PARTS / "m2_eda.csv", index=False)
-    (PARTS / "m2_notes.md").write_text("# Member 2 - notes for report §5\n\n" + "\n".join(NOTES))
+    (PARTS / "m2_notes.md").write_text("# notes for report §5\n\n" + "\n".join(NOTES))
     print(f"{len(out)} rows -> {PARTS / 'm2_eda.csv'}")
     print(f"{len(list(FIGURES.glob('m2_*.png')))} figures -> {FIGURES}")
 

@@ -7,9 +7,9 @@ __pycache__/
 data/
 
 # Local Phase 1 working notes
-results/19/cleaning_decisions.md
-results/19/thursday_decision.md
-results/19/parts/m2_notes.md
-results/19/parts/gap_report_notes.md
-results/19/parts/station_eligibility_notes.md
-results/19/parts/thursday_evidence_notes.md
+results/*/cleaning_decisions.md
+results/*/thursday_decision.md
+results/*/parts/m2_notes.md
+results/*/parts/gap_report_notes.md
+results/*/parts/station_eligibility_notes.md
+results/*/parts/thursday_evidence_notes.md

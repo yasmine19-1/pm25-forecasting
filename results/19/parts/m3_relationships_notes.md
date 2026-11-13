@@ -1,4 +1,4 @@
-# Member 3 - relationships (auto-generated, check the numbers before pasting)
+# Relationships (auto-generated, check the numbers before pasting)
 
 Development rows: 31282. Predictors: temperature_celsius, pressure_mb, wind_u, wind_v, no2, co, o3, aod.
 

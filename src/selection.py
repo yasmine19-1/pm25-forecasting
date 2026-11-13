@@ -1,4 +1,4 @@
-"""Member 3 - feature selection step for the Pipeline (brief 5.3.2).
+"""Feature selection step for the Pipeline (brief 5.3.2).
 
 FeatureSelector(method=..., k=...)
     filter    "f_test"        ANOVA F-test of each column against PM2.5

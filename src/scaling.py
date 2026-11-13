@@ -1,4 +1,4 @@
-"""Member 3 - scaling step for the Pipeline (brief 5.3.2).
+"""Scaling step for the Pipeline (brief 5.3.2).
 
 TrainFoldScaler
     * StandardScaler or RobustScaler ("standard" / "robust"), learned in fit(),
@@ -20,7 +20,7 @@ from sklearn.preprocessing import RobustScaler, StandardScaler
 from sklearn.utils.validation import check_is_fitted
 
 # Brief: "SVR, KNN, neural networks and PCA". Ridge, Lasso, ElasticNet and Huber are added
-# because their penalty depends on the scale of the columns. Team can still remove them.
+# Because their penalty depends on the scale of the columns. Team can still remove them.
 SCALE_SENSITIVE = {
     "Ridge", "Lasso", "ElasticNet", "HuberRegressor",
     "KNeighborsRegressor", "SVR",

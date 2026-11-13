@@ -1,4 +1,4 @@
-"""Member 4: the three figures for report sections 5 to 7.
+"""The three figures for report sections 5 to 7.
 
 Reads the CSV files generated in the shared parts directory and writes three
 PNG files to the corresponding figures directory.

@@ -10,7 +10,7 @@ basics,detected_lat,,value,latitude,
 basics,detected_lon,,value,longitude,
 basics,detected_pm25,,value,pm25,
 manual,source,,value,https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026,
-manual,license,,value,"Reported upstream sources: OpenAQ, Copernicus and NASA. License for this combined Kaggle release has not been independently verified.",
+manual,license,,value,Reported upstream terms: OpenAQ CC BY 4.0 where applicable (see provider terms); Copernicus Sentinel open access; NASA Earth science open data. Combined Kaggle release license text: unverified.,
 manual,units,,value,"pm25 ug/m3; temperature_celsius degC; pressure_mb hPa; wind_u and wind_v m/s; NO2, CO, O3 mol/m2 (Sentinel-5P); AOD dimensionless (MODIS) - per the Kaggle dataset description",
 time,date_min,,value,2016-11-25,
 time,date_max,,value,2024-12-31,
@@ -137,6 +137,8 @@ cleaning,6_same_sensor_same_day,,rows_after,31282,
 date_screening,unknown_date,,rows_excluded,0,Could not assign a period; excluded before development cleaning
 split,development,,rows,31282,2016-11-25 to 2024-12-31
 split,development,,stations,70,
+raw_reserved_dates,final_test,,rows,8172,2025-01-01 to 2025-12-31
+raw_reserved_dates,after_test_period,,rows,1548,2026-01-01 to 2026-04-06
 station_eligibility,development,all,stations,70,
 station_eligibility,development,all,observations,31282,
 station_eligibility,integrity_ok,all,stations,70,Defined metadata checks only; not a retention decision
@@ -869,14 +871,14 @@ station_eligibility,in_ge100_days,sensitivity,observations,30963,"sensitivity co
 5.3.3,pm25,extremes,threshold_q3_plus_3iqr,34.38111842105263,
 5.3.3,pm25,extremes,n_flagged,268.0,
 5.3.3,pm25,extremes,neighbour_radius_km,30.0,
-5.3.3,pm25,verdict=real event,n,130.0,
+5.3.3,pm25,verdict=corroborated episode candidate,n,130.0,
 5.3.3,pm25,verdict=plausible local event,n,63.0,
-5.3.3,pm25,verdict=probable data error,n,35.0,
+5.3.3,pm25,verdict=possible data error,n,35.0,
 5.3.3,pm25,verdict=undetermined,n,32.0,
 5.3.3,pm25,"verdict=suspect, unconfirmed",n,8.0,
+5.3.3,pm25,verdict=corroborated episode candidate,median_pm25,39.6,
 5.3.3,pm25,verdict=plausible local event,median_pm25,46.4,
-5.3.3,pm25,verdict=probable data error,median_pm25,112.0,
-5.3.3,pm25,verdict=real event,median_pm25,39.6,
+5.3.3,pm25,verdict=possible data error,median_pm25,112.0,
 5.3.3,pm25,"verdict=suspect, unconfirmed",median_pm25,47.65,
 5.3.3,pm25,verdict=undetermined,median_pm25,39.25,
 5.3.3,pm25,station=CENCA1,n_extremes,20.0,
@@ -1578,11 +1580,11 @@ station_eligibility,in_ge100_days,sensitivity,observations,30963,"sensitivity co
 5.3,calendar_only,temporal/fold5,mae,4.830874631001971,Development smoke check; rolling daily observations assumed available
 5.3,calendar_plus_pm25_lag_1,temporal/fold5,rmse,8.596564311932557,Development smoke check; rolling daily observations assumed available
 5.3,calendar_plus_pm25_lag_1,temporal/fold5,mae,4.065349692311193,Development smoke check; rolling daily observations assumed available
-5.3.3,pm25,real event,n_flagged,130,Neighbor and adjacent-day screening; retain plausible extremes
-5.3.3,pm25,plausible local event,n_flagged,63,Neighbor and adjacent-day screening; retain plausible extremes
-5.3.3,pm25,probable data error,n_flagged,35,Neighbor and adjacent-day screening; retain plausible extremes
-5.3.3,pm25,undetermined,n_flagged,32,Neighbor and adjacent-day screening; retain plausible extremes
-5.3.3,pm25,"suspect, unconfirmed",n_flagged,8,Neighbor and adjacent-day screening; retain plausible extremes
+5.3.3,pm25,corroborated episode candidate,n_flagged,130,Provisional corroboration label from neighbor and adjacent-day screening
+5.3.3,pm25,plausible local event,n_flagged,63,Provisional corroboration label from neighbor and adjacent-day screening
+5.3.3,pm25,possible data error,n_flagged,35,Provisional corroboration label from neighbor and adjacent-day screening
+5.3.3,pm25,undetermined,n_flagged,32,Provisional corroboration label from neighbor and adjacent-day screening
+5.3.3,pm25,"suspect, unconfirmed",n_flagged,8,Provisional corroboration label from neighbor and adjacent-day screening
 5.3.2,lasso_scaled_ftest6,temporal/fold1,n_selected,6,f_test; selected from 11: temperature_celsius; pressure_mb; wind_u; wind_v; no2; aod
 5.3.2,extratrees_tree6,temporal/fold1,n_selected,6,tree; selected from 11: temperature_celsius; pressure_mb; wind_u; wind_v; no2; aod
 5.3.2,lasso_scaled_ftest6,temporal/fold2,n_selected,6,f_test; selected from 11: temperature_celsius; pressure_mb; wind_u; no2; co; o3

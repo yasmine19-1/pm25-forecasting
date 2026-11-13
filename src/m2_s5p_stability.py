@@ -1,10 +1,10 @@
-"""Member 2 - is the NO2/CO/O3 correlation structure stable across training folds?
+"""Is the NO2/CO/O3 correlation structure stable across training folds?
 (§5.3.1, gate for KNN imputation)
 
-Uses Member 1's folds_temporal.json if present, otherwise a provisional
+Uses the shared folds_temporal.json if present, otherwise a provisional
 TimeSeriesSplit on the complete calendar with a one-day gap. Provisional
 results cannot approve KNN.
-Expected fold file format (adapt load_folds if Member 1 uses another one):
+Expected fold file format (adapt load_folds if the project uses another one):
     [{"train": [row positions...], "val": [row positions...]}, ...]
     or {"folds": [...same...]}
 

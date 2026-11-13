@@ -1,4 +1,4 @@
-"""Member 2 - outlier step for the Pipeline (§5.3.3).
+"""Outlier step for the Pipeline (§5.3.3).
 
 OutlierClipper
     * learns lower/upper limits per column in fit() = on the training fold only:

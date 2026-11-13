@@ -55,8 +55,8 @@ treatment uses training IQR bounds constrained by configured domain limits, flag
 zero AOD as missing, and has a switch for the Phase 2 comparison. Extreme PM2.5
 values within the cleaning interval are retained. Descriptive EDA found a median
 of 7.7 µg/m³, with 2.7% of observations above 25 and 0.29% above 50 µg/m³.
-The 268 extreme flags are screening candidates. Member 2 added station
-predictor distributions and reviewed extremes against nearby stations and
+The 268 extreme flags are screening candidates. The exploratory review added station
+predictor distributions and checked extremes against nearby stations and
 adjacent days. The resulting verdicts do not independently confirm causes.
 
 ## Phase 1 deliverables and limits

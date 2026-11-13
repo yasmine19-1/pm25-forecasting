@@ -1,22 +1,22 @@
-# Decision-gate note (Member 4): temporal validation and lag features
+# Temporal validation and lag decision
 
-Group 19 · Phase 1 · 13 Nov 2026 · Status: for team confirmation
+Phase 1 · 13 Nov 2026 · Historical decision note
 
 ## Decisions
 
 | Question | Decision |
 |---|---|
 | Temporal CV | **Go.** Expanding windows, one-day gap (`folds_temporal.json`). |
-| Spatial CV | **Go** (Member 1's decision, `folds_spatial.json`): stations stay grouped, and the four stations with two coordinate pairs are kept in one group. |
+| Spatial CV | **Go** (the shared decision, `folds_spatial.json`): stations stay grouped, and the four stations with two coordinate pairs are kept in one group. |
 | Forecast scenario | **Next-day**: predict day t from what is known at the end of day t-1. PM2.5 lags allowed. |
 | Same-day and spatial experiments | **No PM2.5 lags** (cold-start rule from the methodology). |
 | Lags and windows | PM2.5 and every predictor: lag 1, lag 3, 3-day rolling mean, standard deviation and maximum, first difference, rate of change. Plus sine and cosine of day of year. 7-day features: **not built**. |
-| Stations kept | All 70 (Member 1's retained-station list). |
+| Stations kept | All 70 (the shared retained-station list). |
 | Final test period | 2025 (2025-01-01 to 2025-12-31), reserved. Development data: 2016-11-25 to 2024-12-31 (31,282 station-days). |
 
 ## Evidence
 
-- **Persistence.** Day-to-day dependence is clear. Median within-station Spearman between consecutive days is 0.695 across 20,496 pairs (Member 1). In my ACF, lag 1 has a median of 0.51, and lag 7 is negative (median -0.09).
+- **Persistence.** Day-to-day dependence is clear. Median within-station Spearman between consecutive days is 0.695 across 20,496 pairs. In the station-segment ACF, lag 1 has a median of 0.51, and lag 7 is negative (median -0.09).
 - **No weekly cycle.** The lag-7 correlation has a median of -0.09 over 123 continuous segments from 59 stations, and only 43% are positive. A 7-day period is not supported.
 - **Lead-lag** (median correlation with PM2.5, positive lag = predictor from earlier days, 123 segments):
 

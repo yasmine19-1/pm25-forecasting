@@ -1,4 +1,4 @@
-"""Member 2 - follow-up from the review.
+"""Follow-up from the review.
 
 1. How the predictors vary between stations (§5.1)
    - one boxplot figure per predictor, stations ordered by latitude
@@ -152,17 +152,17 @@ def investigate_extremes(df):
         stuck = repeats.get((s, v), 1) > 1
 
         if nb_high >= 1 or (aod_high and persist):
-            verdict = "real event"
+            verdict = "corroborated episode candidate"
             why = ("neighbouring station(s) also high" if nb_high
                    else "high AOD and elevated on adjacent days")
         elif persist:
             verdict = "plausible local event"
             why = "station elevated on adjacent days, neighbours not high"
         elif stuck:
-            verdict = "probable data error"
+            verdict = "possible data error"
             why = "exact value repeated at this station (stuck sensor)"
         elif len(nb_vals) >= 1 and pd.notna(jump) and jump >= 5:
-            verdict = "probable data error"
+            verdict = "possible data error"
             why = f"one-day spike ×{jump:.0f}, neighbours normal, AOD normal"
         elif pd.notna(jump) and jump >= 5:
             verdict = "suspect, unconfirmed"
@@ -202,7 +202,7 @@ def investigate_extremes(df):
 def case_figures(ext, pivot, neigh):
     """Time series around a few typical cases: the station and its neighbours."""
     picks = []
-    for verdict in ["real event", "plausible local event", "probable data error"]:
+    for verdict in ["corroborated episode candidate", "plausible local event", "possible data error"]:
         sub = ext[ext.verdict == verdict]
         if len(sub):
             picks.append(sub.iloc[0])
@@ -224,16 +224,16 @@ def case_figures(ext, pivot, neigh):
 def write_notes(eta, med, ext):
     vc = ext.verdict.value_counts()
     medv = ext.groupby("verdict").pm25.median()
-    real = ext[ext.verdict == "real event"]
-    err = ext[ext.verdict == "probable data error"]
+    real = ext[ext.verdict == "corroborated episode candidate"]
+    err = ext[ext.verdict == "possible data error"]
     winter = real.month.isin([11, 12, 1, 2]).mean()
     top_real = ", ".join(f"{s} ({n})" for s, n in real.station_id.value_counts().head(4).items())
     top_err = ", ".join(f"{s} ({n})" for s, n in err.station_id.value_counts().head(4).items())
     big = ext.head(10)
-    n_big_err = int((big.verdict == "probable data error").sum())
+    n_big_err = int((big.verdict == "possible data error").sum())
     hi_no2, lo_no2 = med.no2.idxmax(), med.no2.idxmin()
     p_lo, p_hi = med.pressure_mb.idxmin(), med.pressure_mb.idxmax()
-    text = f"""# Member 2 - review follow-up
+    text = f"""# review follow-up
 
 ## Predictors between stations (§5.1)
 
@@ -261,11 +261,11 @@ eta² = share of a predictor's variance explained by the station alone:
   (Kruskal-Wallis p < 0.001), but with 31,000 rows that test is always
   significant: eta² is the useful measure.
 
-## Flagged extreme values: real events or data errors? (§5.1, §5.3.3)
+## Flagged extreme values: corroborated episode candidates or data errors? (§5.1, §5.3.3)
 
 All {len(ext)} PM2.5 values above Q3 + 3×IQR were checked one by one
 (`m2_extremes_investigation.csv`, one row per value, with the evidence and the
-verdict). Evidence used: stations within {RADIUS_KM} km the same day, the
+provisional label). Labels are corroboration-based. Evidence used: stations within {RADIUS_KM} km the same day, the
 station's own values the day before and after, the jump against the
 station's ±3-day median, AOD, and repeated exact values. A neighbour or an
 adjacent day only "confirms" a value if it is above its own 90th percentile
@@ -275,13 +275,13 @@ and at least a fifth of the extreme.
 |---|---|---|
 """ + "\n".join(f"| {k} | {vc[k]} | {medv[k]:.1f} |" for k in vc.index) + f"""
 
-- **Real events ({vc.get('real event', 0)})** are moderate values (median
-  {medv.get('real event', np.nan):.0f} µg/m³) shared with nearby stations.
+- **Corroborated episode candidates ({vc.get('corroborated episode candidate', 0)})** are moderate values (median
+  {medv.get('corroborated episode candidate', np.nan):.0f} µg/m³) shared with nearby stations.
   {winter:.0%} happen in November to February, mostly at urban stations
-  ({top_real}), consistent with winter inversions, heating and traffic. These are exactly the
-  days the model must learn to predict, so they stay.
-- **Probable data errors ({vc.get('probable data error', 0)})** look very
-  different: much higher values (median {medv.get('probable data error', np.nan):.0f} µg/m³),
+  ({top_real}), consistent with winter inversions, heating and traffic. These
+  observations remain in the development set.
+- **Possible data errors ({vc.get('possible data error', 0)})** look very
+  different: much higher values (median {medv.get('possible data error', np.nan):.0f} µg/m³),
   a one-day spike (5 to 76 times the station's usual level) while
   neighbours within {RADIUS_KM} km stay normal and AOD is ordinary. They
   concentrate at a few stations: {top_err}. {n_big_err} of the 10 highest
@@ -297,20 +297,13 @@ and at least a fifth of the extreme.
 - **Suspect, unconfirmed ({vc.get('suspect, unconfirmed', 0)})** and
   **undetermined ({vc.get('undetermined', 0)})**: no neighbour to compare
   with, or not enough evidence. Kept.
-- Case studies: `m2_extreme_case_1.png` (real event),
+- Case studies: `m2_extreme_case_1.png` (corroborated episode candidate),
   `m2_extreme_case_2.png` (local event), `m2_extreme_case_3.png` (data error).
 
-### What to do with them (proposal for the team)
-1. Keep every real, local and undetermined event: removing them would hide
-   the high-pollution days from the model.
-2. The {vc.get('probable data error', 0)} probable data errors are
-   {vc.get('probable data error', 0) / 31282:.2%} of the rows but, at
-   100 to 485 µg/m³, they can dominate RMSE. Proposal: run Phase 2 twice,
-   with and without them in the **training** folds (the rule uses fixed
-   thresholds and same-day neighbours, nothing learned from validation), and
-   report validation scores both on all rows and without the flagged rows.
-3. Flag CENCA1 and Los Barrios to the team: they produce most of the
-   suspicious spikes.
+### Retention
+All screened extremes remain in the development set. The review uses
+development-wide context and can include observations after the event date.
+The labels are descriptive and are excluded from modeling inputs.
 """
     (PARTS / "m2_review_notes.md").write_text(text)
 
