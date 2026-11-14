@@ -26,7 +26,7 @@ Group 19 · Phase 1 · 13 Nov 2026 · Status: for team confirmation
 | Ozone | -0.26 | -0.15 | -0.09 | strongest next-day-usable lag |
 | Wind v | 0.20 | 0.11 | 0.05 | |
 | Pressure | 0.15 | 0.21 | 0.13 | best at lag 2 (not built) |
-| NO₂ | 0.14 | 0.03 | -0.09 | |
+| NO₂ | 0.14 | 0.03 | -0.08 | |
 | Wind u | -0.11 | -0.10 | -0.22 | best at lag 3 |
 | CO | 0.06 | -0.02 | -0.14 | best at lag 3 |
 | AOD | 0.02 | -0.01 | 0.04 | same-day 0.23, not usable next-day |
