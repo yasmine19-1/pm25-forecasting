@@ -15,6 +15,7 @@ Brief sections §5.1 (relationships), §5.3, §5.3.2. Seed 42; every output come
 | `src/pipeline_check.py` | runs the Pipeline through the three shared fold files and logs the selected features |
 | `tests/test_m3_leakage.py` | leakage tests (every fitted step sees training rows only, no ids in the model) |
 | `tests/test_m3_modules.py` | tests for the scaler, the five selection methods and the Pipeline options |
+| `tests/test_m3_temporal_integration.py` | the Pipeline with `TemporalFeatures`: training rows only, no future leakage, no ids |
 | `tests/test_m3_stratified.py` | tests for the within-station check (station differences are not mistaken for a weather effect) |
 | `tests/m3_synthetic.py`, `tests/conftest.py` | a fake development frame with the real columns, used by the tests |
 
@@ -64,10 +65,26 @@ Steps: `features -> drop_ids -> outliers -> impute -> scale -> select -> model`.
 
 ### Temporal features (`src/features.py`)
 
-Pass your transformer as `build_pipeline(model, features=MyFeatures())`. It runs first and
-receives the full frame, so it can still use `station_id` and `date`. It must return the same
-rows in the same order, with lags built from past values only and no lag across a gap.
-Nothing else needs to change.
+```python
+from src.features import TemporalFeatures
+from src.pipeline import build_pipeline, temporal_step
+
+pipe = build_pipeline(model, features=temporal_step("temporal", dev))   # "temporal" | "spatial" | "standard"
+# the same thing written out:
+pipe = build_pipeline(model, features=TemporalFeatures(history=dev))
+```
+
+`temporal_step` picks the right setting for each fold scheme: next-day scenario, PM2.5 lags on,
+except for the spatial scheme where they are off (held-out stations have no PM2.5 history).
+The step runs first and receives the full frame, returns the same rows in the same order, and
+learns its AOD threshold from the training rows only. In the next-day scenario the same-day
+predictors (aod, no2, ...) are replaced by their past values.
+
+Lag columns are often missing (the decision note: lag 1 exists for 65.5% of rows, lag 3 for
+32.6%) and the default imputer then gives them the training median without a missing flag.
+To add flags, pass your own imputer:
+`build_pipeline(model, features=..., imputer=S5PImputer(s5p_cols=("no2", "co", "o3", "pm25_lag_1")))`.
+This is a team choice, so the default is unchanged.
 
 ## Decisions to agree with the team
 

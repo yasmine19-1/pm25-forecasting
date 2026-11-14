@@ -1,31 +1,61 @@
 scheme,fold,model,method,n_selected,n_input,selected
 temporal,1,lasso_scaled_ftest6,f_test,6,11,temperature_celsius; pressure_mb; wind_u; wind_v; no2; aod
 temporal,1,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; wind_v; no2; aod
+temporal,1,lasso_scaled_ftest10_temporal,f_test,10,66,day_of_year_cos; pm25_lag_1; pm25_lag_3; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; pm25_difference_1; pm25_rate_of_change_1; temperature_celsius_lag_1; temperature_celsius_lag_3
+temporal,1,extratrees_tree10_temporal,tree,10,66,day_of_year_sin; day_of_year_cos; pm25_lag_1; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; pm25_difference_1; pm25_rate_of_change_1; temperature_celsius_lag_1; pressure_mb_lag_1
 temporal,2,lasso_scaled_ftest6,f_test,6,11,temperature_celsius; pressure_mb; wind_u; no2; co; o3
 temporal,2,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; wind_v; no2; aod
+temporal,2,lasso_scaled_ftest10_temporal,f_test,10,66,day_of_year_cos; pm25_lag_1; pm25_lag_3; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; pm25_difference_1; no2_lag_1; temperature_celsius_lag_1; pressure_mb_lag_1
+temporal,2,extratrees_tree10_temporal,tree,10,66,day_of_year_sin; day_of_year_cos; pm25_lag_1; pm25_rolling_mean_3; pm25_rolling_max_3; pm25_difference_1; pm25_rate_of_change_1; temperature_celsius_lag_1; pressure_mb_lag_1; wind_v_lag_1
 temporal,3,lasso_scaled_ftest6,f_test,6,11,temperature_celsius; pressure_mb; no2; co; no2_missing; o3_missing
 temporal,3,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; aod; o3_missing
+temporal,3,lasso_scaled_ftest10_temporal,f_test,10,66,day_of_year_cos; pm25_lag_1; pm25_lag_3; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; no2_lag_1; no2_rolling_mean_3; no2_rolling_max_3; temperature_celsius_lag_1
+temporal,3,extratrees_tree10_temporal,tree,10,66,day_of_year_sin; day_of_year_cos; pm25_lag_1; pm25_rolling_mean_3; pm25_rolling_max_3; pm25_difference_1; o3_lag_1; temperature_celsius_lag_1; pressure_mb_lag_1; wind_v_lag_1
 temporal,4,lasso_scaled_ftest6,f_test,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
 temporal,4,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; co; aod
+temporal,4,lasso_scaled_ftest10_temporal,f_test,10,66,day_of_year_cos; pm25_lag_1; pm25_lag_3; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; pm25_difference_1; no2_lag_1; no2_rolling_mean_3; no2_rolling_max_3
+temporal,4,extratrees_tree10_temporal,tree,10,66,day_of_year_cos; pm25_lag_1; pm25_rolling_mean_3; pm25_rolling_max_3; pm25_rate_of_change_1; aod_lag_1; no2_rate_of_change_1; co_lag_1; o3_rate_of_change_1; wind_u_lag_1
 temporal,5,lasso_scaled_ftest6,f_test,6,11,temperature_celsius; pressure_mb; wind_u; wind_v; no2; aod
 temporal,5,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; wind_v; no2; aod
+temporal,5,lasso_scaled_ftest10_temporal,f_test,10,66,day_of_year_cos; pm25_lag_1; pm25_lag_3; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; pm25_difference_1; no2_lag_1; no2_rolling_mean_3; no2_rolling_max_3
+temporal,5,extratrees_tree10_temporal,tree,10,66,day_of_year_cos; pm25_lag_1; pm25_rolling_mean_3; pm25_rolling_max_3; pm25_rate_of_change_1; no2_rate_of_change_1; o3_rate_of_change_1; temperature_celsius_lag_1; wind_u_lag_1; days_since_last_high_aod_day
 spatial,1,lasso_scaled_ftest6,f_test,6,11,pressure_mb; wind_u; wind_v; no2; o3; aod
 spatial,1,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
+spatial,1,lasso_scaled_ftest10_temporal,f_test,10,59,day_of_year_cos; no2_lag_1; no2_lag_3; no2_rolling_mean_3; no2_rolling_std_3; no2_rolling_max_3; o3_lag_1; temperature_celsius_rolling_max_3; pressure_mb_lag_1; pressure_mb_rolling_mean_3
+spatial,1,extratrees_tree10_temporal,tree,10,59,day_of_year_sin; day_of_year_cos; no2_lag_1; no2_rolling_mean_3; temperature_celsius_lag_1; pressure_mb_lag_1; pressure_mb_rolling_mean_3; wind_u_lag_1; wind_u_rolling_max_3; days_since_last_high_aod_day
 spatial,2,lasso_scaled_ftest6,f_test,6,11,pressure_mb; wind_u; wind_v; no2; o3; aod
 spatial,2,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
+spatial,2,lasso_scaled_ftest10_temporal,f_test,10,59,day_of_year_cos; no2_lag_1; no2_lag_3; no2_rolling_mean_3; no2_rolling_std_3; no2_rolling_max_3; o3_lag_1; pressure_mb_lag_1; pressure_mb_lag_3; pressure_mb_rolling_mean_3
+spatial,2,extratrees_tree10_temporal,tree,10,59,day_of_year_sin; day_of_year_cos; aod_lag_1; no2_lag_1; no2_rolling_mean_3; temperature_celsius_lag_1; pressure_mb_lag_1; pressure_mb_rolling_mean_3; wind_u_lag_1; days_since_last_high_aod_day
 spatial,3,lasso_scaled_ftest6,f_test,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
 spatial,3,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
+spatial,3,lasso_scaled_ftest10_temporal,f_test,10,59,day_of_year_cos; no2_lag_1; no2_rolling_mean_3; no2_rolling_std_3; no2_rolling_max_3; o3_lag_1; temperature_celsius_lag_3; temperature_celsius_rolling_mean_3; temperature_celsius_rolling_max_3; pressure_mb_lag_1
+spatial,3,extratrees_tree10_temporal,tree,10,59,day_of_year_sin; day_of_year_cos; aod_lag_1; no2_lag_1; no2_rolling_mean_3; no2_rolling_max_3; o3_lag_1; temperature_celsius_lag_1; pressure_mb_lag_1; wind_u_lag_1
 spatial,4,lasso_scaled_ftest6,f_test,6,11,pressure_mb; wind_u; wind_v; no2; o3; aod
 spatial,4,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
+spatial,4,lasso_scaled_ftest10_temporal,f_test,10,59,day_of_year_cos; no2_lag_1; no2_lag_3; no2_rolling_mean_3; no2_rolling_std_3; no2_rolling_max_3; o3_lag_1; temperature_celsius_lag_3; temperature_celsius_rolling_max_3; pressure_mb_lag_1
+spatial,4,extratrees_tree10_temporal,tree,10,59,day_of_year_sin; day_of_year_cos; aod_lag_1; no2_lag_1; no2_rolling_mean_3; o3_lag_1; temperature_celsius_lag_1; pressure_mb_lag_1; wind_u_lag_1; days_since_last_high_aod_day
 spatial,5,lasso_scaled_ftest6,f_test,6,11,pressure_mb; wind_u; wind_v; no2; o3; aod
 spatial,5,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
+spatial,5,lasso_scaled_ftest10_temporal,f_test,10,59,day_of_year_cos; no2_lag_1; no2_rolling_mean_3; no2_rolling_std_3; no2_rolling_max_3; o3_lag_1; temperature_celsius_lag_3; temperature_celsius_rolling_mean_3; temperature_celsius_rolling_max_3; pressure_mb_lag_1
+spatial,5,extratrees_tree10_temporal,tree,10,59,day_of_year_sin; day_of_year_cos; aod_lag_1; no2_lag_1; o3_lag_1; temperature_celsius_lag_1; pressure_mb_lag_1; pressure_mb_rolling_mean_3; wind_u_lag_1; days_since_last_high_aod_day
 standard,1,lasso_scaled_ftest6,f_test,6,11,pressure_mb; wind_u; wind_v; no2; o3; aod
 standard,1,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
+standard,1,lasso_scaled_ftest10_temporal,f_test,10,66,day_of_year_cos; pm25_lag_1; pm25_lag_3; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; pm25_difference_1; no2_lag_1; no2_rolling_mean_3; no2_rolling_max_3
+standard,1,extratrees_tree10_temporal,tree,10,66,day_of_year_sin; day_of_year_cos; pm25_lag_1; pm25_rolling_mean_3; pm25_rolling_max_3; pm25_rate_of_change_1; aod_lag_1; no2_rate_of_change_1; temperature_celsius_lag_1; wind_u_lag_1
 standard,2,lasso_scaled_ftest6,f_test,6,11,pressure_mb; wind_u; wind_v; no2; o3; aod
 standard,2,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
+standard,2,lasso_scaled_ftest10_temporal,f_test,10,66,day_of_year_cos; pm25_lag_1; pm25_lag_3; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; pm25_difference_1; no2_lag_1; no2_rolling_mean_3; no2_rolling_max_3
+standard,2,extratrees_tree10_temporal,tree,10,66,day_of_year_cos; pm25_lag_1; pm25_rolling_mean_3; pm25_rolling_max_3; pm25_rate_of_change_1; aod_lag_1; no2_rate_of_change_1; co_lag_1; temperature_celsius_lag_1; days_since_last_high_aod_day
 standard,3,lasso_scaled_ftest6,f_test,6,11,pressure_mb; wind_u; wind_v; no2; o3; aod
 standard,3,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
+standard,3,lasso_scaled_ftest10_temporal,f_test,10,66,day_of_year_cos; pm25_lag_1; pm25_lag_3; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; pm25_difference_1; no2_lag_1; no2_rolling_mean_3; no2_rolling_max_3
+standard,3,extratrees_tree10_temporal,tree,10,66,day_of_year_sin; day_of_year_cos; pm25_lag_1; pm25_rolling_mean_3; pm25_rolling_max_3; pm25_difference_1; pm25_rate_of_change_1; no2_lag_1; temperature_celsius_lag_1; days_since_last_high_aod_day
 standard,4,lasso_scaled_ftest6,f_test,6,11,pressure_mb; wind_u; wind_v; no2; o3; aod
 standard,4,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
+standard,4,lasso_scaled_ftest10_temporal,f_test,10,66,day_of_year_cos; pm25_lag_1; pm25_lag_3; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; pm25_difference_1; no2_lag_1; no2_rolling_mean_3; no2_rolling_max_3
+standard,4,extratrees_tree10_temporal,tree,10,66,day_of_year_sin; day_of_year_cos; pm25_lag_1; pm25_rolling_mean_3; pm25_rolling_max_3; pm25_rate_of_change_1; co_lag_1; temperature_celsius_lag_1; wind_u_lag_1; days_since_last_high_aod_day
 standard,5,lasso_scaled_ftest6,f_test,6,11,pressure_mb; wind_u; wind_v; no2; o3; aod
 standard,5,extratrees_tree6,tree,6,11,temperature_celsius; pressure_mb; wind_u; no2; o3; aod
+standard,5,lasso_scaled_ftest10_temporal,f_test,10,66,pm25_lag_1; pm25_lag_3; pm25_rolling_mean_3; pm25_rolling_std_3; pm25_rolling_max_3; pm25_difference_1; pm25_rate_of_change_1; no2_lag_1; no2_rolling_mean_3; no2_rolling_max_3
+standard,5,extratrees_tree10_temporal,tree,10,66,day_of_year_sin; day_of_year_cos; pm25_lag_1; pm25_rolling_mean_3; pm25_rolling_max_3; pm25_rate_of_change_1; aod_lag_1; no2_lag_1; temperature_celsius_lag_1; wind_u_lag_1
