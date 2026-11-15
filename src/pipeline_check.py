@@ -1,6 +1,6 @@
-"""Run the full Pipeline once through the shared shared folds.
+"""Run the full Pipeline once through the shared folds.
 
-This is a smoke run, NOT the Phase 2 model comparison: two cheap models, no tuning.
+This is a smoke run, NOT the Phase 2 model comparison: cheap models, no tuning.
 It shows that
   * the Pipeline fits and predicts on all three fold files (temporal, spatial, standard)
   * each step is fitted on the training rows of the fold only (checked on every fold)
@@ -25,7 +25,7 @@ from sklearn.metrics import mean_absolute_error, root_mean_squared_error
 from src import config
 from src.folds import load_folds
 from src.m3_common import DEV_FILE, PARTS, add, load_dev, save_parts
-from src.pipeline import build_pipeline
+from src.pipeline import build_pipeline, temporal_step
 from src.selection import FeatureSelector, describe_selection
 
 SEC = "5.3"
@@ -44,11 +44,16 @@ class RowSpy(BaseEstimator, TransformerMixin):
 
 
 def candidates():
-    # name, model, selector (the same selector settings for every fold)
+    # name, model, selector, with_temporal_features
     return {
-        "lasso_scaled_ftest6": (Lasso(alpha=0.1, random_state=config.SEED), FeatureSelector("f_test", k=6)),
+        "lasso_scaled_ftest6": (Lasso(alpha=0.1, random_state=config.SEED), FeatureSelector("f_test", k=6), False),
         "extratrees_tree6": (ExtraTreesRegressor(100, random_state=config.SEED, n_jobs=1),
-                             FeatureSelector("tree", k=6, random_state=config.SEED)),
+                             FeatureSelector("tree", k=6, random_state=config.SEED), False),
+        # same models again, now fed by Member 4's next-day features (more columns, so k = 10)
+        "lasso_scaled_ftest10_temporal": (Lasso(alpha=0.1, random_state=config.SEED),
+                                          FeatureSelector("f_test", k=10), True),
+        "extratrees_tree10_temporal": (ExtraTreesRegressor(100, random_state=config.SEED, n_jobs=1),
+                                       FeatureSelector("tree", k=10, random_state=config.SEED), True),
     }
 
 
@@ -62,8 +67,9 @@ def main():
             print(f"skip {scheme}: {path.name} not found")
             continue
         for number, (train, val) in enumerate(load_folds(path, dev), start=1):
-            for name, (model, selector) in candidates().items():
-                pipe = build_pipeline(model, selector=selector)
+            for name, (model, selector, temporal) in candidates().items():
+                features = temporal_step(scheme, dev) if temporal else None
+                pipe = build_pipeline(model, selector=selector, features=features)
                 pipe.steps.insert(0, ("spy", RowSpy()))
                 t0 = time.perf_counter()
                 pipe.fit(X.iloc[train], y.iloc[train])
