@@ -83,7 +83,7 @@ def main():
         raise ValueError("Resolve duplicate station-days before measuring usable history.")
     report = pd.DataFrame([station_metrics(s, g.date)
                            for s, g in df.groupby("station_id", sort=True)])
-    original = pd.read_csv(config.ROOT / "member4_gap_report.csv")
+    original = pd.read_csv(config.PARTS / "gap_report_reference.csv")
     verification = compare_original(original, report)
     config.PARTS.mkdir(parents=True, exist_ok=True)
     report.to_csv(config.PARTS / "gap_report_enhanced.csv", index=False, float_format="%.4f")
@@ -102,7 +102,7 @@ after {config.TEST_START}; it never reads or rewrites the final-test files.
 Compared all original metrics against the development data, allowing 0.005001
 absolute rounding error for numeric values: {len(verification)} checks, {mismatches} mismatches.
 See `gap_report_verification.csv` for each comparison. The original
-`member4_gap_report.csv` is preserved. Matching values verify the apparent metric
+`gap_report_reference.csv` is preserved. Matching values verify the apparent metric
 definition against this dataset, rather than recovering the original author's code.
 
 ## Metric definitions
