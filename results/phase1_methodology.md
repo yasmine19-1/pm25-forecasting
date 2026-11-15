@@ -12,6 +12,12 @@ station coverage use dates before the holdout cutoff. Rows with unparseable
 dates are counted at date screening and excluded before target cleaning. The
 reserved periods remain in the unchanged raw files.
 
+**PM2.5-to-merge attrition.** Of 63,422 valid pre-2025 PM2.5 rows, 11,700 had
+no exact GEE site in development and 20,436 had an exact site with no GEE
+observation that day. All 31,286 exact site/day matches were present in the
+supplied merge. Cleaning removed 4 conflicting station-day rows, leaving
+31,282 retained rows.
+
 All development rows matched the corresponding station/date/coordinate and GEE
 ID/date records in the supplied sources. Each assigned GEE position matched a
 nearest candidate for its day. This verifies the supplied merge against the

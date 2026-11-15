@@ -39,6 +39,8 @@ def main():
     merged = df[['station_id','date','gee_id','lat','lon']].merge(b, on=['gee_id','date'], how='left', validate='many_to_one', indicator=True)
     merged['source_station_metadata_present'] = source_present
     merged['assigned_distance_degrees'] = np.hypot(merged.lat-merged.gee_lat, merged.lon-merged.gee_lon)
+    if not merged['assigned_distance_degrees'].le(0.25).all():
+        raise ValueError('Every retained row must have a GEE match within 0.25 degrees')
     # Compare assigned point to all source GEE locations available on that date.
     merged['nearest_distance_degrees'] = np.nan
     for day, idx in merged.groupby('date').groups.items():
