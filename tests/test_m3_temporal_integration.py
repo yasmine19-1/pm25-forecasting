@@ -173,16 +173,16 @@ def test_optional_imputer_adds_flags_for_lag_columns(dev):
 
 
 # --- 7. real shared folds (skipped when the parquet is not on this machine) ----------------------------
-REAL = config.INTERIM / "clean_dev.parquet"
+REAL = config.PROCESSED / "clean_dev.parquet"
 
 
-@pytest.mark.skipif(not REAL.exists(), reason="data/interim/clean_dev.parquet not present")
+@pytest.mark.skipif(not REAL.exists(), reason="data/processed/clean_dev.parquet not present")
 @pytest.mark.parametrize("scheme", ["temporal", "spatial", "standard"])
 def test_real_folds_with_temporal_features_fit_on_train_only(scheme):
     from src.folds import load_folds
     real = pd.read_parquet(REAL)
     X, y = real.drop(columns="pm25"), real["pm25"]
-    for train, val in load_folds(config.PARTS.parent / f"folds_{scheme}.json", real):
+    for train, val in load_folds(config.FOLDS / f"folds_{scheme}.json", real):
         pipe = build_pipeline(Ridge(), selector="f_test", features=temporal_step(scheme, real))
         pipe.steps.insert(0, ("spy", RowSpy()))
         RowSpy.seen = []
