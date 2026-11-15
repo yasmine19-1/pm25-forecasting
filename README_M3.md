@@ -12,10 +12,11 @@ Brief sections §5.1 (relationships), §5.3, §5.3.2. Seed 42; every output come
 | `src/scaling.py` | `TrainFoldScaler` (standard or robust) and `needs_scaling(model)` |
 | `src/selection.py` | `FeatureSelector`: ANOVA F, mutual information, RFE, L1, tree importance |
 | `src/pipeline.py` | `build_pipeline(model, ...)`: assembles temporal features, clipping, imputation, scaling and selection |
-| `src/pipeline_check.py` | runs the Pipeline through the three shared fold files and logs the selected features |
+| `src/pipeline_check.py` | runs the Pipeline through the three shared fold files, logs the selected features and reports two baselines (training mean, yesterday's PM2.5) |
 | `tests/test_m3_leakage.py` | leakage tests (every fitted step sees training rows only, no ids in the model) |
 | `tests/test_m3_modules.py` | tests for the scaler, the five selection methods and the Pipeline options |
 | `tests/test_m3_temporal_integration.py` | the Pipeline with `TemporalFeatures`: training rows only, no future leakage, no ids |
+| `tests/test_m3_baselines.py` | the two baselines (training mean, yesterday's PM2.5) use training rows and the right day |
 | `tests/test_m3_stratified.py` | tests for the within-station check (station differences are not mistaken for a weather effect) |
 | `tests/m3_synthetic.py`, `tests/conftest.py` | a fake development frame with the real columns, used by the tests |
 
@@ -35,7 +36,7 @@ Outputs, all in `results/<GROUP_DIR>/`:
 | File | Content |
 |---|---|
 | `parts/m3_relationships.csv`, `parts/m3_stratified.csv` | rows in the shared schema, for the consolidation step to merge into `Exploratory_Data.csv` |
-| `parts/m3_pipeline_check.csv` | RMSE/MAE per fold of the smoke run (shared schema) |
+| `parts/m3_pipeline_check.csv` | RMSE/MAE per fold of the smoke run, with the two baselines (shared schema) |
 | `parts/m3_selected_features.csv` | for every fold and model: method, number of columns kept, their names (§5.3.2) |
 | `parts/m3_relationships_notes.md`, `parts/m3_stratified_notes.md` | auto-written sentences for report section 5; check the numbers before pasting |
 | `figures/m3_*.png` | correlation heatmaps, PCA scree, t-SNE, PM2.5-AOD by season/station/weather |

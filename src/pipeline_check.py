@@ -1,6 +1,11 @@
 """Run the full Pipeline once through the shared folds.
 
 This is a smoke run, NOT the Phase 2 model comparison: cheap models, no tuning.
+It also reports two reference points, so the RMSE of the models can be read against something:
+  baseline_train_mean         always predict the training-fold mean
+  baseline_persistence        predict yesterday's PM2.5 of the same station (training mean when
+                              yesterday is missing); not offered for spatial folds, where the
+                              held-out stations have no PM2.5 history
 It shows that
   * the Pipeline fits and predicts on all three fold files (temporal, spatial, standard)
   * each step is fitted on the training rows of the fold only (checked on every fold)
@@ -57,6 +62,17 @@ def candidates():
     }
 
 
+def baseline_predictions(dev, X, y, train, val, scheme):
+    """{name: (predictions for the validation rows, share of rows that had yesterday's value or None)}."""
+    mean = float(y.iloc[train].mean())
+    out = {"baseline_train_mean": (np.full(len(val), mean), None)}
+    if scheme != "spatial":
+        lag = temporal_step(scheme, dev).fit(X.iloc[train]).transform(X.iloc[val])["pm25_lag_1"]
+        have = lag.notna().to_numpy()
+        out["baseline_persistence"] = (np.where(have, lag.to_numpy(), mean), float(have.mean()))
+    return out
+
+
 def main():
     dev = load_dev(DEV_FILE)
     X, y = dev.drop(columns=config.TARGET), dev[config.TARGET]
@@ -86,10 +102,24 @@ def main():
                 add(rows, SEC, name, group, "seconds", secs)
                 selected_log.append(dict(scheme=scheme, fold=number, model=name,
                                          **describe_selection(pipe["select"])))
+            group = f"{scheme}/fold{number}"
+            for name, (pred, share) in baseline_predictions(dev, X, y, train, val, scheme).items():
+                add(rows, SEC, name, group, "rmse", root_mean_squared_error(y.iloc[val], pred))
+                add(rows, SEC, name, group, "mae", mean_absolute_error(y.iloc[val], pred))
+                add(rows, SEC, name, group, "n_val", len(val))
+                if share is not None:
+                    add(rows, SEC, name, group, "share_with_yesterday", share,
+                        "validation rows whose previous day exists; the others get the training mean")
             print(f"{scheme} fold {number}: {len(train)} train / {len(val)} val  ok")
     save_parts(rows, "m3_pipeline_check.csv")
     pd.DataFrame(selected_log).to_csv(PARTS / "m3_selected_features.csv", index=False)
     print("written: m3_pipeline_check.csv, m3_selected_features.csv")
+    if rows:
+        table = pd.DataFrame(rows)
+        table = table[table["metric"] == "rmse"].copy()
+        table["scheme"] = table["group"].str.split("/").str[0]
+        print("\nAverage RMSE over the folds (ug/m3, lower is better):")
+        print(table.pivot_table(index="variable", columns="scheme", values="value").round(2).to_string())
 
 
 if __name__ == "__main__":
