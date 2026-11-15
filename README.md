@@ -2,31 +2,88 @@
 
 Daily surface PM2.5 forecasting on the Kaggle "Air Quality - Mediterranean Basin (2016-2026)" dataset.
 
-## Setup (macOS / Linux)
+## Phase 1 results
 
-Use CPython 3.14 (verified with 3.14.7). If an existing environment uses
-Anaconda Python 3.13 and pytest crashes while importing readline, create a
-fresh environment with CPython 3.14 in a new directory and activate it.
-Use the active environment for all commands below.
+| What you need | Current location |
+| --- | --- |
+| Data description, cleaning and exploratory statistics | [Exploratory_Data.csv](results/Exploratory_Data.csv) |
+| Temporal profiles and diagnostics | [Exploratory_temporal.csv](results/Exploratory_temporal.csv) |
+| Validation folds | [Temporal](folds/folds_temporal.json), [spatial](folds/folds_spatial.json), [shuffled diagnostic](folds/folds_standard.json) |
+| Methodology and clipping comparison | [Methodology](results/phase1_methodology.md), [paired clipping results](results/clipping_comparison.csv) |
+| Figures and supporting tables | [Figures](figures/), [intermediate tables](results/parts/) |
+
+## Dataset and setup
+
+Download the [Air Quality - Mediterranean Basin dataset](https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026).
+The license of the combined Kaggle release was not verified. Place
+`combined_gee_pm25.csv`, `pm25.csv`, and `gee_features_daily.csv` directly
+in `data/raw/`. Git ignores the datasets and generated clean data.
+
+The analyses use development dates before the cutoff in `src/config.py`.
+The cleaner scans dates to report the reserved periods' counts and date ranges.
+It writes the cleaned development dataset to `data/processed/`.
+
+Use CPython 3.14.7, the version recorded in
+[the Phase 1 methodology](results/phase1_methodology.md). From the project root
+on macOS or Linux:
+
 ```bash
 python3.14 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
-python -m src.config        # creates data/ and results/ folders
+python -m pip install -r requirements.txt
 ```
 
-## Phase 1 - data audit and cleaning
+## Reproduce Phase 1
 
-Set `GROUP_DIR` in [src/config.py](src/config.py) to the assigned course folder code.
-The current setting is `19`. All paths below use that setting for `<GROUP_DIR>`.
-1. Download the [Kaggle dataset](https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026) and place `combined_gee_pm25.csv`, `pm25.csv` and `gee_features_daily.csv` directly in `data/raw/`.
-   Phase 1 analyzes observations dated before 2025. For the 2025 final test and the 2026 set-aside, the cleaner reports raw row counts and date ranges. The workflow leaves the original input files unchanged and writes only development datasets.
-2. `python -m src.first_look`   - list columns, types, missing values
-3. `python -m src.audit`        - dataset audit -> `results/<GROUP_DIR>/parts/audit.csv`
-4. `python -m src.clean`        - screens dates before PM2.5 cleaning and duplicate checks, then writes `data/interim/clean_dev.parquet`, `clean_dev.csv`, and development cleaning logs
-5. `python -m src.gap_report`   - development-only station coverage -> `results/<GROUP_DIR>/parts/gap_report_enhanced.csv`, metric verification and explanatory notes; preserves the original gap report
-6. `python -m src.station_eligibility` - metadata evidence table and acceptance checks; the >=100-day flag is sensitivity only
-7. `python -m src.thursday_evidence` - source-matching verification, development-only lag diagnostics and retained-station list; see `results/<GROUP_DIR>/phase1_methodology.md` for the documented decisions and limitations
+```bash
+python scripts/run_eda.py
+python -m nbconvert --to notebook --execute --output-dir data/processed notebooks/01_eda.ipynb notebooks/02_timeseries.ipynb
+```
+
+The launcher runs the audit, cleaning, station checks, EDA, temporal diagnostics,
+and consolidation against the shared folds. The notebooks in `notebooks/`
+include saved outputs. The command writes re-executed copies to
+`data/processed/` for comparison. Pipeline smoke-test timings vary by machine.
+The methodology records previously observed differences in ExtraTrees scores.
+
+## Folder layout
+
+```text
+.
+├── .gitignore
+├── README.md
+├── requirements.txt
+├── data/
+│   ├── .gitkeep
+│   ├── raw/                             local inputs
+│   └── processed/                       local generated files
+├── notebooks/
+│   ├── 01_eda.ipynb
+│   └── 02_timeseries.ipynb
+├── src/
+│   ├── config.py
+│   ├── preprocessing.py
+│   ├── features.py
+│   ├── splits.py
+│   └── ...                              existing analysis modules
+├── scripts/
+│   └── run_eda.py
+├── folds/
+│   ├── folds_temporal.json
+│   ├── folds_spatial.json
+│   └── folds_standard.json
+├── results/
+│   ├── Exploratory_Data.csv
+│   ├── Exploratory_temporal.csv
+│   └── parts/
+├── figures/
+│   ├── eda_histogrammes.png
+│   ├── correlation_matrix.png
+│   └── ...                              other analysis plots
+├── reports/.gitkeep
+├── presentation/.gitkeep
+└── tests/
+```
 
 ## Shared cross-validation folds
 
@@ -37,7 +94,7 @@ python -m src.folds
 python -m src.folds --verify
 ```
 
-The files are under `results/<GROUP_DIR>/`. Each contains five `train` and `val`
+The files are under `folds/`. Each contains five `train` and `val`
 position lists, the ordered `[station_id, date]` keys, the development parquet's
 SHA-256, and the splitter settings. Positions refer to the original parquet order.
 Verification checks the split rules and compares the regenerated JSON byte for byte.
@@ -54,8 +111,8 @@ import pandas as pd
 from src import config
 from src.folds import load_folds
 
-dev = pd.read_parquet(config.INTERIM / "clean_dev.parquet")
-splits = load_folds(config.PARTS.parent / "folds_temporal.json", dev)
+dev = pd.read_parquet(config.PROCESSED / "clean_dev.parquet")
+splits = load_folds(config.FOLDS / "folds_temporal.json", dev)
 for train, val in splits:
     train_rows, val_rows = dev.iloc[train], dev.iloc[val]
     # Select scenario-appropriate predictors and fit a fresh Pipeline on train_rows.
@@ -63,7 +120,7 @@ for train, val in splits:
 
 Select the spatial file for the held-out-station experiment. Feature construction
 must preserve row alignment and follow the forecast-time rules in
-`results/<GROUP_DIR>/phase1_methodology.md`. Exclude the target and `config.NON_FEATURE_COLS`
+`results/phase1_methodology.md`. Exclude the target and `config.NON_FEATURE_COLS`
 from the model input.
 
 ### Fold-local preprocessing
@@ -78,37 +135,8 @@ If a predictor is entirely missing in training, its missing entries use a fixed
 zero placeholder with the indicator set to 1. See the methodology for the
 first temporal fold's limitation.
 
-## Reproduce the Phase 1 deliverables
+## Phase 1 feature comparisons
 
-The final tables are `Exploratory_Data.csv`
-and `Exploratory_temporal.csv` in `results/<GROUP_DIR>/`.
-From the repository root, after running the audit and cleaning steps and generating the shared folds, run the full set of result producers:
-
-```bash
-(
-    set -e
-    python src/m2_eda.py
-    python src/m2_review.py
-    python src/m2_s5p_stability.py
-    python -m src.relationships
-    python -m src.stratified
-    python -m src.pipeline_check
-    python -m src.clipping_check
-    for script in temporal_analysis temporal_patterns weekly_cycle lead_lag_analysis drift_seasonality; do
-        python "${script}.py"
-    done
-    python -m src.m4_figures
-    python -m src.rolling_check
-    python -m src.phase1_results
-    python -m src.folds --verify
-    python -m pytest -q
-)
-```
-
-The consolidation reads the generated parts directory. Fold verification compares
-JSON bytes. Model timings vary by machine. Record Python and platform alongside
-ExtraTrees results. The earlier audit observed score differences across runs with
-the same package version pins. Their detailed outputs remain available separately.
 The rolling check uses `src.features.rolling_forecast_features` on the development
 data before applying the shared temporal indices. It is a Phase 1 diagnostic
 under the assumption that each previous day's PM2.5 is available at the next
@@ -147,11 +175,10 @@ from src.features import VARIABLES, TemporalFeatures, rolling_forecast_features
 from src.folds import load_folds
 from src.pipeline import build_pipeline
 
-dev = pd.read_parquet(config.INTERIM / "clean_dev.parquet")
+dev = pd.read_parquet(config.PROCESSED / "clean_dev.parquet")
 y = dev[config.TARGET]
 X = dev.drop(columns=config.TARGET)
-results = config.PARTS.parent
-train, val = load_folds(results / "folds_temporal.json", dev)[0]
+train, val = load_folds(config.FOLDS / "folds_temporal.json", dev)[0]
 
 # Rolling next-day diagnostic. Assume yesterday's observations are released
 # Before today's forecast. Earlier validation dates may supply a prior value.
@@ -175,7 +202,7 @@ fixed_predictions = fixed.fit(X.iloc[train], y.iloc[train]).predict(fixed_inputs
 
 # Cold start at held-out stations. The same-day inputs must be available at
 # Prediction time. Keep only training-station history and disable PM2.5 lags.
-train, val = load_folds(results / "folds_spatial.json", dev)[0]
+train, val = load_folds(config.FOLDS / "folds_spatial.json", dev)[0]
 cold = build_pipeline(
     Ridge(),
     features=TemporalFeatures(
@@ -192,7 +219,7 @@ targets or weather/satellite values to history.
 
 ## Paired predictor clipping comparison
 
-`python -m src.clipping_check` writes `results/<GROUP_DIR>/clipping_comparison.csv`.
+`python -m src.clipping_check` writes `results/clipping_comparison.csv`.
 The two default Ridge fits per fold use the same validation rows. Clipping
 thresholds are fitted per training fold. The AOD zero-to-missing rule is shared
 by both runs. The table reports unweighted means across each scheme's five folds.
@@ -216,12 +243,6 @@ by both runs. The table reports unweighted means across each scheme's five folds
 | Predictor clipping | Enabled. Fit thresholds on each training fold before imputation. | [Outlier clipper](src/outliers.py#L46), [Pipeline](src/pipeline.py#L63) | Argument `clip_outliers=False` or `outliers__enabled=False`. |
 | Extreme PM2.5 | Flag 268 values above Q3 + 3×IQR and keep them in development. Episode and data-quality labels are provisional, based on corroboration from nearby stations, adjacent days, AOD and repeated readings. | [Extreme screen](src/m2_eda.py#L378), [Corroboration review](src/m2_review.py#L120) | Changing retention of flagged extremes needs code change. |
 
-The development data run from 2016-11-25 through 2024-12-31. The earlier
-recommendation to start after Sentinel-5P coverage began is superseded. The
-first-pass `parts/m2_eda.csv` has 684 rows. The canonical `figures/` directory
-contains 42 figures, including the 19-figure initial exploratory subset. The
-verified test suite passes 94 tests.
-
 Upstream terms referenced for the audit are CC BY 4.0 for applicable OpenAQ
 records (check provider terms), open access for Copernicus Sentinel data, and
 NASA's Earth science open-data policy. The combined Kaggle release's own license
@@ -229,22 +250,18 @@ text is unverified. [OpenAQ licenses](https://docs.openaq.org/resources/licenses
 [Copernicus Sentinel license](https://cds.climate.copernicus.eu/licences/ec-sentinel) ·
 [NASA Earthdata policy](https://www.earthdata.nasa.gov/engage/open-data-services-software).
 
-## Historical / non-canonical files
-
-- The root `member4_gap_report.csv` and the `B04-01/` temporal diagnostics,
-  drift, patterns, lead–lag, weekly-cycle and gap CSVs are historical copies.
-  Use the consolidated tables and generated `parts/` outputs under the
-  configured group directory.
-- The two large observation-level historical files in `B04-01/` are
-  `member4_features_preview.csv` (22.7 MB) and `member4_daily_values.csv`
-  (6.0 MB). The feature preview contains a shifted target.
-- There are six historical figure copies outside the canonical `figures/`
-  directory. Both `src/` and `results/<GROUP_DIR>/` contain a copy of each:
-  `m4_acf_pm25.png`, `m4_lead_lag.png` and `m4_seasonal_profile.png`.
-- The decision-gate note preserves the exploratory discussion. The Phase 1
-  methodology records the final station, imputation and lag choices.
-
 ## Conventions
-- Random seed: `SEED = 42` (see `src/config.py`)
-- Canonical column names: `date, station_id, lat, lon, pm25`, everything else lower snake_case
-- Data files are not committed; they are rebuilt by running the scripts.
+
+- `SEED = 42` is defined in `src/config.py`.
+- Canonical keys and target are `date`, `station_id`, `lat`, `lon`, and `pm25`.
+- The cleaning command is `python -m src.clean`. The `src.preprocessing`
+  module exposes the development data reader and fold-local transformers.
+
+## Team
+
+Group 18
+
+- Member 1: ____________________
+- Member 2: ____________________
+- Member 3: ____________________
+- Member 4: ____________________

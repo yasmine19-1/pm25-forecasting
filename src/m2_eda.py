@@ -113,6 +113,14 @@ def figures(df):
         ax.set_title(v)
     savefig(fig, "hist_all")
 
+    fig, axes = plt.subplots(1, 3, figsize=(11, 3.5))
+    for ax, variable in zip(axes, ("pm25", "aod", "temperature_celsius")):
+        ax.hist(df[variable].dropna(), bins=60, color="#4C72B0", edgecolor="white", lw=.3)
+        ax.set_title(variable)
+    fig.tight_layout()
+    fig.savefig(FIGURES / "eda_histogrammes.png", dpi=130)
+    plt.close(fig)
+
     # PM2.5 raw vs log
     fig, ax = plt.subplots(1, 2, figsize=(11, 4))
     ax[0].hist(df.pm25, bins=100, color="#C44E52")

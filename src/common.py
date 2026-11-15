@@ -50,7 +50,11 @@ def find_raw_file():
 
 def load_raw():
     path = find_raw_file()
-    return pd.read_csv(path, low_memory=False), path
+    columns = pd.read_csv(path, nrows=0).columns
+    found = detect_columns(columns)
+    require(found, ["date"])
+    dates = read_csv_dates(path, found["date"])
+    return read_development_csv(path, dates=dates), path, dates
 
 
 def development_rows(frame, date_column):
@@ -59,8 +63,19 @@ def development_rows(frame, date_column):
     return frame.loc[dates.lt(pd.Timestamp(config.TEST_START))].copy()
 
 
-def read_development_csv(path, date_column="date"):
-    return development_rows(pd.read_csv(path, low_memory=False), date_column)
+def read_csv_dates(path, date_column):
+    """Read only the date column to identify development records."""
+    dates = pd.read_csv(path, usecols=[date_column], skip_blank_lines=False)
+    return parse_dates(dates[date_column])
+
+
+def read_development_csv(path, date_column="date", *, dates=None, usecols=None):
+    """Skip reserved and undated records before pandas loads other columns."""
+    if dates is None:
+        dates = read_csv_dates(path, date_column)
+    skip = dates.index[~dates.lt(pd.Timestamp(config.TEST_START))] + 1
+    return pd.read_csv(path, skiprows=skip, usecols=usecols, low_memory=False,
+                       skip_blank_lines=False)
 
 
 def detect_columns(columns, *, use_overrides=True):

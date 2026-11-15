@@ -10,20 +10,17 @@ from src.common import detect_columns, load_raw, parse_dates, require, to_snake
 warnings.filterwarnings("ignore")
 config.ensure_dirs()
 
-df, path = load_raw()
+df, path, dates = load_raw()
 found = detect_columns(df.columns)
 require(found, ["date", "pm25", "station_id", "lat", "lon"])
-dates = parse_dates(df[found["date"]])
 unknown_dates = int(dates.isna().sum())
 test_start = pd.Timestamp(config.TEST_START)
 test_end = pd.Timestamp(config.TEST_END)
-is_dev = dates.lt(test_start)
 reserved_dates = {
     "final_test": dates.loc[dates.between(test_start, test_end)],
     "after_test_period": dates.loc[dates.gt(test_end)],
 }
-df = df.loc[is_dev].copy()
-df[found["date"]] = dates.loc[is_dev]
+df[found["date"]] = parse_dates(df[found["date"]])
 canonical = {"date": "date", "station_id": "station_id", "lat": "lat", "lon": "lon", "pm25": "pm25"}
 
 # --- standardise column names (station_id = sensor_name; GEE 'id' -> gee_id) -------------

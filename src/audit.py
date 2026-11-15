@@ -6,15 +6,14 @@ import warnings
 import pandas as pd
 
 from src import config
-from src.common import detect_columns, development_rows, load_raw, parse_dates, require, save_rows
+from src.common import detect_columns, load_raw, parse_dates, require, save_rows
 
 warnings.filterwarnings("ignore")
 pd.set_option("display.width", 200)
 
-df, path = load_raw()
+df, path, _ = load_raw()
 found = detect_columns(df.columns)
 require(found, ["date", "pm25", "station_id", "lat", "lon"])
-df = development_rows(df, found["date"])
 rows = []
 
 

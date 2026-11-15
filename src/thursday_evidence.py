@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 from src import config
-from src.common import parse_dates
+from src.common import parse_dates, read_development_csv
 
 
 def past_pairs(g, column, lag):
@@ -26,12 +26,10 @@ def main():
     assert df.date.notna().all() and df.date.eq(df.date.dt.normalize()).all()
     assert df.date.lt(config.TEST_START).all() and not df.duplicated(['station_id','date']).any()
     # Read source metadata only; never run the raw-data diagnostic modules.
-    a = pd.read_csv(config.RAW / 'pm25.csv', usecols=['sensor_name','date','latitude','longitude'])
-    b = pd.read_csv(config.RAW / 'gee_features_daily.csv', usecols=['id','date','lat','lon'])
+    a = read_development_csv(config.RAW / 'pm25.csv', usecols=['sensor_name','date','latitude','longitude'])
+    b = read_development_csv(config.RAW / 'gee_features_daily.csv', usecols=['id','date','lat','lon'])
     for x in (a,b):
         x['date'] = parse_dates(x.date)
-    a = a.loc[a.date.lt(config.TEST_START)].copy()
-    b = b.loc[b.date.lt(config.TEST_START)].copy()
     a = a.rename(columns={'sensor_name':'station_id','latitude':'lat','longitude':'lon'})
     b = b.rename(columns={'id':'gee_id','lat':'gee_lat','lon':'gee_lon'})
     keys = ['station_id','date','lat','lon']

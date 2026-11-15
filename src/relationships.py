@@ -17,6 +17,7 @@ Writes:
                             m3_pca_scree.png, m3_tsne.png
 """
 import argparse
+from shutil import copyfile
 
 import matplotlib
 
@@ -99,6 +100,8 @@ def main(tsne=True, data_path=None):
         for v in X:
             add(rows, SEC, v, name, "r_with_pm25", m.loc[v, config.TARGET])
         heatmap(m, f"{name.capitalize()} correlation (development data)", FIGURES / f"m3_corr_{name}.png")
+
+    copyfile(FIGURES / "m3_corr_pearson.png", FIGURES / "correlation_matrix.png")
 
     # 2) predictor pairs above 0.9 in absolute value: reported, never dropped
     flagged = []
