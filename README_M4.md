@@ -33,7 +33,7 @@ The temporal analysis examined the temporal structure of the PM2.5 dataset and p
 
 Feature implementation: src/features.py and features.py.
 
-Features include day-of-year sine and cosine, past-value lags, rolling mean, standard deviation and maximum, first differences, rate of change, and the future PM2.5 target.
+Predictors include day-of-year sine and cosine, past-value lags, rolling mean, standard deviation and maximum, first differences, and rate of change. `build_features(data)` returns the predictor frame and a separate future PM2.5 series with the same station/date index.
 
 Feature calculations are separated by station and continuous date segments. They do not calculate lags across missing-date gaps or detected station metadata changes. PM2.5 lag features require a forecast horizon of at least one day.
 
@@ -58,7 +58,7 @@ The reproduction command in README.md generates the consolidated temporal CSV in
 - member4_lead_lag_summary.csv: aggregated lead-lag correlations.
 - member4_lead_lag_detail.csv: segment-level lead-lag correlations.
 - member4_daily_values.csv: daily station-level values.
-- The optional feature preview can be generated with `python -m src.features`.
+- Run `python -m src.features` to generate `member4_features_preview.csv` and `member4_target_preview.csv` under `results/parts/`.
 
 ## 5. Limitations and pending integration
 

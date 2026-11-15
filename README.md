@@ -142,8 +142,9 @@ data before applying the shared temporal indices. It is a Phase 1 diagnostic
 under the assumption that each previous day's PM2.5 is available at the next
 forecast origin. It can use an earlier validation observation under that
 assumption. Actual release times and permission for within-fold updates in
-scored evaluation still need confirmation. Keep the exploratory feature preview
-out of the Pipeline because it contains future labels and same-day measurements.
+scored evaluation still need confirmation. `build_features(data)` returns
+`X, y` for the standalone preview. Both use a sorted station/date index.
+Use the row-preserving builders in the examples below with positional folds.
 
 For a comparison with the rolling features, keep the same fold positions and
 rows, including rows with no prior-day observation. Compare calendar-only

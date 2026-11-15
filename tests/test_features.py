@@ -23,39 +23,41 @@ class TestFeatureEngineering(unittest.TestCase):
             "no2": [5, 6, 7, 8, 9]
         })
 
-    def test_output_has_expected_rows(self):
-        result = build_features(self.data, forecast_horizon_days=1)
-        self.assertEqual(len(result), 5)
+    def test_predictors_and_target_share_station_day_index(self):
+        predictors, target = build_features(self.data.iloc[::-1])
+        pd.testing.assert_index_equal(predictors.index, target.index)
+        self.assertEqual(predictors.index.tolist(), list(zip(self.data.station_id, self.data.date)))
+        self.assertEqual(target.name, "target_pm25")
+        self.assertTrue({"station_id", "date", "pm25", "aod", "no2", "segment_id",
+                         "target_pm25"}.isdisjoint(predictors.columns))
 
     def test_lag_uses_previous_day(self):
-        result = build_features(self.data, forecast_horizon_days=1)
-        row = result[result["date"] == pd.Timestamp("2024-01-02")].iloc[0]
+        result, _ = build_features(self.data, forecast_horizon_days=1)
+        row = result.loc[("Station A", pd.Timestamp("2024-01-02"))]
         self.assertEqual(row["pm25_lag_1"], 10)
 
     def test_features_do_not_cross_date_gaps(self):
-        result = build_features(self.data, forecast_horizon_days=1)
-        row = result[result["date"] == pd.Timestamp("2024-01-05")].iloc[0]
+        result, _ = build_features(self.data, forecast_horizon_days=1)
+        row = result.loc[("Station A", pd.Timestamp("2024-01-05"))]
         self.assertTrue(pd.isna(row["pm25_lag_1"]))
 
     def test_target_is_future_pm25(self):
-        result = build_features(self.data, forecast_horizon_days=1)
-        row = result[result["date"] == pd.Timestamp("2024-01-01")].iloc[0]
-        self.assertEqual(row["target_pm25"], 20)
+        _, target = build_features(self.data, forecast_horizon_days=1)
+        self.assertEqual(target.loc[("Station A", pd.Timestamp("2024-01-01"))], 20)
 
     def test_target_does_not_cross_date_gaps(self):
-        result = build_features(self.data, forecast_horizon_days=1)
-        row = result[result["date"] == pd.Timestamp("2024-01-03")].iloc[0]
-        self.assertTrue(pd.isna(row["target_pm25"]))
+        _, target = build_features(self.data, forecast_horizon_days=1)
+        self.assertTrue(pd.isna(target.loc[("Station A", pd.Timestamp("2024-01-03"))]))
 
     def test_invalid_horizon_is_rejected(self):
         with self.assertRaises(ValueError):
             build_features(self.data, forecast_horizon_days=0)
 
     def test_aod_recency_requires_training_threshold(self):
-        result = build_features(self.data, forecast_horizon_days=1)
+        result, _ = build_features(self.data, forecast_horizon_days=1)
         self.assertNotIn("days_since_last_high_aod_day", result.columns)
 
-        result_with_threshold = build_features(
+        result_with_threshold, _ = build_features(
             self.data,
             forecast_horizon_days=1,
             high_aod_threshold=0.25
@@ -77,8 +79,8 @@ class TestFeatureEngineering(unittest.TestCase):
             "aod": [0.1, 0.2, 0.3]
         })
 
-        result = build_features(data, forecast_horizon_days=1)
-        row = result[result["date"] == pd.Timestamp("2024-01-03")].iloc[0]
+        result, _ = build_features(data, forecast_horizon_days=1)
+        row = result.loc[("Station A", pd.Timestamp("2024-01-03"))]
         self.assertTrue(pd.isna(row["pm25_lag_1"]))
 
 

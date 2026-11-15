@@ -2,7 +2,7 @@
 
 Two things live here:
 
-* build_features(...)   the feature table (one row per station and day). Fast,
+* build_features(...)   the predictors and their separate future PM2.5 target. Fast,
                         vectorised version of the original function; the numbers
                         match the original on unchanged station segments.
 * TemporalFeatures      a scikit-learn step that plugs into the pipeline:
@@ -30,6 +30,12 @@ METADATA = ["gee_id", "lat", "lon"]
 
 
 def build_features(data, forecast_horizon_days=1, high_aod_threshold=None):
+    """Return (predictors, target), both indexed by sorted station and date.
+
+    Predictor columns contain calendar features and past observations. The
+    target is missing when PM2.5 is unavailable at the requested horizon
+    within the same continuous station segment.
+    """
     if forecast_horizon_days < 1:
         raise ValueError("Forecast horizon must be at least 1 day.")
 
@@ -39,9 +45,6 @@ def build_features(data, forecast_horizon_days=1, high_aod_threshold=None):
 
     variables = [v for v in VARIABLES if v in data.columns]
     metadata = [c for c in METADATA if c in data.columns]
-
-    if data.empty:
-        return pd.DataFrame()
 
     # --- one row per station and day (median of the day's rows) -----------------
     grouped = data.groupby(KEYS, sort=True)
@@ -65,9 +68,6 @@ def build_features(data, forecast_horizon_days=1, high_aod_threshold=None):
     mixed_boundary = daily["_mixed"] | daily["_mixed"].shift(1, fill_value=False)
     breaks = new_station | date_gap | changed | mixed_boundary
     segment = breaks.cumsum()                              # unique over the whole table
-    daily["segment_id"] = (
-        segment - segment.groupby(station).transform("min")
-    ).astype(int)                                          # 0, 1, 2 ... per station
     groups = daily.groupby(segment)
 
     # --- calendar features (known in advance) -----------------------------------
@@ -100,14 +100,11 @@ def build_features(data, forecast_horizon_days=1, high_aod_threshold=None):
         last_before_today = last_high.groupby(segment).shift(1)
         new_columns["days_since_last_high_aod_day"] = position - last_before_today
 
-    # --- the next-day target, kept only for the standalone preview --------------
-    target = groups["pm25"].shift(-forecast_horizon_days) if "pm25" in variables else np.nan
-    new_columns["target_pm25"] = target
-
-    result = pd.concat([daily.drop(columns=["_mixed", "segment_id"]),
-                        pd.DataFrame(new_columns)], axis=1)
-    result["segment_id"] = daily["segment_id"]
-    return result
+    index = pd.MultiIndex.from_frame(daily[KEYS])
+    predictors = pd.DataFrame(new_columns).set_axis(index)
+    target = (groups["pm25"].shift(-forecast_horizon_days) if "pm25" in variables
+              else pd.Series(np.nan, index=daily.index))
+    return predictors, target.set_axis(index).rename("target_pm25")
 
 
 class TemporalFeatures(TransformerMixin, BaseEstimator):
@@ -158,10 +155,8 @@ class TemporalFeatures(TransformerMixin, BaseEstimator):
         X = self._check(X)
         base = self._base_frame(X)
 
-        table = build_features(base, forecast_horizon_days=1,
-                               high_aod_threshold=self.high_aod_threshold_)
-        keep_out = set(KEYS) | set(VARIABLES) | set(METADATA) | {"target_pm25", "segment_id"}
-        new_cols = [c for c in table.columns if c not in keep_out]
+        table, _ = build_features(base, high_aod_threshold=self.high_aod_threshold_)
+        new_cols = list(table.columns)
         if not self.use_target_lags_:
             new_cols = [c for c in new_cols if not c.startswith("pm25_")]
         elif not base["pm25"].notna().any():
@@ -170,7 +165,7 @@ class TemporalFeatures(TransformerMixin, BaseEstimator):
 
         keys = pd.DataFrame({"station_id": X["station_id"].to_numpy(),
                              "date": self._day(X["date"]).to_numpy()})
-        merged = keys.merge(table[KEYS + new_cols], on=KEYS, how="left")
+        merged = keys.merge(table[new_cols], left_on=KEYS, right_index=True, how="left")
         if len(merged) != len(X):
             raise ValueError("feature table is not unique per station and day")
 
@@ -210,20 +205,18 @@ class TemporalFeatures(TransformerMixin, BaseEstimator):
 
 def main():
     data = pd.read_parquet(config.PROCESSED / "clean_dev.parquet")
-    features = build_features(data, forecast_horizon_days=1)
+    features, target = build_features(data, forecast_horizon_days=1)
 
     config.PARTS.mkdir(parents=True, exist_ok=True)
-    features.to_csv(
-        config.PARTS / "member4_features_preview.csv",
-        index=False
-    )
+    features.to_csv(config.PARTS / "member4_features_preview.csv", index=True)
+    target.to_csv(config.PARTS / "member4_target_preview.csv", index=True)
 
     print("Feature rows:", len(features))
     print("Feature columns:", len(features.columns))
     print("Rate-of-change features:", sum(
         "_rate_of_change_1" in column for column in features.columns
     ))
-    print("Feature file saved.")
+    print("Predictor and target files saved.")
 
 
 

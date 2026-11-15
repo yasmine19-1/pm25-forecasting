@@ -73,7 +73,7 @@ screen covers 123 segments and has a median Pearson correlation of about
 −0.090. It does not establish weekly seasonality. Short segments limit formal
 inference, and the tests apply to the PM2.5 series rather than model residuals.
 
-The original feature preview includes a shifted target for exploratory use.
+The standalone feature preview exports predictors and shifted targets separately.
 The rolling comparison instead constructs calendar features and exact
 previous-day observed PM2.5 before slicing the existing temporal folds.
 It preserves row order, resets at date gaps and metadata changes, and keeps
