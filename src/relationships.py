@@ -150,7 +150,7 @@ def main(tsne=True, data_path=None):
 
     # text for the report
     r_target = mats["spearman"].loc[X, config.TARGET].sort_values(key=abs, ascending=False)
-    notes.append("# relationships (auto-generated, check the numbers before pasting)\n")
+    notes.append("# Relationships (auto-generated, check the numbers before pasting)\n")
     notes.append(f"Development rows: {len(df)}. Predictors: {', '.join(X)}.\n")
     notes.append("Strongest Spearman correlations with PM2.5: " +
                  ", ".join(f"{v} ({r:+.2f})" for v, r in r_target.head(3).items()) + ".")

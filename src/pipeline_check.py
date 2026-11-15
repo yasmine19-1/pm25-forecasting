@@ -83,7 +83,7 @@ def main():
                 add(rows, SEC, name, group, "mae", mean_absolute_error(y.iloc[val], pred))
                 add(rows, SEC, name, group, "n_train", len(train))
                 add(rows, SEC, name, group, "n_val", len(val))
-                add(rows, SEC, name, group, "seconds", secs)
+                print(f"{group} {name}: {secs:.3f}s")
                 selected_log.append(dict(scheme=scheme, fold=number, model=name,
                                          **describe_selection(pipe["select"])))
             print(f"{scheme} fold {number}: {len(train)} train / {len(val)} val  ok")

@@ -43,7 +43,7 @@ python -m nbconvert --to notebook --execute --output-dir data/processed notebook
 The launcher runs the audit, cleaning, station checks, EDA, temporal diagnostics,
 and consolidation against the shared folds. The notebooks in `notebooks/`
 include saved outputs. The command writes re-executed copies to
-`data/processed/` for comparison. Pipeline smoke-test timings vary by machine.
+`data/processed/` for comparison. Pipeline smoke-test timings are printed to stdout.
 The methodology records previously observed differences in ExtraTrees scores.
 
 ## Folder layout
