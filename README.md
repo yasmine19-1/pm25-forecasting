@@ -262,7 +262,7 @@ NASA's Earth science open-data policy. [OpenAQ licenses](https://docs.openaq.org
 
 Group 18
 
-- Member 1: ____________________
-- Member 2: ____________________
-- Member 3: ____________________
-- Member 4: ____________________
+- Member 1: Boulouaret Yasmine
+- Member 2: Dali Hiba
+- Member 3:Ferrah hala roufaida 
+- Member 4:chioukh chahrazed
