@@ -161,6 +161,33 @@ def test_changing_the_future_cannot_change_earlier_predictions(dev):
 
 
 # --- 6. optional imputer -----------------------------------------------------------------------------
+def test_temporal_s5p_indicators_and_training_medians(dev):
+    X, y = dev.drop(columns="pm25"), dev["pm25"]
+    train, val = splits(dev)["temporal"][1]
+    X_train, X_val = X.iloc[train], X.iloc[val]
+    pipe = build_pipeline(Recorder(), scaled=False, features=temporal_step("temporal", dev))
+    pipe.fit(X_train, y.iloc[train])
+
+    before_train = pipe[:-2].transform(X_train)
+    before_val = pipe[:-2].transform(X_val)
+    after_train = pipe[:-1].transform(X_train)
+    after_val = pipe[:-1].transform(X_val)
+    derived = [c for c in before_train if c.startswith(("no2_", "co_", "o3_"))]
+    indicators = [f"{c}_missing" for c in derived]
+    assert len(indicators) == 21
+    assert list(after_train.columns) == list(after_val.columns)
+    assert list(after_val.columns.difference(before_val.columns, sort=False)) == indicators
+
+    medians = before_train[derived].median().fillna(0.0)
+    assert not medians.equals(before_val[derived].median())
+    pd.testing.assert_series_equal(pipe["impute"].medians_[derived], medians)
+    for before, after in ((before_train, after_train), (before_val, after_val)):
+        assert not after[derived + indicators].isna().any().any()
+        expected_flags = before[derived].isna().astype(np.int8).set_axis(indicators, axis=1)
+        pd.testing.assert_frame_equal(after[indicators], expected_flags)
+        pd.testing.assert_frame_equal(after[derived], before[derived].fillna(medians))
+
+
 def test_optional_imputer_adds_flags_for_lag_columns(dev):
     X, y = dev.drop(columns="pm25"), dev["pm25"]
     train, val = splits(dev)["temporal"][1]

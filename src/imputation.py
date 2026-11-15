@@ -2,7 +2,7 @@
 
 S5PImputer
     * median imputation, medians learned in fit() = on the training fold only
-    * one 0/1 missingness indicator per Sentinel-5P column (no2_missing, ...)
+    * one 0/1 missingness indicator per raw or derived Sentinel-5P column
     * any other numeric column with gaps is also median-imputed (no indicator)
     * categorical columns (if any are passed): mode, or an explicit "missing"
       category
@@ -43,6 +43,11 @@ class S5PImputer(TransformerMixin, BaseEstimator):
         self.numeric_cols_ = num
         self.categorical_cols_ = cat
         self.s5p_cols_ = [c for c in self.s5p_cols if c in X.columns]
+        prefixes = tuple(f"{c}_" for c in S5P_DEFAULT if c in self.s5p_cols)
+        self.s5p_cols_.extend(
+            c for c in X.columns
+            if isinstance(c, str) and c.startswith(prefixes) and c not in self.s5p_cols_
+        )
 
         self.medians_ = X[num].median(numeric_only=True)
         # A column entirely missing in this training fold: fall back to 0 and

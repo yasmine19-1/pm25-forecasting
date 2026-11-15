@@ -92,9 +92,8 @@ def build_pipeline(model, *, scaled=None, scaler="standard", selector=None,
                   frame (it needs station_id and date to build past-only lags) and must
                   return the same rows in the same order.
     clip_outliers False switches the clipper off from the start
-    imputer       None = the default S5PImputer(). Pass S5PImputer(s5p_cols=...) to also get a
-                  0/1 missing indicator for other columns, e.g. the lag columns, which are
-                  often missing and otherwise get the training median without a trace
+    imputer       None = S5PImputer() with missingness indicators for raw and derived
+                  Sentinel-5P predictors. A custom imputer can also flag other columns.
     """
     if scaled is None:
         scaled = needs_scaling(model)

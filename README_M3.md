@@ -80,11 +80,9 @@ The step runs first and receives the full frame, returns the same rows in the sa
 learns its AOD threshold from the training rows only. In the next-day scenario the same-day
 predictors (aod, no2, ...) are replaced by their past values.
 
-Lag columns are often missing (the decision note: lag 1 exists for 65.5% of rows, lag 3 for
-32.6%) and the default imputer then gives them the training median without a missing flag.
-To add flags, pass your own imputer:
+The default imputer fills missing lags with training medians and adds one indicator
+per derived NO₂, CO or O₃ column. To also flag a missing PM2.5 lag, pass a custom imputer.
 `build_pipeline(model, features=..., imputer=S5PImputer(s5p_cols=("no2", "co", "o3", "pm25_lag_1")))`.
-This is a team choice, so the default is unchanged.
 
 ## Decisions to agree with the team
 
