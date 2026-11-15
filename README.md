@@ -15,8 +15,9 @@ Daily surface PM2.5 forecasting on the Kaggle "Air Quality - Mediterranean Basin
 ## Dataset and setup
 
 Download the [Air Quality - Mediterranean Basin dataset](https://www.kaggle.com/datasets/sarahameziane/air-quality-mediterranean-basin-20162026).
-The license of the combined Kaggle release was not verified. Place
-`combined_gee_pm25.csv`, `pm25.csv`, and `gee_features_daily.csv` directly
+The release license is “Other (specified in description); see the upstream
+OpenAQ, Copernicus and NASA terms referenced in the Kaggle dataset description”.
+Place `combined_gee_pm25.csv`, `pm25.csv`, and `gee_features_daily.csv` directly
 in `data/raw/`. Git ignores the datasets and generated clean data.
 
 The analyses use development dates before the cutoff in `src/config.py`.
@@ -246,8 +247,7 @@ by both runs. The table reports unweighted means across each scheme's five folds
 
 Upstream terms referenced for the audit are CC BY 4.0 for applicable OpenAQ
 records (check provider terms), open access for Copernicus Sentinel data, and
-NASA's Earth science open-data policy. The combined Kaggle release's own license
-text is unverified. [OpenAQ licenses](https://docs.openaq.org/resources/licenses) ·
+NASA's Earth science open-data policy. [OpenAQ licenses](https://docs.openaq.org/resources/licenses) ·
 [Copernicus Sentinel license](https://cds.climate.copernicus.eu/licences/ec-sentinel) ·
 [NASA Earthdata policy](https://www.earthdata.nasa.gov/engage/open-data-services-software).
 

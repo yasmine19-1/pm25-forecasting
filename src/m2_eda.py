@@ -22,8 +22,8 @@ from scipy import stats
 from sklearn.ensemble import IsolationForest
 from sklearn.neighbors import LocalOutlierFactor
 
-from m2_config import (DATA_PATH, FIGURES, PARTS, SEED, TARGET, S5P_COLS,
-                    NUMERIC_COLS, PM25_THRESHOLDS)
+from m2_config import (DATA_PATH, FIGURES, MEASUREMENT_LABELS, NUMERIC_COLS,
+                       PARTS, PM25_THRESHOLDS, S5P_COLS, SEED, TARGET)
 
 ROWS: list[dict] = []
 NOTES: list[str] = []
@@ -110,13 +110,13 @@ def figures(df):
     fig, axes = plt.subplots(3, 3, figsize=(13, 10))
     for ax, v in zip(axes.ravel(), PLOT_VARS):
         ax.hist(df[v].dropna(), bins=60, color="#4C72B0", edgecolor="white", lw=.3)
-        ax.set_title(v)
+        ax.set(title=v, xlabel=MEASUREMENT_LABELS[v], ylabel="Count")
     savefig(fig, "hist_all")
 
     fig, axes = plt.subplots(1, 3, figsize=(11, 3.5))
     for ax, variable in zip(axes, ("pm25", "aod", "temperature_celsius")):
         ax.hist(df[variable].dropna(), bins=60, color="#4C72B0", edgecolor="white", lw=.3)
-        ax.set_title(variable)
+        ax.set(title=variable, xlabel=MEASUREMENT_LABELS[variable], ylabel="Count")
     fig.tight_layout()
     fig.savefig(FIGURES / "eda_histogrammes.png", dpi=130)
     plt.close(fig)
@@ -124,11 +124,11 @@ def figures(df):
     # PM2.5 raw vs log
     fig, ax = plt.subplots(1, 2, figsize=(11, 4))
     ax[0].hist(df.pm25, bins=100, color="#C44E52")
-    ax[0].set_title("PM2.5 (µg/m³)")
+    ax[0].set(title="PM2.5", xlabel=MEASUREMENT_LABELS["pm25"], ylabel="Count")
     for t in PM25_THRESHOLDS:
         ax[0].axvline(t, ls="--", c="k", lw=.8)
     ax[1].hist(np.log1p(df.pm25), bins=80, color="#C44E52")
-    ax[1].set_title("log(1 + PM2.5)")
+    ax[1].set(title="Log-transformed PM2.5", xlabel="log(1 + PM2.5 in µg/m³)", ylabel="Count")
     savefig(fig, "pm25_hist_log")
 
     # boxplots (standardised so they share an axis)

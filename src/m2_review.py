@@ -30,7 +30,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from scipy import stats
 
-from m2_config import DATA_PATH, FIGURES, PARTS, SEED
+from m2_config import DATA_PATH, FIGURES, MEASUREMENT_LABELS, PARTS, SEED
 
 PREDICTORS = ["aod", "no2", "co", "o3", "temperature_celsius", "pressure_mb",
               "wind_u", "wind_v"]
@@ -89,6 +89,7 @@ def predictors_by_station(df):
         ax.axvline(d[v].median(), ls="--", c="#C44E52", lw=1, label="overall median")
         ax.set_title(f"{v} by station (south at the bottom, fliers hidden)\n"
                      f"eta² = {eta[v]:.2f}")
+        ax.set_xlabel(MEASUREMENT_LABELS[v])
         ax.tick_params(axis="y", labelsize=6)
         ax.legend(loc="lower right", fontsize=8)
         savefig(fig, f"station_{v}")

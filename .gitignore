@@ -1,11 +1,17 @@
 .venv/
 .venv-phase1/
+venv/
+.pytest_cache/
 __pycache__/
 .DS_Store
 .ipynb_checkpoints/
 # datasets stay out of git (size + Kaggle licence); everyone rebuilds them with the scripts
-/data/*
-!/data/.gitkeep
+/data/raw/*
+!/data/raw/.gitkeep
+/data/processed/*
+!/data/processed/.gitkeep
+/data/final_test/
+/data/.matplotlib/
 
 # Local Phase 1 working notes
 /results/cleaning_decisions.md

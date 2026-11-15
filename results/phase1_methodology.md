@@ -92,5 +92,5 @@ Phase 2 still covers model comparison and the clipping-on/off experiment.
 The regenerated tables were checked with CPython 3.14.7 on macOS arm64.
 The shared folds reproduce byte for byte. Smoke-test runtimes are machine
 specific, and the regenerated ExtraTrees scores differ slightly from the
-historical table. The combined dataset license and operational release times
-still require source confirmation.
+historical table. The README records the Kaggle license wording.
+Operational release times still require source confirmation.
