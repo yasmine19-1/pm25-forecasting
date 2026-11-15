@@ -72,3 +72,4 @@ tzdata==2026.6
 wcwidth==0.9.4
 webencodings==0.6.1
 wrapt==2.6.0.dev1
+pyarrow==26.0.1
