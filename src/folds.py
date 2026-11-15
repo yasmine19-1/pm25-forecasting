@@ -12,9 +12,8 @@ from sklearn.model_selection import GroupKFold, KFold, TimeSeriesSplit
 
 from src import config
 
-SOURCE = config.INTERIM / "clean_dev.parquet"
+SOURCE = config.PROCESSED / "clean_dev.parquet"
 RETAINED = config.PARTS / "retained_stations.csv"
-RESULTS = config.PARTS.parent
 KEYS = ["station_id", "date"]
 N_SPLITS = 5
 GAP_DAYS = 1
@@ -160,8 +159,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--verify", action="store_true", help="Compare saved files with regenerated splits.")
     args = parser.parse_args()
+    if not args.verify:
+        config.FOLDS.mkdir(parents=True, exist_ok=True)
     for scheme, payload in generate().items():
-        path = RESULTS / f"folds_{scheme}.json"
+        path = config.FOLDS / f"folds_{scheme}.json"
         encoded = (json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
         if args.verify:
             require(path.read_bytes() == encoded, f"{path.name} differs from the regenerated file.")

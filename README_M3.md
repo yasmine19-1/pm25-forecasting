@@ -29,7 +29,7 @@ python -m src.pipeline_check
 pytest tests/
 ```
 
-Outputs, all in `results/<GROUP_DIR>/`:
+Outputs, all in `results/`:
 
 | File | Content |
 |---|---|
@@ -93,4 +93,4 @@ Nothing else needs to change.
   the real parquet is not in git. Numbers in `results/` come from your own run.
 * `pipeline_check.py` is a smoke run with two cheap models, not the Phase 2 comparison.
 * The leakage tests on the real fold files are skipped automatically when
-  `data/interim/clean_dev.parquet` is missing; they run on any machine that has it.
+  `data/processed/clean_dev.parquet` is missing; they run on any machine that has it.

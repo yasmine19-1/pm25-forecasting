@@ -109,8 +109,8 @@ step("6_same_sensor_same_day", f"station_id+date; rule={config.SENSOR_DAY_DUP_RU
 dev = df.sort_values(["station_id", "date"]).reset_index(drop=True)
 assert not dev.duplicated(["station_id", "date"]).any()
 
-dev.to_parquet(config.INTERIM / "clean_dev.parquet", index=False)
-dev.to_csv(config.INTERIM / "clean_dev.csv", index=False, encoding="utf-8")
+dev.to_parquet(config.PROCESSED / "clean_dev.parquet", index=False)
+dev.to_csv(config.PROCESSED / "clean_dev.csv", index=False, encoding="utf-8")
 
 # --- logs: cleaning_log.csv + the team's six-column schema ---------------------------------
 pd.DataFrame(log).to_csv(config.PARTS / "cleaning_log.csv", index=False, encoding="utf-8")
@@ -133,5 +133,5 @@ pd.DataFrame(rows, columns=["section", "variable", "group", "metric", "value", "
 # --- summary --------------------------------------------------------------------------------
 print(f"\nDevelopment: {len(dev):,} rows, {dev['station_id'].nunique()} stations, {rng}")
 print(f"Columns: {', '.join(dev.columns)}")
-print("Saved: data/interim/clean_dev.parquet and .csv")
+print("Saved: data/processed/clean_dev.parquet and .csv")
 print("Logs in", config.PARTS.relative_to(config.ROOT), ": cleaning_log.csv, cleaning_counts.csv, column_mapping.csv")

@@ -56,7 +56,7 @@ def coordinate_evidence(g, bounds):
 
 def main():
     mapping = pd.read_csv(config.PARTS / 'column_mapping.csv')
-    df = pd.read_parquet(config.INTERIM / 'clean_dev.parquet',
+    df = pd.read_parquet(config.PROCESSED / 'clean_dev.parquet',
                          columns=['station_id', 'date', 'gee_id', 'lat', 'lon'])
     df['date'] = parse_dates(df.date)
     original = pd.read_csv(config.PARTS / 'gap_report_enhanced.csv')
@@ -241,7 +241,7 @@ Integrity checks passed: {int(report.integrity_ok.sum())}/70. Review flags: {int
 Stations ending before 2024: {len(ended)}: {json.dumps(ended, ensure_ascii=False)}.
 '''
     config.PARTS.mkdir(parents=True, exist_ok=True)
-    report.to_csv(config.INTERIM / 'station_eligibility.csv', index=False, na_rep='unavailable', float_format='%.6f')
+    report.to_csv(config.PROCESSED / 'station_eligibility.csv', index=False, na_rep='unavailable', float_format='%.6f')
     summary.to_csv(config.PARTS / 'station_eligibility_summary.csv', index=False)
     (config.PARTS / 'station_eligibility_notes.md').write_text(notes, encoding='utf-8')
     print(report.loc[~report.integrity_ok | report.needs_review, ['station_id', 'integrity_ok', 'integrity_note',

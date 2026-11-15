@@ -15,7 +15,7 @@ import pandas as pd
 from src import config
 
 INPUT = config.PARTS
-OUTPUT = config.PARTS.parent / "figures"
+OUTPUT = config.FIGURES
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 

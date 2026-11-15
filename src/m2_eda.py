@@ -6,9 +6,9 @@ period already removed by the cleaner). No threshold computed here is used to
 transform data: the Pipeline learns its own thresholds per training fold.
 
 Run from the repo root:  python src/m2_eda.py
-Writes: results/<GROUP>/parts/m2_eda.csv  (shared schema)
-        results/<GROUP>/figures/m2_*.png
-        results/<GROUP>/parts/m2_notes.md  (interpretations to paste in the report)
+Writes: results/parts/m2_eda.csv  (shared schema)
+        figures/m2_*.png
+        results/parts/m2_notes.md  (interpretations to paste in the report)
 """
 from __future__ import annotations
 

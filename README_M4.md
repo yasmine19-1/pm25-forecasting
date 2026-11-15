@@ -47,18 +47,18 @@ The suite covers standalone feature generation and integration with the shared P
 
 ## 4. Main outputs
 
-The shared reproduction commands in README.md generate temporal CSVs in the configured parts directory and figures in the corresponding figures directory. The root B04-01 folder contains historical outputs.
+The reproduction command in README.md generates the consolidated temporal CSV in `results/`, supporting tables in `results/parts/`, and plots in `figures/`.
 
-- Exploratory_temporal_M4.csv: combined temporal results using the shared six-column schema.
+- Exploratory_temporal.csv: combined temporal results using the shared six-column schema.
 - Exploratory_temporal_member4.csv: temporal dependence diagnostics.
-- member4_gap_report.csv: timestamp quality by station.
+- gap_report_enhanced.csv: timestamp quality by station.
 - member4_drift_summary.csv: monthly and yearly drift summaries.
 - member4_temporal_patterns.csv: daily, weekly, monthly and seasonal summaries.
 - member4_weekly_cycle_test.csv: lag-7 correlations.
 - member4_lead_lag_summary.csv: aggregated lead-lag correlations.
 - member4_lead_lag_detail.csv: segment-level lead-lag correlations.
 - member4_daily_values.csv: daily station-level values.
-- member4_features_preview.csv: preview of engineered features.
+- The optional feature preview can be generated with `python -m src.features`.
 
 ## 5. Limitations and pending integration
 

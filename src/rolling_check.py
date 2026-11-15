@@ -3,15 +3,16 @@ import pandas as pd
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error, root_mean_squared_error
 
+from src import config
 from src.features import rolling_forecast_features
 from src.folds import load_folds
-from src.m3_common import DEV_FILE, PARTS, add, load_dev, save_parts
+from src.m3_common import DEV_FILE, add, load_dev, save_parts
 from src.pipeline import build_pipeline
 
 
 def main():
     dev = load_dev(DEV_FILE)
-    splits = load_folds(PARTS.parent / "folds_temporal.json", dev)
+    splits = load_folds(config.FOLDS / "folds_temporal.json", dev)
     features = rolling_forecast_features(dev)
     if not features.index.equals(dev.index):
         raise ValueError("Forecast features must preserve development row alignment.")

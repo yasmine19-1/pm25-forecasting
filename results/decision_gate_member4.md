@@ -6,8 +6,8 @@ Phase 1 · 13 Nov 2026 · Historical decision note
 
 | Question | Decision |
 |---|---|
-| Temporal CV | **Go.** Expanding windows, one-day gap (`folds_temporal.json`). |
-| Spatial CV | **Go** (the shared decision, `folds_spatial.json`): stations stay grouped, and the four stations with two coordinate pairs are kept in one group. |
+| Temporal CV | **Go.** Expanding windows, one-day gap (`folds/folds_temporal.json`). |
+| Spatial CV | **Go** (the shared decision, `folds/folds_spatial.json`): stations stay grouped, and the four stations with two coordinate pairs are kept in one group. |
 | Forecast scenario | **Next-day**: predict day t from what is known at the end of day t-1. PM2.5 lags allowed. |
 | Same-day and spatial experiments | **No PM2.5 lags** (cold-start rule from the methodology). |
 | Lags and windows | PM2.5 and every predictor: lag 1, lag 3, 3-day rolling mean, standard deviation and maximum, first difference, rate of change. Plus sine and cosine of day of year. 7-day features: **not built**. |

@@ -5,10 +5,10 @@ else:
     import config
 
 SEED = config.SEED
-DATA_PATH = config.INTERIM / "clean_dev.parquet"
+DATA_PATH = config.PROCESSED / "clean_dev.parquet"
 PARTS = config.PARTS
-RESULTS = PARTS.parent
-FIGURES = RESULTS / "figures"
+FOLDS = config.FOLDS
+FIGURES = config.FIGURES
 
 TARGET = "pm25"
 S5P_COLS = ["no2", "co", "o3"]  # Sentinel-5P, the only columns with gaps

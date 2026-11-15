@@ -35,20 +35,20 @@ def test_cleaner_uses_only_dated_development_rows(tmp_path, monkeypatch):
         encoding="utf-8",
     )
     original = source.read_bytes()
-    interim, parts = tmp_path / "interim", tmp_path / "results" / "parts"
+    processed, parts = tmp_path / "processed", tmp_path / "results" / "parts"
     reserved = tmp_path / "final_test"
     reserved.mkdir()
     existing = reserved / "final_test.parquet"
     existing.write_bytes(b"reserved file must stay untouched")
     for name, path in (
-        ("ROOT", tmp_path), ("RAW", raw), ("INTERIM", interim),
+        ("ROOT", tmp_path), ("RAW", raw), ("PROCESSED", processed),
         ("PARTS", parts), ("FINAL_TEST", reserved),
     ):
         monkeypatch.setattr(config, name, path)
 
     runpy.run_module("src.clean", run_name="__main__")
 
-    dev = pd.read_parquet(interim / "clean_dev.parquet")
+    dev = pd.read_parquet(processed / "clean_dev.parquet")
     assert dev["pm25"].tolist() == [10]
     assert dev["date"].tolist() == [pd.Timestamp("2024-12-30")]
     log = pd.read_csv(parts / "cleaning_log.csv").set_index("step")

@@ -4,7 +4,7 @@ from statsmodels.tsa.stattools import acf, pacf, adfuller
 from statsmodels.stats.diagnostic import acorr_ljungbox
 from src import config
 
-data = pd.read_parquet(config.INTERIM / "clean_dev.parquet")
+data = pd.read_parquet(config.PROCESSED / "clean_dev.parquet")
 
 data["date"] = pd.to_datetime(data["date"], errors="coerce")
 data = data.dropna(subset=["date", "station_id"])

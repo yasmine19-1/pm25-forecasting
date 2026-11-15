@@ -17,7 +17,7 @@
 
 Descriptive only, on the development data. Run from the repo root:
     python src/m2_review.py
-Writes results/<GROUP>/parts/m2_review.csv, m2_extremes_investigation.csv,
+Writes results/parts/m2_review.csv, m2_extremes_investigation.csv,
 m2_review_notes.md and figures m2_station_*.png, m2_extreme_case_*.png
 """
 from __future__ import annotations

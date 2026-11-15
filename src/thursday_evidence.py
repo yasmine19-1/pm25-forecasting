@@ -20,7 +20,7 @@ def correlations(pairs):
 
 
 def main():
-    df = pd.read_parquet(config.INTERIM / 'clean_dev.parquet')
+    df = pd.read_parquet(config.PROCESSED / 'clean_dev.parquet')
     df.date = parse_dates(df.date)
     assert len(df) == 31282 and df.station_id.nunique() == 70
     assert df.date.notna().all() and df.date.eq(df.date.dt.normalize()).all()
@@ -56,7 +56,7 @@ def main():
         nearest_assigned_rows=('assigned_is_nearest','sum'),
         max_assigned_distance_degrees=('assigned_distance_degrees','max'))
     matching.to_csv(config.PARTS / 'thursday_matching.csv')
-    eligibility = pd.read_csv(config.INTERIM / 'station_eligibility.csv')
+    eligibility = pd.read_csv(config.PROCESSED / 'station_eligibility.csv')
     decision = eligibility.merge(matching.reset_index(), on='station_id', validate='one_to_one', suffixes=('', '_match'))
     if len(decision) != 70 or not decision.integrity_ok.all() or not decision.n_obs.eq(decision.n_obs_match).all():
         raise ValueError('Station integrity evidence changed; re-review the decision')

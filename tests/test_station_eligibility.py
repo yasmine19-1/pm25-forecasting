@@ -34,12 +34,12 @@ class StationEvidenceTests(unittest.TestCase):
 
     def test_report_reads_only_the_development_parquet(self):
         columns = ['station_id', 'date', 'gee_id', 'lat', 'lon']
-        dev = pd.read_parquet(config.INTERIM / 'clean_dev.parquet', columns=columns)
+        dev = pd.read_parquet(config.PROCESSED / 'clean_dev.parquet', columns=columns)
         with tempfile.TemporaryDirectory() as temp:
             output = Path(temp)
             for name in ('column_mapping.csv', 'gap_report_enhanced.csv', 'audit.csv'):
                 shutil.copyfile(config.PARTS / name, output / name)
-            with patch.object(config, 'PARTS', output), patch.object(config, 'INTERIM', output), patch(
+            with patch.object(config, 'PARTS', output), patch.object(config, 'PROCESSED', output), patch(
                 'src.station_eligibility.pd.read_parquet', return_value=dev
             ) as read, contextlib.redirect_stdout(io.StringIO()):
                 main()
@@ -48,11 +48,11 @@ class StationEvidenceTests(unittest.TestCase):
 
     def test_failed_acceptance_writes_nothing(self):
         cols = ['station_id', 'date', 'gee_id', 'lat', 'lon']
-        frame = pd.read_parquet(config.INTERIM / 'clean_dev.parquet', columns=cols)
+        frame = pd.read_parquet(config.PROCESSED / 'clean_dev.parquet', columns=cols)
         frame = pd.concat([frame, frame.iloc[[0]]], ignore_index=True)
         with tempfile.TemporaryDirectory() as temp:
             output = Path(temp)
-            with patch.object(config, 'INTERIM', output), patch('src.station_eligibility.pd.read_parquet', return_value=frame), contextlib.redirect_stdout(io.StringIO()) as log:
+            with patch.object(config, 'PROCESSED', output), patch('src.station_eligibility.pd.read_parquet', return_value=frame), contextlib.redirect_stdout(io.StringIO()) as log:
                 with self.assertRaises(SystemExit):
                     main()
             self.assertIn('FAIL: 1.', log.getvalue())

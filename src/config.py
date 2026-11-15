@@ -1,14 +1,16 @@
-"""Shared settings for the whole project. Edit GROUP_DIR first."""
+"""Shared paths and settings for the project."""
 from pathlib import Path
 
 SEED = 42
-GROUP_DIR = "19"  # <- replace with your real group ID, e.g. "B03-02"
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw"
-INTERIM = ROOT / "data" / "interim"
+PROCESSED = ROOT / "data" / "processed"
 FINAL_TEST = ROOT / "data" / "final_test"
-PARTS = ROOT / "results" / GROUP_DIR / "parts"
+RESULTS = ROOT / "results"
+PARTS = RESULTS / "parts"
+FOLDS = ROOT / "folds"
+FIGURES = ROOT / "figures"
 
 # Which CSV in data/raw to use. None = auto (works only if there is exactly one CSV).
 RAW_FILE = "combined_gee_pm25.csv"
@@ -49,7 +51,7 @@ NON_FEATURE_COLS = ["date", "datetime_utc", "station_id", "gee_id", "lat", "lon"
 
 
 def ensure_dirs():
-    for d in (RAW, INTERIM, PARTS):
+    for d in (RAW, PROCESSED, PARTS):
         d.mkdir(parents=True, exist_ok=True)
     (PARTS / ".gitkeep").touch()
 

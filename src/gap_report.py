@@ -70,7 +70,7 @@ def compare_original(original, enhanced):
 
 
 def main():
-    source = config.INTERIM / "clean_dev.parquet"
+    source = config.PROCESSED / "clean_dev.parquet"
     df = pd.read_parquet(source, columns=["station_id", "date"])
     df["date"] = pd.to_datetime(df["date"], errors="raise")
     if df.empty or df[["station_id", "date"]].isna().any().any():
@@ -93,7 +93,7 @@ def main():
     note = f"""# Development station coverage
 
 Reproduce with `python -m src.gap_report` from the repository root.
-Input: `data/interim/clean_dev.parquet`; {len(df):,} observations across {len(report)} stations.
+Input: `data/processed/clean_dev.parquet`; {len(df):,} observations across {len(report)} stations.
 Dates: {df.date.min().date()} to {df.date.max().date()}. The script rejects dates on or
 after {config.TEST_START}; it never reads or rewrites the final-test files.
 

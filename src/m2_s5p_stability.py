@@ -10,7 +10,7 @@ Expected fold file format (adapt load_folds if the project uses another one):
 
 Rule: stable if, for each pair, the Spearman correlation varies by less than
 0.15 across training folds (max - min).
-Writes results/<GROUP>/parts/m2_s5p_stability.csv
+Writes results/parts/m2_s5p_stability.csv
 """
 import json
 from itertools import combinations
@@ -19,13 +19,13 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import TimeSeriesSplit
 
-from m2_config import DATA_PATH, PARTS, RESULTS, S5P_COLS
+from m2_config import DATA_PATH, FOLDS, PARTS, S5P_COLS
 
 TOL = 0.15
 
 
 def load_folds(df):
-    path = RESULTS / "folds_temporal.json"
+    path = FOLDS / "folds_temporal.json"
     if path.exists():
         folds = json.loads(path.read_text())
         folds = folds["folds"] if isinstance(folds, dict) else folds

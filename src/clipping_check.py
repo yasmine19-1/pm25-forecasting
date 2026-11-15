@@ -15,7 +15,7 @@ def main():
     rows = []
     results_dir = config.PARTS.parent
     for scheme in ("temporal", "spatial", "standard"):
-        folds = load_folds(results_dir / f"folds_{scheme}.json", dev)
+        folds = load_folds(config.FOLDS / f"folds_{scheme}.json", dev)
         for fold, (train, val) in enumerate(folds, start=1):
             for enabled in (True, False):
                 pipeline = build_pipeline(Ridge(), clip_outliers=enabled)

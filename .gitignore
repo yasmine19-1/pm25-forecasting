@@ -4,12 +4,18 @@ __pycache__/
 .DS_Store
 .ipynb_checkpoints/
 # datasets stay out of git (size + Kaggle licence); everyone rebuilds them with the scripts
-data/
+/data/*
+!/data/.gitkeep
 
 # Local Phase 1 working notes
-results/*/cleaning_decisions.md
-results/*/thursday_decision.md
-results/*/parts/m2_notes.md
-results/*/parts/gap_report_notes.md
-results/*/parts/station_eligibility_notes.md
-results/*/parts/thursday_evidence_notes.md
+/results/cleaning_decisions.md
+/results/thursday_decision.md
+/results/parts/m2_notes.md
+/results/parts/gap_report_notes.md
+/results/parts/station_eligibility_notes.md
+/results/parts/thursday_evidence_notes.md
+
+# Regenerated temporal work tables
+/results/parts/Exploratory_temporal_member4.csv
+/results/parts/member4_*.csv
+/results/parts/rolling_pipeline_check.csv

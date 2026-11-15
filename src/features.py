@@ -209,7 +209,7 @@ class TemporalFeatures(TransformerMixin, BaseEstimator):
 
 
 def main():
-    data = pd.read_parquet(config.INTERIM / "clean_dev.parquet")
+    data = pd.read_parquet(config.PROCESSED / "clean_dev.parquet")
     features = build_features(data, forecast_horizon_days=1)
 
     config.PARTS.mkdir(parents=True, exist_ok=True)

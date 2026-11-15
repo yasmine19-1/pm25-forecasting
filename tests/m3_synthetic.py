@@ -1,4 +1,4 @@
-"""Synthetic development frame with the SAME columns as data/interim/clean_dev.parquet.
+"""Synthetic development frame with the SAME columns as data/processed/clean_dev.parquet.
 
 Only for the tests and quick checks (the real parquet is not in git).
 Mimics what matters for the Pipeline: station/date identifiers, Sentinel-5P

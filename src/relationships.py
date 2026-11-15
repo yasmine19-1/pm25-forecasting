@@ -11,9 +11,9 @@ Run from the repo root:
     python -m src.relationships            # add --no-tsne to skip the slow plot
 
 Writes:
-    results/<GROUP>/parts/m3_relationships.csv        (shared schema)
-    results/<GROUP>/parts/m3_relationships_notes.md   (text for the report)
-    results/<GROUP>/figures/m3_corr_pearson.png, m3_corr_spearman.png,
+    results/parts/m3_relationships.csv        (shared schema)
+    results/parts/m3_relationships_notes.md   (text for the report)
+    figures/m3_corr_pearson.png, m3_corr_spearman.png,
                             m3_pca_scree.png, m3_tsne.png
 """
 import argparse
@@ -173,7 +173,7 @@ def main(tsne=True, data_path=None):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--no-tsne", action="store_true", help="skip the t-SNE figure")
-    ap.add_argument("--data", default=None, help="other parquet than data/interim/clean_dev.parquet")
+    ap.add_argument("--data", default=None, help="other parquet than data/processed/clean_dev.parquet")
     args = ap.parse_args()
     from pathlib import Path
     main(tsne=not args.no_tsne, data_path=Path(args.data) if args.data else None)

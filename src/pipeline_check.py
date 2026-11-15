@@ -10,8 +10,8 @@ Run from the repo root, once folds_*.json exist:
     python -m src.pipeline_check
 
 Writes:
-    results/<GROUP>/parts/m3_pipeline_check.csv       (shared schema: RMSE / MAE per fold)
-    results/<GROUP>/parts/m3_selected_features.csv    (scheme, fold, model, method, n_input, n_selected, selected)
+    results/parts/m3_pipeline_check.csv       (shared schema: RMSE / MAE per fold)
+    results/parts/m3_selected_features.csv    (scheme, fold, model, method, n_input, n_selected, selected)
 """
 import time
 
@@ -57,7 +57,7 @@ def main():
     X, y = dev.drop(columns=config.TARGET), dev[config.TARGET]
     rows, selected_log = [], []
     for scheme in SCHEMES:
-        path = PARTS.parent / f"folds_{scheme}.json"
+        path = config.FOLDS / f"folds_{scheme}.json"
         if not path.exists():
             print(f"skip {scheme}: {path.name} not found")
             continue

@@ -10,9 +10,9 @@ DESCRIPTIVE ONLY, on the development data. Rows with AOD missing or AOD == 0
 Run from the repo root:   python -m src.stratified
 
 Writes:
-    results/<GROUP>/parts/m3_stratified.csv         (shared schema)
-    results/<GROUP>/parts/m3_stratified_notes.md    (interpretation for the report)
-    results/<GROUP>/figures/m3_pm25_aod_by_season.png, m3_pm25_aod_by_station.png,
+    results/parts/m3_stratified.csv         (shared schema)
+    results/parts/m3_stratified_notes.md    (interpretation for the report)
+    figures/m3_pm25_aod_by_season.png, m3_pm25_aod_by_station.png,
                             m3_pm25_aod_by_weather.png
 """
 import matplotlib

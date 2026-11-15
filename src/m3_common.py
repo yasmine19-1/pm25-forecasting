@@ -7,9 +7,9 @@ import pandas as pd
 
 from src import config
 
-DEV_FILE = config.INTERIM / "clean_dev.parquet"
+DEV_FILE = config.PROCESSED / "clean_dev.parquet"
 PARTS = config.PARTS
-FIGURES = config.PARTS.parent / "figures"
+FIGURES = config.FIGURES
 COLUMNS = ["section", "variable", "group", "metric", "value", "note"]  # shared schema (ground rule 5)
 
 
