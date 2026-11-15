@@ -65,6 +65,15 @@ The 268 extreme flags are screening candidates. The exploratory review added sta
 predictor distributions and checked extremes against nearby stations and
 adjacent days. The resulting verdicts do not independently confirm causes.
 
+**Exploratory diagnostics scope.** In the Phase 1 launcher, PCA, t-SNE, and the
+IQR, z-score and Isolation Forest diagnostics are descriptive and use only the
+development cohort, excluding 2025 and later. Flagged observations stay in the
+cohort to preserve plausible PM2.5 extremes. These outputs are used only for
+exploratory reporting, outside the cleaned dataset, fold definitions and model
+pipelines. In Phase 2, fit any learned preprocessing used for modelling,
+including imputation, scaling and any adopted outlier thresholds, on each
+training fold only.
+
 ## Phase 1 deliverables and limits
 
 `Exploratory_Data.csv` combines the audit, cleaning, station eligibility,
