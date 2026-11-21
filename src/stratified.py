@@ -7,7 +7,6 @@ Questions answered:
 DESCRIPTIVE ONLY, on the development data. Rows with AOD missing or AOD == 0
 (failed retrieval, consistent with the predictor clipper) are left out of this analysis.
 
-Run from the repo root:   python -m src.stratified
 
 Writes:
     results/<GROUP>/parts/m3_stratified.csv         (shared schema)

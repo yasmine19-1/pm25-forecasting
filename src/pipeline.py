@@ -9,18 +9,6 @@ columns) does it in fit(). Because they all sit in one sklearn Pipeline, a
 cross-validation loop refits them on each training fold, and the validation
 rows are only ever transformed with what was learned on the training rows.
 
-Usage (X = the development frame rows of a fold, y = its pm25):
-
-    pipe = build_pipeline(Lasso(random_state=42))          # scaling picked automatically
-    pipe.fit(X_train, y_train)
-    pred = pipe.predict(X_val)
-
-    build_pipeline(ExtraTreesRegressor(random_state=42), selector="tree")
-    pipe.set_params(outliers__enabled=False)               # disable predictor clipping
-
-Pass the full development rows, ids included. The `drop_ids` step removes the
-station id, coordinates, dates, GEE id and the target itself before anything is
-learned, so they can never become model inputs (ground rule 2).
 """
 from __future__ import annotations
 

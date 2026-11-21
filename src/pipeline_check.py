@@ -11,12 +11,6 @@ It shows that
   * each step is fitted on the training rows of the fold only (checked on every fold)
   * the selected features and their number are logged for every fold (brief 5.3.2)
 
-Run from the repo root, once folds_*.json exist:
-    python -m src.pipeline_check
-
-Writes:
-    results/<GROUP>/parts/m3_pipeline_check.csv       (shared schema: RMSE / MAE per fold)
-    results/<GROUP>/parts/m3_selected_features.csv    (scheme, fold, model, method, n_input, n_selected, selected)
 """
 import time
 

@@ -7,14 +7,6 @@ DESCRIPTIVE ONLY. Nothing here drops or changes a column that a model uses.
 Correlated pairs are reported; if a column has to go, that happens inside the
 training fold of the Pipeline (ground rule 3).
 
-Run from the repo root:
-    python -m src.relationships            # add --no-tsne to skip the slow plot
-
-Writes:
-    results/<GROUP>/parts/m3_relationships.csv        (shared schema)
-    results/<GROUP>/parts/m3_relationships_notes.md   (text for the report)
-    results/<GROUP>/figures/m3_corr_pearson.png, m3_corr_spearman.png,
-                            m3_pca_scree.png, m3_tsne.png
 """
 import argparse
 
